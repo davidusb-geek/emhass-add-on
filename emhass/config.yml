@@ -1,0 +1,23 @@
+name: "EMHASS"
+description: "Energy Management for Home Assistant"
+version: "1.7.0"
+slug: "emhass"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+homeassistant_api: true
+options:
+  log_level: info
+  seconds_to_publish_data: 60
+  optimization_task_at: "06:00"
+  action: "dayahead-optim"
+  costfun: "profit"
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  seconds_to_publish_data: int(1,120)
+  optimization_task_at: str
+  action: list(dayahead-optim|perfect-optim)
+  costfun: list(profit|cost|self-consumption)
