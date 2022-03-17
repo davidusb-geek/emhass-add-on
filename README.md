@@ -1,6 +1,6 @@
 # EMHASS Add-on
 
-This is an experimental and a work in progress.
+This is experimental and a work in progress.
 
 A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
 
