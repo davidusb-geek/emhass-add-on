@@ -5,6 +5,6 @@
 # ==============================================================================
 
 
-bashio::log.info "Starting Example1..."
+bashio::log.info "Starting EMHASS..."
 
 exec /usr/bin/emhass.sh
