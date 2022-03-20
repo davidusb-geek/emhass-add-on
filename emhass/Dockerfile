@@ -1,5 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/amd64:6.0.3
-# hadolint ignore=DL3006
+ARG BUILD_FROM=python:3.9-alpine3.14
 FROM ${BUILD_FROM}
 
 # Copy root filesystem
@@ -12,10 +11,10 @@ COPY requirements.txt /tmp/
 ARG BUILD_ARCH=amd64
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        gcc=10.2.1_pre1-r3 \
+        gcc=9.3.0-r0 \
         libc-dev=0.7.2-r3 \
-        libffi-dev=3.3-r2 \
-        openssl-dev=1.1.1k-r0 \
+        libffi-dev=3.2.1-r6 \
+        openssl-dev=1.1.1l-r0 \
     \
     && apk add --no-cache \
         dbus=1.12.20-r1 \
@@ -23,7 +22,7 @@ RUN \
     && pip3 install \
         --no-cache-dir \
         --prefer-binary \
-        --find-links "https://wheels.home-assistant.io/alpine-3.13/${BUILD_ARCH}/" \
+        --find-links "https://wheels.home-assistant.io/alpine-3.14/${BUILD_ARCH}/" \
         -r /tmp/requirements.txt \
     \
     && find /usr/local \
@@ -32,16 +31,6 @@ RUN \
         -exec rm -rf '{}' + \
     \
     && apk del --no-cache --purge .build-dependencies
-
-#ARG BUILD_FROM
-#FROM $BUILD_FROM
-
-# Copy root filesystem
-#COPY rootfs /
-
-# Install requirements for add-on
-#RUN apk add py3-setuptools python3-dev
-#RUN pip3 install --no-cache-dir emhass==0.2.2
 
 # Build arguments
 ARG BUILD_ARCH
