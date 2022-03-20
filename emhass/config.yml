@@ -1,6 +1,6 @@
 name: "EMHASS"
 description: "Energy Management for Home Assistant"
-version: "1.7.0"
+version: "1.8.0"
 slug: "emhass"
 arch:
   - aarch64

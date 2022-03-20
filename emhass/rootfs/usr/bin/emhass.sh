@@ -14,10 +14,11 @@ main() {
     bashio::log.trace "${FUNCNAME[0]}"
 
     sleep=$(bashio::config 'seconds_to_publish_data')
-    bashio::log.info "Seconds between each quotes is set to: ${sleep}"
+    bashio::log.info "Seconds between each publish is set to: ${sleep}"
 
     while true; do
-        emhass --action 'publish-data' --config '/data/config_emhass.yaml'
+        #emhass --action 'publish-data' --config '/data/config_emhass.yaml'
+        bashio::log.info "Publishing data"
         sleep "${sleep}"
     done
 }

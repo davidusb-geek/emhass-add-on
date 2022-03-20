@@ -1,5 +1,6 @@
-ARG BUILD_FROM=python:3.9-alpine3.14
-FROM ${BUILD_FROM}
+#FROM python:3.8-slim-buster
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
 # Copy root filesystem
 COPY rootfs /
@@ -7,30 +8,28 @@ COPY rootfs /
 # Copy Python requirements file
 COPY requirements.txt /tmp/
 
-# Setup base
-ARG BUILD_ARCH=amd64
-RUN \
-    apk add --no-cache --virtual .build-dependencies \
-        gcc=9.3.0-r0 \
-        libc-dev=0.7.2-r3 \
-        libffi-dev=3.2.1-r6 \
-        openssl-dev=1.1.1l-r0 \
-    \
-    && apk add --no-cache \
-        dbus=1.12.20-r1 \
-    \
-    && pip3 install \
-        --no-cache-dir \
-        --prefer-binary \
-        --find-links "https://wheels.home-assistant.io/alpine-3.14/${BUILD_ARCH}/" \
+# Install packages
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        python3 \
+        python3-dev \
+        build-essential \
+        git \
+    && curl --silent --show-error --retry 5 \
+        "https://bootstrap.pypa.io/get-pip.py" \
+        | python3 \
+    && pip3 install --no-cache-dir \
         -r /tmp/requirements.txt \
-    \
-    && find /usr/local \
-        \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
-        -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-        -exec rm -rf '{}' + \
-    \
-    && apk del --no-cache --purge .build-dependencies
+    && apt-get remove -y --purge \
+        python3-dev \
+        build-essential \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Setup base
+#RUN apt-get update \
+#    && pip3 install --no-cache-dir \
+#    -r /tmp/requirements.txt \
 
 # Build arguments
 ARG BUILD_ARCH
