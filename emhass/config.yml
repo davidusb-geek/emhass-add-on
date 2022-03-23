@@ -1,18 +1,22 @@
-name: "EMHASS"
-description: "Energy Management for Home Assistant"
-version: "1.8.0"
-slug: "emhass"
+name: EMHASS
+description: Energy Management for Home Assistant
+url: https://github.com/davidusb-geek/emhass
+version: 0.0.17
+slug: emhass
 arch:
   - aarch64
   - amd64
   - armhf
   - armv7
   - i386
+startup: before
+ports:
+  5000/tcp: 5000
 homeassistant_api: true
 options:
   log_level: info
-  seconds_to_publish_data: 60
-  optimization_task_at: "06:00"
+  seconds_to_publish_data: 30
+  optimization_task_at: "21:35"
   action: "dayahead-optim"
   costfun: "profit"
 schema:
@@ -21,3 +25,4 @@ schema:
   optimization_task_at: str
   action: list(dayahead-optim|perfect-optim)
   costfun: list(profit|cost|self-consumption)
+

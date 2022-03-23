@@ -1,56 +1,31 @@
-#FROM python:3.8-slim-buster
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM python:3.8-slim-buster
 
-# Copy root filesystem
-COPY rootfs /
+# copy the requirements file into the image
+COPY ./requirements.txt /app/requirements.txt
 
-# Copy Python requirements file
-COPY requirements.txt /tmp/
+# switch working directory
+WORKDIR /app
 
-# Install packages
+# Setup slim-buster
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        python3 \
-        python3-dev \
-        build-essential \
         git \
-    && curl --silent --show-error --retry 5 \
-        "https://bootstrap.pypa.io/get-pip.py" \
-        | python3 \
     && pip3 install --no-cache-dir \
-        -r /tmp/requirements.txt \
-    && apt-get remove -y --purge \
-        python3-dev \
-        build-essential \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+        -r requirements.txt
 
-# Setup base
-#RUN apt-get update \
-#    && pip3 install --no-cache-dir \
-#    -r /tmp/requirements.txt \
+# copy every content from the local file to the image
+COPY . /app
 
-# Build arguments
-ARG BUILD_ARCH
-ARG BUILD_DATE
-ARG BUILD_REF
-ARG BUILD_VERSION
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python" ]
+
+CMD ["app_server.py" ]
 
 # Labels
 LABEL \
-    io.hass.name="emhass" \
-    io.hass.description="EMHASS: Energy Management for Home Assistant" \
-    io.hass.arch="${BUILD_ARCH}" \
-    io.hass.type="addon" \
-    io.hass.version=${BUILD_VERSION} \
-    maintainer="David" \
-    org.label-schema.description="EMHASS: Energy Management for Home Assistant" \
-    org.label-schema.build-date=${BUILD_DATE} \
-    org.label-schema.name="emhass" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://github.com/davidusb-geek/emhass" \
-    org.label-schema.usage="https://github.com/davidusb-geek/emhass/README.md" \
-    org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/davidusb-geek/emhass" \
-    org.label-schema.vendor="Community Hass.io Addons"
+  io.hass.name="emhass" \
+  io.hass.description="EMHASS: Energy Management for Home Assistant" \
+  io.hass.version=${BUILD_VERSION} \
+  io.hass.type="addon" \
+  io.hass.arch="aarch64|amd64|armhf|armv7|i386"
+
