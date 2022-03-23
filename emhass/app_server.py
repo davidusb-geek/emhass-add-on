@@ -4,20 +4,30 @@ from flask import Flask, make_response, render_template
 from pathlib import Path
 import os, json
 
-OPTIONS = "/data/options.json"
-options_json = Path(OPTIONS)
+app = Flask(__name__)
+
+OPTIONS_PATH = "/data/options.json"
+options_json = Path(OPTIONS_PATH)
+CONFIG_PATH = "/app/config_emhass.json"
+config_json = Path(CONFIG_PATH)
 # Read options info
 if options_json.exists():
     with options_json.open('r') as data:
         options = json.load(data)
     seconds_to_publish_data = options['seconds_to_publish_data']
-    optimization_task_at = options['optimization_task_at']
-    opt_task_at_hour = int(optimization_task_at.split(":")[0])
-    opt_task_at_minute = int(optimization_task_at.split(":")[1])
 else:
-    seconds_to_publish_data = None
-
-app = Flask(__name__)
+    app.logger.error("ERROR: options.json does not exists")
+# Read example config file
+if config_json.exists():
+    with config_json.open('r') as data:
+        config = json.load(data)
+    retrieve_hass_conf = config['retrieve_hass_conf']
+    optim_conf = config['optim_conf']
+    plant_conf = config['plant_conf']
+else:
+    app.logger.error("ERROR: config_emhass.json does not exists")
+# Build params and params_secrets
+# ...
 
 @app.route('/')
 def hello():
