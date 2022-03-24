@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Flask Docker</title>
-</head>
-<body>
-    <h1>This is a Flask App containerised with Docker</h1>
-</body>
+<html>
+    <head>
+        <title>EMHASS: Energy Management Optimization for Home Assistant</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        {% for plot in injection_dict %}
+            <div align="center">
+                {{injection_dict[plot]}}
+            </div> 
+        {% endfor %}
+    </body>
 </html>
