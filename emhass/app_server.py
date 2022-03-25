@@ -72,7 +72,11 @@ if is_prod:
     optim_conf[0]['treat_def_as_semi_cont'] = [True for i in range(len(optim_conf[0]['P_deferrable_nom']))]
     optim_conf[0]['set_def_constant'] = [False for i in range(len(optim_conf[0]['P_deferrable_nom']))]
     # TODO: implement weather forecast, load, prod sell price and load cost forecast methods using CSV (load CSV files with new function with POST method)
-    optim_conf[0]['list_hp_periods'] = json.loads(options['peak_hours_periods_data'])
+    start_hours_list = options['peak_hours_periods_start_hours'].split(',')
+    end_hours_list = options['peak_hours_periods_end_hours'].split(',')
+    num_peak_hours = len(start_hours_list)
+    list_hp_periods_list = [{'period_hp_'+str(i+1):[{'start':start_hours_list[i]},{'end':end_hours_list[i]}]} for i in range(num_peak_hours)]
+    optim_conf[0]['list_hp_periods'] = {"list_hp_periods": [list_hp_periods_list]}
     optim_conf[0]['load_cost_hp'] = options['load_peak_hours_cost']
     optim_conf[0]['load_cost_hc'] = options['load_offpeak_hours_cost']
     optim_conf[0]['prod_sell_price'] = options['photovoltaic_production_sell_price']

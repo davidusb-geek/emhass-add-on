@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.0.18
+version: 0.0.20
 slug: emhass
 arch:
   - aarch64
@@ -20,11 +20,11 @@ options:
   historic_days_to_retrieve: 2
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
-  set_use_battery: false
   number_of_deferrable_loads: 2
   nominal_power_of_deferrable_loads: 3000, 750
   operating_hours_of_each_deferrable_load: 5, 8
-  peak_hours_periods_data: {"list_hp_periods": [{"period_hp_1": [{"start": "02:54"}, {"end": "15:24"}]}, {"period_hp_2": [{"start": "17:24"}, {"end": "20:24"}]}]}
+  peak_hours_periods_start_hours: 02:54, 17:24
+  peak_hours_periods_end_hours: 15:24, 20:24
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
@@ -35,6 +35,7 @@ options:
   surface_azimuth: 205
   modules_per_string: 16
   strings_per_inverter: 1
+  set_use_battery: false
   battery_discharge_power_max: 1000 
   battery_charge_power_max: 1000
   battery_discharge_efficiency: 0.95 
@@ -45,30 +46,31 @@ options:
   battery_target_state_of_charge: 0.6
 schema:
   costfun: list(profit|cost|self-consumption)
-  optimization_time_step: int(10, 1440)
-  historic_days_to_retrieve: int(2, 365)
+  optimization_time_step: int(10,1440)
+  historic_days_to_retrieve: int(2,365)
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
-  set_use_battery: bool
-  number_of_deferrable_loads: int(1, 10)
+  number_of_deferrable_loads: int(1,10)
   nominal_power_of_deferrable_loads: str
   operating_hours_of_each_deferrable_load: str
-  peak_hours_periods_data: str
+  peak_hours_periods_start_hours: str
+  peak_hours_periods_end_hours: str
   load_peak_hours_cost: float(0,)
   load_offpeak_hours_cost: float(0,)
   photovoltaic_production_sell_price: float(0,)
   maximum_power_from_grid: int(0,)
   pv_module_model: str
   pv_inverter_model: str
-  surface_tilt: int(0, 90)
-  surface_azimuth: int(0, 360)
+  surface_tilt: int(0,90)
+  surface_azimuth: int(0,360)
   modules_per_string: int(1,)
   strings_per_inverter: int(1,)
+  set_use_battery: bool
   battery_discharge_power_max: int(0,)
   battery_charge_power_max: int(0,)
-  battery_discharge_efficiency: float(0.0, 1.0)
-  battery_charge_efficiency: float(0.0, 1.0)
+  battery_discharge_efficiency: float(0.0,1.0)
+  battery_charge_efficiency: float(0.0,1.0)
   battery_nominal_energy_capacity: int(0,)
-  battery_minimum_state_of_charge: float(0.0, 1.0)
-  battery_maximum_state_of_charge: float(0.0, 1.0)
-  battery_target_state_of_charge: float(0.0, 1.0)
+  battery_minimum_state_of_charge: float(0.0,1.0)
+  battery_maximum_state_of_charge: float(0.0,1.0)
+  battery_target_state_of_charge: float(0.0,1.0)
