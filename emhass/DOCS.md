@@ -72,11 +72,36 @@ If the `set_use_battery` is set to `true`, then the following parameters need to
 
 ## Usage
 
-Define automations...
+To integrate with home assistant we will need to define some shell commands in the `configuration.yaml` file and some basic automations in the `automations.yaml` file.
+
+In `configuration.yaml`:
+
+```
+shell_command:
+  dayahead_optim: curl -X POST http://localhost:5000/action/dayahead-optim
+  publish_data: curl -X POST http://localhost:5000/action/publish-data 
+```
+
+In `automations.yaml`:
+
+```
+- alias: EMHASS day-ahead optimization
+  trigger:
+    platform: time
+    at: '05:30:00'
+  action:
+  - service: shell_command.dayahead_optim
+- alias: EMHASS publish data
+  trigger:
+  - minutes: /5
+    platform: time_pattern
+  action:
+  - service: shell_command.publish_data
+```
 
 ## Disclaimer
 
-Quality of the optimization results bound to the quality of forecasts...
+The quality of the optimization results bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not in the add-on. It is a work in progress and this will be added in the future.
 
 ## TODOs
 
