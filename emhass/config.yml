@@ -9,29 +9,28 @@ arch:
   - armhf
   - armv7
   - i386
-startup: before
 ports:
   5000/tcp: 5000
 hassio_api: true
 homeassistant_api: true
-webui: http://localhost:5000
+webui: http://[HOST]:[PORT:5000]
 options:
-  costfun: "profit"
+  costfun: profit
   optimization_time_step: 30
   historic_days_to_retrieve: 2
-  sensor_power_photovoltaics: "sensor.power_photovoltaics"
-  sensor_power_load_no_var_loads: "sensor.power_load_no_var_loads"
+  sensor_power_photovoltaics: sensor.power_photovoltaics
+  sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   set_use_battery: false
   number_of_deferrable_loads: 2
-  nominal_power_of_deferrable_loads: "3000, 750"
-  operating_hours_of_each_deferrable_load: "5, 8"
-  peak_hours_periods_data: '{"list_hp_periods": [{"period_hp_1": [{"start": "02:54"}, {"end": "15:24"}]}, {"period_hp_2": [{"start": "17:24"}, {"end": "20:24"}]}]}'
+  nominal_power_of_deferrable_loads: 3000, 750
+  operating_hours_of_each_deferrable_load: 5, 8
+  peak_hours_periods_data: {"list_hp_periods": [{"period_hp_1": [{"start": "02:54"}, {"end": "15:24"}]}, {"period_hp_2": [{"start": "17:24"}, {"end": "20:24"}]}]}
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
   maximum_power_from_grid: 9000
-  pv_module_model: "CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M"
-  pv_inverter_model: "Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_"
+  pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
+  pv_inverter_model: Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_
   surface_tilt: 30
   surface_azimuth: 205
   modules_per_string: 16
