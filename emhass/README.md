@@ -1,7 +1,5 @@
 # EMHASS Add-on
 
-This is experimental and a work in progress.
-
 A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
 
 The EMHASS module github repository: https://github.com/davidusb-geek/emhass

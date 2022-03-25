@@ -14,8 +14,6 @@ ports:
   5000/tcp: 5000
 hassio_api: true
 homeassistant_api: true
-map:
-  - config:rw
 webui: http://localhost:5000
 options:
   costfun: "profit"

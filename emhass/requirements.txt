@@ -11,4 +11,5 @@ pyyaml>=5.4.1
 netcdf4>=1.5.3
 tables>=3.6.1
 flask>=2.0.3
+plotly=>5.3.1
 git+https://github.com/davidusb-geek/emhass

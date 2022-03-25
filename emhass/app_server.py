@@ -5,11 +5,13 @@ from jinja2 import Environment, FileSystemLoader
 from requests import get
 from pathlib import Path
 import os, json
+import pandas as pd
+import plotly.express as px
 from emhass.command_line import setUp
 from emhass.command_line import dayahead_forecast_optim
 from emhass.command_line import publish_data
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.env = "development"
 
 OPTIONS_PATH = "/data/options.json"
@@ -34,7 +36,7 @@ if config_path.exists():
     plant_conf = config['plant_conf']
 else:
     app.logger.error("ERROR: config_emhass.json does not exists")
-
+'''
 # Build params and params_secrets
 hass_url = 'http://supervisor/core/api'
 long_lived_token = '${SUPERVISOR_TOKEN}'
@@ -44,10 +46,7 @@ headers = {
     "content-type": "application/json"
 }
 response = get(url, headers=headers)
-try:
-    config_hass = response.json()
-except IndexError:
-    app.logger.error("The retrieved JSON is empty, check that correct url and token are passed")
+config_hass = response.json()
 params_secrets = {
     'hass_url': hass_url,
     'long_lived_token': long_lived_token,
@@ -91,40 +90,62 @@ plant_conf[0]['Enom'] = options['battery_nominal_energy_capacity']
 plant_conf[0]['SOCmin'] = options['battery_minimum_state_of_charge']
 plant_conf[0]['SOCmax'] = options['battery_maximum_state_of_charge']
 plant_conf[0]['SOCtarget'] = options['battery_target_state_of_charge']
+# The params dict
+params = {'params_secrets': params_secrets,
+        'retrieve_hass_conf': retrieve_hass_conf,
+        'optim_conf': optim_conf,
+        'plant_conf': plant_conf}
+# The cost function
+costfun = options['costfun']
+'''
+app.logger.error("Parameter dicts will be empty")
+params = {}
+costfun = "profit"
 
+def get_injection_dict(fig, overview_df):
+    # Load HTML template
+    file_loader = FileSystemLoader('templates')
+    env = Environment(loader=file_loader)
+    template = env.get_template('index.html')
+    # Get full path to image
+    image_path_0 = fig.to_html(full_html=False, default_width='75%')
+    # The tables
+    table1 = overview_df.reset_index().to_html(classes='mystyle', index=False)
+    # The dict of plots
+    injection_dict = {}
+    injection_dict['title'] = '<h2>EMHASS optimization results</h2>'
+    injection_dict['subsubtitle2'] = '<h4>Plotting latest optimization results</h4>'
+    injection_dict['figure_0'] = image_path_0
+    injection_dict['subsubtitle1'] = '<h4>Last run results table</h4>'
+    injection_dict['table1'] = table1
+    # Render HTML template with elements from report
+    source_html = template.render(injection_dict=injection_dict)
+    return injection_dict, source_html
+
+# Initialize this global dict
+opt_res = pd.read_csv(base_path+'/data/opt_res_dayahead_latest.csv', index_col='timestamp')
+plot_size = 1080
+fig = px.line(opt_res, title='EMHASS optimization results', 
+              template='seaborn', width=plot_size, height=0.75*plot_size)
+injection_dict, source_html = get_injection_dict(fig, opt_res)
 
 @app.route('/')
-def hello():
+def index():
     app.logger.info("EMHASS server online...")
-    # Load HTML template
-    # file_loader = FileSystemLoader('templates')
-    # env = Environment(loader=file_loader)
-    # template = env.get_template('index.html')
-    # Get full path to image
-    # image_path_0 = fig.to_html(full_html=False, default_width='75%')
-    # The tables
-    # table1 = overview_df.reset_index().to_html(classes='mystyle', index=False)
-    # The dict of plots
-    # injection_dict = {}
-    # injection_dict['title'] = '<h2>EMHHAS optimization results</h2>'
-    # injection_dict['subsubtitle1'] = '<h4>Last run results</h4>'
-    # injection_dict['table1'] = table1
-    # injection_dict['subsubtitle2'] = '<h4>Plotting</h4>'
-    # injection_dict['figure_0'] = image_path_0
-    # Render HTML template with elements from report
-    # source_html = template.render(injection_dict=injection_dict)
-    # return render_template(source_html)
-    return render_template('index.html')
+    return source_html
 
 @app.route('/action/<name>', methods=['POST'])
 def action_call(name):
+    input_data_dict = setUp(config_path, base_path, costfun, params, app.logger)
     if name == 'publish-data':
         app.logger.info("Publishing data...")
+        _ = publish_data(input_data_dict, app.logger)
     elif name == 'dayahead-optim':
         app.logger.info("Performing optimization...")
+        opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
+        injection_dict, source_html = get_injection_dict(fig, opt_res)
     else:
         app.logger.error("ERROR: passed action is not valid")
-
     msg = f'EMHASS >> Action {name} received\n'
     return make_response(msg, 201)
 
