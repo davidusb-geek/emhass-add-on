@@ -6,6 +6,18 @@ The EMHASS module github repository: https://github.com/davidusb-geek/emhass
 
 The complete documentation for this module can be found here: https://emhass.readthedocs.io/en/latest/
 
+## Installation
+
+To install add the EMHASS Add-on repository in the Home Assistant store. Follow these steps: https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons
+
+This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository and then press "Add".
+
+Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
+
+This add-on is based on the official python:3.8-slim-buster docker image from docker-hub. In the future I may migrate this to the official Home Assistant docker images, however the slim version offers a good trade-off between final image size and possibility to install complete PyPi Python packages. Despite the reduced size of the slim image be patient, the installation may take some time depending on your hardware.
+
+When the installation has finished go to the `Configuration` tab to set the add-on parameters.
+
 ## License
 
 MIT License

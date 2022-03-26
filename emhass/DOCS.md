@@ -6,23 +6,12 @@ This add-on repository: https://github.com/davidusb-geek/emhass-add-on
 The EMHASS module github repository: https://github.com/davidusb-geek/emhass
 The complete documentation for this module can be found here: https://emhass.readthedocs.io/en/latest/
 
-## Installation
-
-To install add the EMHASS Add-on repository in the Home Assistant stroe. Follow these steps: https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons
-
-This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository and then press "Add".
-
-Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
-
-This add-on is based on the official python:3.8-slim-buster docker image from docker-hub. In the future I may migrate this to the official Home Assistant docker images, however the slim version offers a good trade-off between final image size and possibility to install complete PyPi Python packages. Despite the reduced size of the slim image be patient, the installation may take some time depending on your hardware.
-
-When the installation has finished go to the `Configuration` tab to set the add-on parameters.
-
-
 ## Configuration
 
 These are the configuration parameters needed to correctly use this module.
 
+- home_assistant_url: Enter the URL to your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost:8123/
+- long_lived_access_token: The "Long-Lived Access Token" generated from your profile. See: https://www.home-assistant.io/docs/authentication/#your-account-profile
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
 - optimization_time_step: The time step to resample retrieved data from hass. This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
 - historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.
@@ -69,8 +58,18 @@ If the `set_use_battery` is set to `true`, then the following parameters need to
 - battery_maximum_state_of_charge: The maximum allowable battery state of charge. Defaults to 0.9.
 - battery_target_state_of_charge: The desired battery state of charge at the end of each optimization cycle. Defaults to 0.6.
 
+Don't forget to hit the `SAVE` button at the end of the page.
+
+You are now ready to lauch the add-on using the `START` button.
 
 ## Usage
+
+This add-on exposes a simple webserver on port 5000. You can access it hiting on the `OPEN WEB UI` button or directly using your brower, ex: http://localhost:5000.
+
+Using this web server you can perform RESTful POST commands on one ENDPOINT called `action` with two main options:
+
+- A POST call to `action/dayahead-optim` to perform a day-ahead optimization task of your home energy
+- A POST call to `action/publish-data ` to publish the optimization results data
 
 To integrate with home assistant we will need to define some shell commands in the `configuration.yaml` file and some basic automations in the `automations.yaml` file.
 
@@ -99,10 +98,39 @@ In `automations.yaml`:
   - service: shell_command.publish_data
 ```
 
+The final action will be to link a sensor value in Home Assistant to control the switch of a desired controllable load. For example imagine that I want to control my water heater and that the `publish-data` action is publishing the optimized value of a deferrable load that I have linked to my water heater desired behavior. In this case we could use an automation like this one below to control the desired real switch:
+
+```
+automation:
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.p_deferrable1
+      above: 0.1
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.water_heater
+```
+
+A second automation should be used to turn off the switch:
+
+```
+automation:
+  trigger:
+    - platform: numeric_state
+      entity_id:
+        - sensor.p_deferrable1
+      below: 0.1
+  action:
+    - service: homeassistant.turn_off
+      entity_id: switch.water_heater
+```
+
 ## Disclaimer
 
-The quality of the optimization results bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not in the add-on. It is a work in progress and this will be added in the future.
+The quality of the optimization results is bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not yet in this add-on. It is a work in progress and this will be added in the future.
 
 ## TODOs
 
-Implement the different methods for weather, load power, production and load costs forecasting...
+Implement the different methods for weather, load power, production and load costs forecasting.
+Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.

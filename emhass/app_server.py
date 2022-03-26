@@ -40,9 +40,10 @@ else:
     app.logger.error("ERROR: config_emhass.json does not exists")
 if is_prod:
     # Build params and params_secrets
-    hass_url = 'http://supervisor/core/api'
-    long_lived_token = '${SUPERVISOR_TOKEN}'
-    url = hass_url+"/config"
+    # TODO: For now we will be using the long_lived_access_token solution as it was not possible to fetch config directly from supervisor
+    hass_url = options['home_assistant_url']
+    long_lived_token = options['long_lived_access_token']
+    url = hass_url+"api/config"
     headers = {
         "Authorization": "Bearer " + long_lived_token,
         "content-type": "application/json"
