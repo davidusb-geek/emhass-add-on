@@ -10,8 +10,14 @@ WORKDIR /app
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
+        build-essential \
+        make \
+        gcc \
     && pip3 install --no-cache-dir \
-        -r requirements.txt
+        -r requirements.txt \
+    && apt-get remove -y --purge make gcc build-essential \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # copy every content from the local file to the image
 COPY . /app
