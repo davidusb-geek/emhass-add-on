@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start EMHASS service
+# ==============================================================================
+
+exec python3 /usr/src/app_server.py --url "http://supervisor/core/api" --key "$SUPERVISOR_TOKEN"
