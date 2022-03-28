@@ -26,7 +26,7 @@ We will define now the paramters associated with the energy cost.
 - peak_hours_periods_start_hours: This is a list of start hours of peak hours periods. A list of comma separated hours in 24h HH:MM format. For example for two peak hour periods: 02:54, 17:24
 - peak_hours_periods_end_hours: This is a list of end hours of peak hours periods. A list of comma separated hours in 24h HH:MM format. For example for two peak hour periods: 15:24, 20:24
 
-In this previous example the first peak hour will start at 02:54 and end at 15:24, and so on.
+In this previous example the first peak hour will start at 02:54 and end at 15:24, and so on. If you don't have a peak/off-peak hours contract, then just leave these defaults period values and set the following peak/off-peak hours cost at the same value.
 
 - load_peak_hours_cost: The cost of the electrical energy from the grid during peak hours in €/kWh. Defaults to 0.1907.
 - load_offpeak_hours_cost: The cost of the electrical energy from the grid during non-peak hours in €/kWh. Defaults to 0.1419.
@@ -64,7 +64,7 @@ You are now ready to lauch the add-on using the `START` button.
 
 ## Usage
 
-This add-on exposes a simple webserver on port 5000. You can access it hiting on the `OPEN WEB UI` button or directly using your brower, ex: http://localhost:5000.
+This add-on exposes a simple webserver on port 5000. You can access it hiting on the `OPEN WEB UI` button or directly using your brower, ex: http://localhost:5000. The webserver can be used to manually launch an optimization task or to publish the optimization data to some Home Assistant variables. For this use the manual buttons in the webserver. It can also be used to visualize optimization results with a graphic and table overview.
 
 Using this web server you can perform RESTful POST commands on one ENDPOINT called `action` with two main options:
 
@@ -125,12 +125,15 @@ automation:
     - service: homeassistant.turn_off
       entity_id: switch.water_heater
 ```
+The `publish-data` command will push to Home Assistant the optimization results for each deferrable load defined in the configuration. For example if you have defined two deferrable loads, then the command will publish `sensor.p_deferrable1` and `sensor.p_deferrable2` to Home Assistant.
 
 ## Disclaimer
 
 The quality of the optimization results is bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not yet in this add-on. It is a work in progress and this will be added in the future.
 
+It is up to the user to test and validate the optimization results. Before control any deferrable load on your home, you should check that the results are coherent with your expectations. The webapp allows this with a visual inspection and an overview table of the optimization results, including the expected cost of the objective function choosed by the user.
+
 ## TODOs
 
-Implement the different methods for weather, load power, production and load costs forecasting.
-Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.
+- [ ] Implement the different methods for weather, load power, production and load costs forecasting.
+- [ ] Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.
