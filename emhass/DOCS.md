@@ -132,5 +132,5 @@ The quality of the optimization results is bound to the quality of forecasts. To
 
 ## TODOs
 
--[] Implement the different methods for weather, load power, production and load costs forecasting.
--[] Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.
+- [ ] Implement the different methods for weather, load power, production and load costs forecasting.
+- [ ] Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.
