@@ -102,8 +102,9 @@ def main():
     parser.add_argument('--key', type=str, help='Your access key')
     args = parser.parse_args()
     # TODO: For now we will be using the long_lived_access_token solution as it was not possible to fetch config directly from supervisor
-    hass_url = args.url #options['home_assistant_url']
-    long_lived_token = args.key #options['long_lived_access_token']
+    web_ui_url = options['web_ui_url']
+    hass_url = args.url
+    long_lived_token = args.key
     url = hass_url+"/config"
     headers = {
         "Authorization": "Bearer " + long_lived_token,
@@ -170,7 +171,7 @@ def main():
     # Launch server
     os.environ.setdefault('FLASK_ENV', 'development')
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=False, host=web_ui_url, port=port)
 
 if __name__ == "__main__":
     main()
