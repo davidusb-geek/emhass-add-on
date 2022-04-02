@@ -1,17 +1,32 @@
 # EMHASS Add-on Documentation
 
-This is the documentation for the Add-on of EMHASS: Energy Management for Home Assistant.
+This is the documentation for the Add-on of **EMHASS: Energy Management for Home Assistant**
 
-This add-on repository: https://github.com/davidusb-geek/emhass-add-on
-The EMHASS module github repository: https://github.com/davidusb-geek/emhass
-The complete documentation for this module can be found here: https://emhass.readthedocs.io/en/latest/
+This add-on repository: [https://github.com/davidusb-geek/emhass-add-on](https://github.com/davidusb-geek/emhass-add-on)
+The EMHASS module github repository: [https://github.com/davidusb-geek/emhass](https://github.com/davidusb-geek/emhass)
+The complete documentation for this module can be found here: [https://emhass.readthedocs.io/en/latest/](https://emhass.readthedocs.io/en/latest/)
+
+EMHASS is a Python module proposing an **optimized energy management** approach using the Linear Programming (LP) optimization technique.
+
+Right out the box EMHASS can be used to optimize the use of loads that are deferrable. This means that these loads can be “moved” around the day with “ideally” no impact on our everyday life. Good examples of these are: dishwasher, washing machine, etc. At my place I also considered as deferrable the water heater and the pool pump.
+
+You must follow these steps to make EMHASS work properly:
+
+1) Define all the parameters in the configuration pane according to your installation. See the description for each parameter in the **configuration** section below.
+
+2) You most notably will need to define the main data entering EMHASS. This will be the `sensor_power_photovoltaics` for the name of the your hass variable containing the PV produced power and the variable `sensor_power_load_no_var_loads` for the load power of your household excluding the power of the deferrable loads that you want to optimize.
+
+3) Launch the actual optimization and check the results. This can be done manually using the buttons in the web ui or with a `curl` command like this: `curl -X POST http://localhost:5000/action/dayahead-optim`
+
+4) If you’re satisfied with the optimization results then you can set the optimization and data publish task commands in an automation. You can read more about this on the **usage** section below.
+
+5) The final step is to link the deferrable loads variables to real switchs on your installation. An example code for this using automations and the shell command integration is presentedd below in the **usage** section.
 
 ## Configuration
 
 These are the configuration parameters needed to correctly use this module.
 
-- home_assistant_url: Enter the URL to your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost:8123/
-- long_lived_access_token: The "Long-Lived Access Token" generated from your profile. See: https://www.home-assistant.io/docs/authentication/#your-account-profile
+- web_ui_url: Enter the URL where you want the WEB UI to be accessed from. This will normally be the root url to your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost/. This defaults to 0.0.0.0 (localhost)
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
 - optimization_time_step: The time step to resample retrieved data from hass. This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
 - historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.
@@ -64,7 +79,11 @@ You are now ready to lauch the add-on using the `START` button.
 
 ## Usage
 
-This add-on exposes a simple webserver on port 5000. You can access it hiting on the `OPEN WEB UI` button or directly using your brower, ex: http://localhost:5000. The webserver can be used to manually launch an optimization task or to publish the optimization data to some Home Assistant variables. For this use the manual buttons in the webserver. It can also be used to visualize optimization results with a graphic and table overview.
+This add-on exposes a simple webserver on port 5000. You can access it by clicking on the `OPEN WEB UI` button or directly using your brower, ex: http://localhost:5000. 
+
+When you access the webserver you will be looking at the latests results stored in a csv file on the data folder inside the add-on. Each time that you launch the optimization task this csv file is rewritten and the graph and table in the UI can be refreshed. I left an initial csv file in the data folder so that the first time an user access the webserver it can check what type of results EMHASS will obtain when launching the optimization task. This initial csv was obtained with the default configuration presented in the configuration pane. The graph is interactive, so what you can do is use the legend to turn off the visualization of all variables except the deferrable load powers. In that example we have two deferrable loads and what you’re seeing is the result of the optimization. This is giving you the optimal evolution and turn on/off times of those deferrable loads in order to maximize profit for example, depending on what objective function you choose and all the forecast data that have been entered to EMHASS.
+
+The webserver can be used to manually launch an optimization task or to publish the optimization data to some Home Assistant variables. For this use the manual buttons in the webserver. It can also be used to visualize optimization results with a graphic and table overview.
 
 Using this web server you can perform RESTful POST commands on one ENDPOINT called `action` with two main options:
 
@@ -127,11 +146,31 @@ automation:
 ```
 The `publish-data` command will push to Home Assistant the optimization results for each deferrable load defined in the configuration. For example if you have defined two deferrable loads, then the command will publish `sensor.p_deferrable1` and `sensor.p_deferrable2` to Home Assistant.
 
+## Forecast data
+
+In EMHASS we have basically 4 forecasts to deal with:
+
+- PV power production forecast (internally based on the weather forecast and the characteristics of your PV plant). This is given in Watts.
+
+- Load power forecast: how much power your house will demand on the next 24h. This is given in Watts.
+
+- PV production selling price forecast: at what price are you selling your excess PV production on the next 24h. This is given in EUR/kWh.
+
+- Load cost forecast: the price of the energy from the grid on the next 24h. This is given in EUR/kWh.
+
+Maybe the hardest part is the load data: `sensor_power_load_no_var_loads`. As we want to optimize the energies, the load forecast default method is a naive approach using 1-day persistence, this mean that the load data variable should not contain the data from the deferrable loads themselves. For example, lets say that you set your deferrable load to be the washing machine. The variable that you should enter in EMHASS will be: `sensor_power_load_no_var_loads = sensor_power_load - sensor_power_washing_machine`. This is supposing that the overall load of your house is contained in variable: `sensor_power_load`. This can be easily done with a new template sensor in Home Assistant.
+
 ## Disclaimer
 
 The quality of the optimization results is bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not yet in this add-on. It is a work in progress and this will be added in the future.
 
 It is up to the user to test and validate the optimization results. Before control any deferrable load on your home, you should check that the results are coherent with your expectations. The webapp allows this with a visual inspection and an overview table of the optimization results, including the expected cost of the objective function choosed by the user.
+
+## Contact
+
+If you have any request or if you need any help using this add-on or EMHASS in general you can leave a message in this HA community thread: [https://community.home-assistant.io/t/emhass-an-energy-management-for-home-assistant](https://community.home-assistant.io/t/emhass-an-energy-management-for-home-assistant).
+
+If you find any problems with the code you can of course open new issues on the Github repository of [this add-on](https://github.com/davidusb-geek/emhass-add-on) or on the repository of the [core EMHASS code](https://github.com/davidusb-geek/emhass).
 
 ## TODOs
 
