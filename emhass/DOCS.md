@@ -96,8 +96,8 @@ In `configuration.yaml`:
 
 ```
 shell_command:
-  dayahead_optim: curl -X POST http://localhost:5000/action/dayahead-optim
-  publish_data: curl -X POST http://localhost:5000/action/publish-data 
+  dayahead_optim: curl -i -H "Content-Type: application/json" -X POST -d '{}' http://localhost:5000/action/dayahead-optim
+  publish_data: curl -i -H "Content-Type: application/json" -X POST -d '{}' http://localhost:5000/action/publish-data 
 ```
 
 In `automations.yaml`:
@@ -154,11 +154,31 @@ In EMHASS we have basically 4 forecasts to deal with:
 
 - Load power forecast: how much power your house will demand on the next 24h. This is given in Watts.
 
-- PV production selling price forecast: at what price are you selling your excess PV production on the next 24h. This is given in EUR/kWh.
-
 - Load cost forecast: the price of the energy from the grid on the next 24h. This is given in EUR/kWh.
 
+- PV production selling price forecast: at what price are you selling your excess PV production on the next 24h. This is given in EUR/kWh.
+
 Maybe the hardest part is the load data: `sensor_power_load_no_var_loads`. As we want to optimize the energies, the load forecast default method is a naive approach using 1-day persistence, this mean that the load data variable should not contain the data from the deferrable loads themselves. For example, lets say that you set your deferrable load to be the washing machine. The variable that you should enter in EMHASS will be: `sensor_power_load_no_var_loads = sensor_power_load - sensor_power_washing_machine`. This is supposing that the overall load of your house is contained in variable: `sensor_power_load`. This can be easily done with a new template sensor in Home Assistant.
+
+### Passing your own forecast data
+
+It is possible to provide EMHASS with your own forecast data. For this just add the data as list of values to the data dictionnary during the `curl` POST. 
+
+For example:
+```
+curl -i -H "Content-Type: application/json" -X POST -d '{"pv_power_forecast":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 141.22, 246.18, 513.5, 753.27, 1049.89, 1797.93, 1697.3, 3078.93, 1164.33, 1046.68, 1559.1, 2091.26, 1556.76, 1166.73, 1516.63, 1391.13, 1720.13, 820.75, 804.41, 251.63, 79.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}' http://localhost:5000/action/dayahead-optim
+```
+
+The possible dictionnary keys to pass data are:
+
+- `pv_power_forecast` for the PV power production forecast.
+
+- `load_power_forecast` for the Load power forecast.
+
+- `load_cost_forecast` for the Load cost forecast.
+
+- `prod_price_forecast` for the PV production selling price forecast.
+
 
 ## Disclaimer
 
