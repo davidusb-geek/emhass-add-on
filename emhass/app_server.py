@@ -201,7 +201,6 @@ def main():
     num_peak_hours = len(start_hours_list)
     list_hp_periods_list = [{'period_hp_'+str(i+1):[{'start':start_hours_list[i]},{'end':end_hours_list[i]}]} for i in range(num_peak_hours)]
     params['optim_conf'][10]['list_hp_periods'] = list_hp_periods_list
-    app.logger.error(params['optim_conf'][10]['list_hp_periods'])
     params['optim_conf'][11]['load_cost_hp'] = options['load_peak_hours_cost']
     params['optim_conf'][12]['load_cost_hc'] = options['load_offpeak_hours_cost']
     params['optim_conf'][14]['prod_sell_price'] = options['photovoltaic_production_sell_price']
