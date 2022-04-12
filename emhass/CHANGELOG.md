@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.1.18 - 2022-04-05
+## [0.1.19] - 2022-04-12
+### Fix
+- Removed possibility to pass web ui url as a parameter.
+- Added the possibility to pass HA instance url and token as parameters.
+- Fixed errors in manual buttons on index.html
+
+## [0.1.18] - 2022-04-05
 ### Added
 - Added support to post list of values for forecast methods.
 ### Fix
@@ -29,3 +35,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the first version of the EMHASS add-on
 
 [0.1.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.0
+[0.1.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.18
+[0.1.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.19

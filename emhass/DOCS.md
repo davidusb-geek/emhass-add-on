@@ -26,7 +26,8 @@ You must follow these steps to make EMHASS work properly:
 
 These are the configuration parameters needed to correctly use this module.
 
-- web_ui_url: Enter the URL where you want the WEB UI to be accessed from. This will normally be the root url to your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost/. This defaults to 0.0.0.0 (localhost)
+- hass_url: Enter the URL of your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost/. This defaults to empty. If using the supervisor you can leave this to the default empty value.
+- long_lived_token: A Long-Lived Access Token that can be created from the Lovelace profile page. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
 - optimization_time_step: The time step to resample retrieved data from hass. This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
 - historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.

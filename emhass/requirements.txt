@@ -13,4 +13,4 @@ tables>=3.6.1
 flask>=2.0.3
 Flask-Caching>=1.10.1
 plotly>=5.6.0
-git+https://github.com/davidusb-geek/emhass
+emhass==0.2.5

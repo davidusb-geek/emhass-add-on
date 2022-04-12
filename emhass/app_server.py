@@ -162,10 +162,18 @@ def main():
     parser.add_argument('--url', type=str, help='The hass instance url')
     parser.add_argument('--key', type=str, help='Your access key')
     args = parser.parse_args()
-    web_ui_url = options['web_ui_url']
-    hass_url = args.url
-    long_lived_token = args.key
-    url = hass_url+"/config"
+    url_from_options = options['hass_url']
+    if url_from_options == 'empty':
+        hass_url = args.url
+        url = hass_url+"/config"
+    else:
+        hass_url = url_from_options
+        url = hass_url+"/api/config"
+    token_from_options = options['long_lived_token']
+    if token_from_options == 'empty':
+        long_lived_token = args.key
+    else:
+        long_lived_token = token_from_options
     headers = {
         "Authorization": "Bearer " + long_lived_token,
         "content-type": "application/json"
@@ -228,9 +236,8 @@ def main():
     # Launch server
     os.environ.setdefault('FLASK_ENV', 'development')
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host=web_ui_url, port=port)
+    app.run(debug=False, host='0.0.0.0', port=port)
 
 if __name__ == "__main__":
     main()
 
-    
