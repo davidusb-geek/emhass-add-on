@@ -42,3 +42,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.0
 [0.1.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.18
 [0.1.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.19
+[0.1.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.20
