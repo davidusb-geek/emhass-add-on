@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.1.19
+version: 0.1.2001
 slug: emhass
 arch:
   - aarch64
@@ -16,6 +16,7 @@ startup: application
 homeassistant_api: true
 webui: http://[HOST]:[PORT:5000]
 options:
+  web_ui_url: 0.0.0.0
   hass_url: empty
   long_lived_token: empty
   costfun: profit
@@ -48,6 +49,7 @@ options:
   battery_maximum_state_of_charge: 0.9
   battery_target_state_of_charge: 0.6
 schema:
+  web_ui_url: str
   hass_url: str
   long_lived_token: str
   costfun: list(profit|cost|self-consumption)

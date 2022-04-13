@@ -162,6 +162,7 @@ def main():
     parser.add_argument('--url', type=str, help='The hass instance url')
     parser.add_argument('--key', type=str, help='Your access key')
     args = parser.parse_args()
+    web_ui_url = options['web_ui_url']
     url_from_options = options['hass_url']
     if url_from_options == 'empty':
         hass_url = args.url
@@ -236,7 +237,7 @@ def main():
     # Launch server
     os.environ.setdefault('FLASK_ENV', 'development')
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run(debug=False, host=web_ui_url, port=port)
 
 if __name__ == "__main__":
     main()

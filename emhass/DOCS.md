@@ -26,6 +26,7 @@ You must follow these steps to make EMHASS work properly:
 
 These are the configuration parameters needed to correctly use this module.
 
+- web_ui_url: Provide the web ui url. Leave this at the default value to have the web ui at localhost. Otherwise provide your custom url.
 - hass_url: Enter the URL of your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost/. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - long_lived_token: A Long-Lived Access Token that can be created from the Lovelace profile page. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
