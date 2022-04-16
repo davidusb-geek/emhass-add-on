@@ -16,6 +16,7 @@ RUN apt-get update \
         python3-dev \
         git \
         build-essential \
+        libglpk-dev \
         glpk-utils \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
