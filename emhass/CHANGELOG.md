@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.21] - 2022-04-16
+### Fix
+- Fix following the improved handling of errors in EMHASS concerning solver issues with Pulp. Added support for glpk solver. For now just using a try/catch strategy but should update to solver passed as a parameter to EMHASS.
+
 ## [0.1.20] - 2022-04-13
 ### Fix
 - Added possibility to pass web ui url as a parameter AGAIN. This functionnality was removed by error.
@@ -43,3 +47,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.18
 [0.1.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.19
 [0.1.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.20
+[0.1.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.21
