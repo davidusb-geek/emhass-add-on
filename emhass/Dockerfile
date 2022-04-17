@@ -20,7 +20,6 @@ RUN apt-get update \
         glpk-utils \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
-    && pulptest \
     && apt-get purge -y --auto-remove \
         git \
         build-essential \
