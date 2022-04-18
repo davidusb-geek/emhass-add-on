@@ -16,6 +16,8 @@ RUN apt-get update \
         python3-dev \
         git \
         build-essential \
+        coinor-libcbc-dev \
+        coinor-cbc \
         libglpk-dev \
         glpk-utils \
     && pip3 install --no-cache-dir -U setuptools wheel \

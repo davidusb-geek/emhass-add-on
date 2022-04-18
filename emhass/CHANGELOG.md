@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.23] - 2022-04-18
+### Fix
+- Updating to a new release to build with latest emhass version as a fatal errors on pubish_data were fixed.
+
+## [0.1.22] - 2022-04-16
+### Fix
+- Fixed problem of solver not found on arm64 architectures by installing the glpk solver. The install is added to the add-on Dockerfile.
+
 ## [0.1.21] - 2022-04-16
 ### Fix
 - Fix following the improved handling of errors in EMHASS concerning solver issues with Pulp. Added support for glpk solver. For now just using a try/catch strategy but should update to solver passed as a parameter to EMHASS.
@@ -48,3 +56,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.19
 [0.1.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.20
 [0.1.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.21
+[0.1.22]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.22
