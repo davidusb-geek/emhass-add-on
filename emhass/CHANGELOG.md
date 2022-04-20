@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.24] - 2022-04-20
+### Fix
+- Fixed 'index' did not return a valid response errors. Added appropiate returns to flask app.
+
 ## [0.1.23] - 2022-04-18
 ### Fix
 - Updating to a new release to build with latest emhass version as a fatal errors on pubish_data were fixed.

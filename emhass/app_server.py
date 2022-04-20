@@ -144,15 +144,17 @@ def action_call(name):
     if name == 'publish-data':
         app.logger.info("Publishing data...")
         _ = publish_data(input_data_dict, app.logger)
+        return index()
     elif name == 'dayahead-optim':
         app.logger.info("Performing optimization...")
         global source_html
         opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
         source_html = get_injection_dict(opt_res)
         cache.set("source_html", source_html)
-        index()
+        return index()
     else:
         app.logger.error("ERROR: passed action is not valid")
+        return index()
     msg = f'EMHASS >> Action {name} received... \n'
     return make_response(msg, 201)
 
