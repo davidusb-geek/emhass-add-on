@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from flask import Flask, make_response, render_template, request
+from flask import Flask, make_response, render_template, request, redirect, url_for
 from flask_caching import Cache
 from jinja2 import Environment, FileSystemLoader
 from requests import get
