@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.25] - 2022-04-21
+### Fix
+- Fixed error using flask returns. It was not using redirect and url_for methods.
+
 ## [0.1.24] - 2022-04-20
 ### Fix
 - Fixed 'index' did not return a valid response errors. Added appropiate returns to flask app.
@@ -61,3 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.20
 [0.1.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.21
 [0.1.22]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.22
+[0.1.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.23
+[0.1.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.24
+[0.1.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.25
