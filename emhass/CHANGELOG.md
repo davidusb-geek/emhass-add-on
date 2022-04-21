@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.27] - 2022-04-21
+### Fix
+- Fixing flask redirects and correct response returns.
+- Updated to new emhass version using now pandas get_indexer method.
+
 ## [0.1.26] - 2022-04-21
 ### Fix
 - Fixed missing imports in flask app.
@@ -72,3 +77,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.23
 [0.1.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.24
 [0.1.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.25
+[0.1.26]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.26
+[0.1.27]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.27

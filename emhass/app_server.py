@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from flask import Flask, make_response, render_template, request, redirect, url_for
+from flask import Flask, make_response, request, redirect, url_for
 from flask_caching import Cache
 from jinja2 import Environment, FileSystemLoader
 from requests import get
@@ -68,7 +68,7 @@ if options_json.exists():
     with options_json.open('r') as data:
         options = json.load(data)
 else:
-    app.logger.error("ERROR: options.json does not exists")
+    app.logger.error("options.json does not exists")
 
 # Read example config file
 if config_path.exists():
@@ -78,7 +78,7 @@ if config_path.exists():
     optim_conf = config['optim_conf']
     plant_conf = config['plant_conf']
 else:
-    app.logger.error("ERROR: config_emhass.json does not exists")
+    app.logger.error("config_emhass.json does not exists")
 
 params = {}
 params['retrieve_hass_conf'] = retrieve_hass_conf
@@ -102,7 +102,7 @@ cache.set("source_html", source_html)
 def index():
     app.logger.info("EMHASS server online, serving index.html...")
     source_html = cache.get("source_html")
-    return source_html
+    return make_response(source_html)
 
 @app.route('/action/<name>', methods=['POST'])
 def action_call(name):
@@ -155,8 +155,6 @@ def action_call(name):
     else:
         app.logger.error("ERROR: passed action is not valid")
         return redirect(url_for(".index"))
-    msg = f'EMHASS >> Action {name} received... \n'
-    return make_response(msg, 201)
 
 def main():
     # Parsing arguments
