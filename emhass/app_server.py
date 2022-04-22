@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-from flask import Flask, make_response, request, redirect, url_for
+from flask import Flask, render_template, make_response, request, redirect, url_for
 from flask_caching import Cache
 from jinja2 import Environment, FileSystemLoader
 from requests import get
+# from waitress import serve
+# from paste.translogger import TransLogger
 from pathlib import Path
 import os, json, argparse
 from datetime import datetime, timedelta
@@ -17,12 +19,7 @@ from emhass.utils import get_root
 def get_injection_dict(df, plot_size = 1366):
     # Create plots
     fig = px.line(df, title='Systems powers and optimization cost results', 
-                  template='seaborn', width=plot_size, height=0.75*plot_size)   
-    # Load HTML template
-    app.logger.info("Look for this path: "+base_path)
-    file_loader = FileSystemLoader(base_path+'/templates')
-    env = Environment(loader=file_loader)
-    template = env.get_template('index.html')
+                  template='seaborn', width=plot_size, height=0.75*plot_size)
     # Get full path to image
     image_path_0 = fig.to_html(full_html=False, default_width='75%')
     # The tables
@@ -34,9 +31,7 @@ def get_injection_dict(df, plot_size = 1366):
     injection_dict['figure_0'] = image_path_0
     injection_dict['subsubtitle1'] = '<h4>Last run optimization results table</h4>'
     injection_dict['table1'] = table1
-    # Render HTML template with elements from report
-    source_html = template.render(injection_dict=injection_dict)
-    return source_html
+    return injection_dict
 
 def get_forecast_dates(freq, delta_forecast, timedelta_days = 0):
     freq = pd.to_timedelta(freq, "minutes")
@@ -47,67 +42,7 @@ def get_forecast_dates(freq, delta_forecast, timedelta_days = 0):
         freq=freq).round(freq)
     return forecast_dates
 
-# Define the Flask instance
-app = Flask(__name__, static_url_path='/static')
-app.env = "development"
-
-# Define cache instance
-cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
-cache.init_app(app)
-
-# Define the paths
-OPTIONS_PATH = "/data/options.json"
-options_json = Path(OPTIONS_PATH)
-CONFIG_PATH = "/usr/src/config_emhass.json"
-config_path = Path(CONFIG_PATH)
-base_path = str(config_path.parent)
-is_prod = True
-
-# Read options info
-if options_json.exists():
-    with options_json.open('r') as data:
-        options = json.load(data)
-else:
-    app.logger.error("options.json does not exists")
-
-# Read example config file
-if config_path.exists():
-    with config_path.open('r') as data:
-        config = json.load(data)
-    retrieve_hass_conf = config['retrieve_hass_conf']
-    optim_conf = config['optim_conf']
-    plant_conf = config['plant_conf']
-else:
-    app.logger.error("config_emhass.json does not exists")
-
-params = {}
-params['retrieve_hass_conf'] = retrieve_hass_conf
-params['optim_conf'] = optim_conf
-params['plant_conf'] = plant_conf
-cache.set("params", params)
-
-# The cost function
-costfun = options['costfun']
-
-# Initialize this global dict
-if is_prod:
-    opt_res = pd.read_csv(base_path+'/data/opt_res_dayahead_latest.csv', index_col='timestamp')
-else:
-    root = get_root(__name__)
-    opt_res = pd.read_csv(root / 'data' / 'opt_res_dayahead_latest.csv', index_col='timestamp')
-source_html = get_injection_dict(opt_res)
-cache.set("source_html", source_html)
-
-@app.route('/')
-def index():
-    app.logger.info("EMHASS server online, serving index.html...")
-    source_html = cache.get("source_html")
-    return make_response(source_html)
-
-@app.route('/action/<name>', methods=['POST'])
-def action_call(name):
-    params = cache.get("params")
-    data = request.get_json(force=True)
+def treat_data_params(data, params):
     if data is not None:
         forecast_dates = get_forecast_dates(params['retrieve_hass_conf'][0]['freq'], params['optim_conf'][1]['delta_forecast'])
         if 'pv_power_forecast' in data.keys():
@@ -138,59 +73,9 @@ def action_call(name):
             else:
                 app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
                 app.logger.error("Passed type is "+str(type(data['prod_price_forecast']))+" and length is "+str(len(data['prod_price_forecast'])))
-        cache.set("params", params)
-    params = json.dumps(params)
-    input_data_dict = setUp(config_path, base_path, costfun, params, app.logger)
-    if name == 'publish-data':
-        app.logger.info("Publishing data...")
-        _ = publish_data(input_data_dict, app.logger)
-        return redirect(url_for(".index"))
-    elif name == 'dayahead-optim':
-        app.logger.info("Performing optimization...")
-        global source_html
-        opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
-        source_html = get_injection_dict(opt_res)
-        cache.set("source_html", source_html)
-        return redirect(url_for(".index"))
-    else:
-        app.logger.error("ERROR: passed action is not valid")
-        return redirect(url_for(".index"))
+    return params
 
-def main():
-    # Parsing arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--url', type=str, help='The hass instance url')
-    parser.add_argument('--key', type=str, help='Your access key')
-    args = parser.parse_args()
-    web_ui_url = options['web_ui_url']
-    url_from_options = options['hass_url']
-    if url_from_options == 'empty':
-        hass_url = args.url
-        url = hass_url+"/config"
-    else:
-        hass_url = url_from_options
-        url = hass_url+"/api/config"
-    token_from_options = options['long_lived_token']
-    if token_from_options == 'empty':
-        long_lived_token = args.key
-    else:
-        long_lived_token = token_from_options
-    headers = {
-        "Authorization": "Bearer " + long_lived_token,
-        "content-type": "application/json"
-    }
-    response = get(url, headers=headers)
-    config_hass = response.json()
-    params_secrets = {
-        'hass_url': hass_url,
-        'long_lived_token': long_lived_token,
-        'time_zone': config_hass['time_zone'],
-        'lat': config_hass['latitude'],
-        'lon': config_hass['longitude'],
-        'alt': config_hass['elevation']
-    }
-    # Build params
-    params = cache.get("params")
+def build_params(params, options):
     # Updating variables in retrieve_hass_conf
     params['retrieve_hass_conf'][0]['freq'] = options['optimization_time_step']
     params['retrieve_hass_conf'][1]['days_to_retrieve'] = options['historic_days_to_retrieve']
@@ -232,13 +117,128 @@ def main():
     # The params dict
     params['params_secrets'] = params_secrets
     params['passed_data'] = {'pv_power_forecast':None,'load_power_forecast':None,'load_cost_forecast':None,'prod_price_forecast':None}
+    return params
+
+# Define the Flask instance
+app = Flask(__name__, static_url_path='/static')
+
+# Define cache instance
+cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
+cache.init_app(app)
+
+# Define the paths
+OPTIONS_PATH = "/data/options.json"
+options_json = Path(OPTIONS_PATH)
+CONFIG_PATH = "/usr/src/config_emhass.json"
+config_path = Path(CONFIG_PATH)
+base_path = str(config_path.parent)
+
+# Read options info
+if options_json.exists():
+    with options_json.open('r') as data:
+        options = json.load(data)
+else:
+    app.logger.error("options.json does not exists")
+
+# Read example config file
+if config_path.exists():
+    with config_path.open('r') as data:
+        config = json.load(data)
+    retrieve_hass_conf = config['retrieve_hass_conf']
+    optim_conf = config['optim_conf']
+    plant_conf = config['plant_conf']
+else:
+    app.logger.error("config_emhass.json does not exists")
+
+params = {}
+params['retrieve_hass_conf'] = retrieve_hass_conf
+params['optim_conf'] = optim_conf
+params['plant_conf'] = plant_conf
+cache.set("params", params)
+
+# The cost function
+costfun = options['costfun']
+
+# Initialize this global dict
+opt_res = pd.read_csv(base_path+'/data/opt_res_dayahead_latest.csv', index_col='timestamp')
+injection_dict = get_injection_dict(opt_res)
+cache.set("injection_dict", injection_dict)
+
+@app.route('/')
+def index():
+    app.logger.info("EMHASS server online, serving index.html...")
+    # Load HTML template
+    file_loader = FileSystemLoader(base_path+'/templates')
+    env = Environment(loader=file_loader)
+    template = env.get_template('index.html')
+    # Load cache dict
+    injection_dict = cache.get("injection_dict")
+    return make_response(template.render(injection_dict=injection_dict))
+
+@app.route('/action/<name>', methods=['POST'])
+def action_call(name):
+    params = cache.get("params")
+    data = request.get_json(force=True)
+    params = treat_data_params(data, params)
+    cache.set("params", params)
+    params = json.dumps(params)
+    input_data_dict = setUp(config_path, base_path, costfun, params, app.logger)
+    if name == 'publish-data':
+        app.logger.info("Publishing data...")
+        _ = publish_data(input_data_dict, app.logger)
+        msg = f'EMHASS >> Action publish-data executed... \n'
+        return make_response(msg, 201)
+    elif name == 'dayahead-optim':
+        app.logger.info("Performing optimization...")
+        opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
+        injection_dict = get_injection_dict(opt_res)
+        cache.set("injection_dict", injection_dict)
+        msg = f'EMHASS >> Action dayahead-optim executed... \n'
+        return make_response(msg, 201)
+    else:
+        app.logger.error("ERROR: passed action is not valid")
+        msg = f'EMHASS >> Passed action is not valid... \n'
+        return make_response(msg, 400)
+
+if __name__ == "__main__":
+    # Parsing arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--url', type=str, help='The hass instance url')
+    parser.add_argument('--key', type=str, help='Your access key')
+    args = parser.parse_args()
+    web_ui_url = options['web_ui_url']
+    url_from_options = options['hass_url']
+    if url_from_options == 'empty':
+        hass_url = args.url
+        url = hass_url+"/config"
+    else:
+        hass_url = url_from_options
+        url = hass_url+"/api/config"
+    token_from_options = options['long_lived_token']
+    if token_from_options == 'empty':
+        long_lived_token = args.key
+    else:
+        long_lived_token = token_from_options
+    headers = {
+        "Authorization": "Bearer " + long_lived_token,
+        "content-type": "application/json"
+    }
+    response = get(url, headers=headers)
+    config_hass = response.json()
+    params_secrets = {
+        'hass_url': hass_url,
+        'long_lived_token': long_lived_token,
+        'time_zone': config_hass['time_zone'],
+        'lat': config_hass['latitude'],
+        'lon': config_hass['longitude'],
+        'alt': config_hass['elevation']
+    }
+    # Build params
+    params = cache.get("params")
+    params = build_params(params, options)
     cache.set("params", params)
 
     # Launch server
-    os.environ.setdefault('FLASK_ENV', 'development')
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=False, host=web_ui_url, port=port)
-
-if __name__ == "__main__":
-    main()
-
+    #serve(TransLogger(app, setup_console_handler=True), host=web_ui_url, port=port)
