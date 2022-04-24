@@ -1,0 +1,6 @@
+# ---> Python
+
+# Byte-compiled / optimized / DLL files
+emhass/__pycache__/
+*.py[cod]
+*$py.class

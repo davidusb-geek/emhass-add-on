@@ -102,8 +102,8 @@ In `configuration.yaml`:
 
 ```
 shell_command:
-  dayahead_optim: curl -i -H "Content-Type: application/json" -X POST -d '{}' http://localhost:5000/action/dayahead-optim
-  publish_data: curl -i -H "Content-Type: application/json" -X POST -d '{}' http://localhost:5000/action/publish-data 
+  dayahead_optim: "curl -i -H 'Content-Type: application/json' -X POST -d '{}' http://localhost:5000/action/dayahead-optim"
+  publish_data: "curl -i -H 'Content-Type: application/json' -X POST -d '{}' http://localhost:5000/action/publish-data"
 ```
 
 In `automations.yaml`:

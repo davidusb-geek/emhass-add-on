@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 from flask import Flask, render_template, make_response, request, redirect, url_for
-from flask_caching import Cache
 from jinja2 import Environment, FileSystemLoader
 from requests import get
 # from waitress import serve
 # from paste.translogger import TransLogger
 from pathlib import Path
-import os, json, argparse
+import os, json, argparse, pickle
 from datetime import datetime, timedelta
 import pandas as pd
 import plotly.express as px
@@ -122,10 +121,6 @@ def build_params(params, options):
 # Define the Flask instance
 app = Flask(__name__, static_url_path='/static')
 
-# Define cache instance
-cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
-cache.init_app(app)
-
 # Define the paths
 OPTIONS_PATH = "/data/options.json"
 options_json = Path(OPTIONS_PATH)
@@ -154,7 +149,8 @@ params = {}
 params['retrieve_hass_conf'] = retrieve_hass_conf
 params['optim_conf'] = optim_conf
 params['plant_conf'] = plant_conf
-cache.set("params", params)
+with open(base_path+'/data/params.pkl', "wb") as fid:
+    pickle.dump(params, fid)
 
 # The cost function
 costfun = options['costfun']
@@ -162,7 +158,8 @@ costfun = options['costfun']
 # Initialize this global dict
 opt_res = pd.read_csv(base_path+'/data/opt_res_dayahead_latest.csv', index_col='timestamp')
 injection_dict = get_injection_dict(opt_res)
-cache.set("injection_dict", injection_dict)
+with open(base_path+'/data/injection_dict.pkl', "wb") as fid:
+    pickle.dump(injection_dict, fid)
 
 @app.route('/')
 def index():
@@ -172,15 +169,21 @@ def index():
     env = Environment(loader=file_loader)
     template = env.get_template('index.html')
     # Load cache dict
-    injection_dict = cache.get("injection_dict")
-    return make_response(template.render(injection_dict=injection_dict))
+    with open(base_path+'/data/injection_dict.pkl', "rb") as fid:
+        injection_dict = pickle.load(fid)
+    if injection_dict is None:
+        return make_response(template.render(injection_dict={}))
+    else:
+        return make_response(template.render(injection_dict=injection_dict))
 
 @app.route('/action/<name>', methods=['POST'])
 def action_call(name):
-    params = cache.get("params")
+    with open(base_path+'/data/params.pkl', "rb") as fid:
+        params = pickle.load(fid)
     data = request.get_json(force=True)
     params = treat_data_params(data, params)
-    cache.set("params", params)
+    with open(base_path+'/data/params.pkl', "wb") as fid:
+        pickle.dump(params, fid)
     params = json.dumps(params)
     input_data_dict = setUp(config_path, base_path, costfun, params, app.logger)
     if name == 'publish-data':
@@ -192,12 +195,13 @@ def action_call(name):
         app.logger.info("Performing optimization...")
         opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
         injection_dict = get_injection_dict(opt_res)
-        cache.set("injection_dict", injection_dict)
+        with open(base_path+'/data/injection_dict.pkl', "wb") as fid:
+            pickle.dump(injection_dict, fid)
         msg = f'EMHASS >> Action dayahead-optim executed... \n'
         return make_response(msg, 201)
     else:
         app.logger.error("ERROR: passed action is not valid")
-        msg = f'EMHASS >> Passed action is not valid... \n'
+        msg = f'EMHASS >> ERROR: Passed action is not valid... \n'
         return make_response(msg, 400)
 
 if __name__ == "__main__":
@@ -234,9 +238,11 @@ if __name__ == "__main__":
         'alt': config_hass['elevation']
     }
     # Build params
-    params = cache.get("params")
+    with open(base_path+'/data/params.pkl', "rb") as fid:
+        params = pickle.load(fid)
     params = build_params(params, options)
-    cache.set("params", params)
+    with open(base_path+'/data/params.pkl', "wb") as fid:
+        pickle.dump(params, fid)
 
     # Launch server
     port = int(os.environ.get('PORT', 5000))

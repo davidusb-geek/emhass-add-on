@@ -23,3 +23,6 @@ jobs:
             --all \
             --target emhass \
             --docker-hub davidusb
+            -d davidusb \
+            --docker-user davidusb \
+            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
