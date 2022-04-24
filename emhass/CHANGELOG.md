@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.30] - 2022-04-24
 ### Fix
 - Fixing presumed problems with falsk caching module. Now using just simple pickle object save/load.
+- Added fixed image name for automated docker images pubishing.
 
 ## [0.1.29] - 2022-04-23
 ### Improvement
