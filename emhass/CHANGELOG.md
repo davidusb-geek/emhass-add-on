@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.31] - 2022-04-24
 ### Fix
-- Added build.yaml for automated docker images pubishing.
+- Reinstated build.yaml for automatic image builder.
 
 ## [0.1.30] - 2022-04-24
 ### Fix
