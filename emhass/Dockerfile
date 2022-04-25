@@ -24,7 +24,9 @@ RUN apt-get update \
         libhdf5-serial-dev \
         netcdf-bin \
         libnetcdf-dev \
-    && pip3 install --no-cache-dir -U setuptools wheel h5py \
+        pkg-config \
+        python3-h5py \
+    && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
         git \
