@@ -20,6 +20,8 @@ RUN apt-get update \
         coinor-cbc \
         libglpk-dev \
         glpk-utils \
+        hdf5-helpers \ 
+        hdf5-tools \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
