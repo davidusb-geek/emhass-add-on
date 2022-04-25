@@ -20,9 +20,11 @@ RUN apt-get update \
         coinor-cbc \
         libglpk-dev \
         glpk-utils \
-        hdf5-helpers \ 
-        hdf5-tools \
-    && pip3 install --no-cache-dir -U setuptools wheel \
+        libhdf5-dev \
+        libhdf5-serial-dev \
+        netcdf-bin \
+        libnetcdf-dev \
+    && pip3 install --no-cache-dir -U setuptools wheel h5py \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
         git \
