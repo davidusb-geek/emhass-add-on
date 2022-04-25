@@ -50,28 +50,28 @@ def treat_data_params(data, params):
                 params['optim_conf'][7]['weather_forecast_method'] = 'list'
             else:
                 app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['pv_power_forecast']))+" and length is "+str(len(data['pv_power_forecast'])))
+                app.logger.error("Passed type is "+str(type(data['pv_power_forecast']))+" and length is "+str(len(forecast_dates)))
         if 'load_power_forecast' in data.keys():
             if type(data['load_power_forecast']) == list and len(data['load_power_forecast']) < len(forecast_dates):
                 params['passed_data']['load_power_forecast'] = data['load_power_forecast']
                 params['optim_conf'][8]['load_forecast_method'] = 'list'
             else:
                 app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['load_power_forecast']))+" and length is "+str(len(data['load_power_forecast'])))
+                app.logger.error("Passed type is "+str(type(data['load_power_forecast']))+" and length is "+str(len(forecast_dates)))
         if 'load_cost_forecast' in data.keys():
             if type(data['load_cost_forecast']) == list and len(data['load_cost_forecast']) < len(forecast_dates):
                 params['passed_data']['load_cost_forecast'] = data['load_cost_forecast']
                 params['optim_conf'][9]['load_cost_forecast_method'] = 'list'
             else:
                 app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['load_cost_forecast']))+" and length is "+str(len(data['load_cost_forecast'])))
+                app.logger.error("Passed type is "+str(type(data['load_cost_forecast']))+" and length is "+str(len(forecast_dates)))
         if 'prod_price_forecast' in data.keys():
             if type(data['prod_price_forecast']) == list and len(data['prod_price_forecast']) < len(forecast_dates):
                 params['passed_data']['prod_price_forecast'] = data['prod_price_forecast']
                 params['optim_conf'][13]['prod_price_forecast_method'] = 'list'
             else:
                 app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['prod_price_forecast']))+" and length is "+str(len(data['prod_price_forecast'])))
+                app.logger.error("Passed type is "+str(type(data['prod_price_forecast']))+" and length is "+str(len(forecast_dates)))
     return params
 
 def build_params(params, options):
