@@ -39,7 +39,6 @@ RUN apt-get update \
         netcdf-bin \
         libnetcdf-dev \
         pkg-config \
-        python3-h5py \
         gfortran \
     && rm -rf /var/lib/apt/lists/*
 
