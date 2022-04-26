@@ -30,9 +30,17 @@ RUN apt-get update \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
+        python3-pip \
+        python3-dev \
         git \
         build-essential \
-        python3-dev \
+        libhdf5-dev \
+        libhdf5-serial-dev \
+        netcdf-bin \
+        libnetcdf-dev \
+        pkg-config \
+        python3-h5py \
+        gfortran \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
