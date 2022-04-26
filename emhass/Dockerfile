@@ -26,6 +26,7 @@ RUN apt-get update \
         libnetcdf-dev \
         pkg-config \
         python3-h5py \
+        gfortran \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
