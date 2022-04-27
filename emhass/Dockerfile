@@ -27,6 +27,9 @@ RUN apt-get update \
         pkg-config \
         python3-h5py \
         gfortran \
+    && curl --silent --show-error --retry 5 \
+        "https://bootstrap.pypa.io/get-pip.py" \
+        | python3 \
     && pip3 install --no-cache-dir -U setuptools wheel \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
