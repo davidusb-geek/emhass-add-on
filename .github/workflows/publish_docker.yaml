@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish:
+  publish_amd64:
     name: Publish-amd64
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,7 @@ jobs:
             -d davidusb \
             --docker-user davidusb \
             --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
-  publish:
+  publish_aarch64:
     name: Publish-aarch64
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +47,7 @@ jobs:
             -d davidusb \
             --docker-user davidusb \
             --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
-  publish:
+  publish_armhf:
     name: Publish-armhf
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
             -d davidusb \
             --docker-user davidusb \
             --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
-  publish:
+  publish_armv7:
     name: Publish-armv7
     runs-on: ubuntu-latest
     steps:
