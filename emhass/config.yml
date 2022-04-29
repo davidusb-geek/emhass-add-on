@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.1.38
+version: 0.1.39
 slug: emhass
 arch:
   - aarch64
@@ -23,6 +23,7 @@ options:
   costfun: profit
   optimization_time_step: 30
   historic_days_to_retrieve: 2
+  set_total_pv_sell: false
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -56,6 +57,7 @@ schema:
   costfun: list(profit|cost|self-consumption)
   optimization_time_step: int(10,1440)
   historic_days_to_retrieve: int(2,365)
+  set_total_pv_sell: bool
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)

@@ -32,6 +32,7 @@ These are the configuration parameters needed to correctly use this module.
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
 - optimization_time_step: The time step to resample retrieved data from hass. This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
 - historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.
+- set_total_pv_sell: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
 - sensor_power_photovoltaics: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example: 'sensor.power_photovoltaics'.
 - sensor_power_load_no_var_loads: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example: 'sensor.power_load_no_var_loads'
 - number_of_deferrable_loads: Define the number of deferrable loads to consider. Defaults to 2.
