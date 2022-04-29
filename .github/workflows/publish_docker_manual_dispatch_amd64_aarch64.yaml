@@ -1,4 +1,4 @@
-name: "Publish Manual Dispatch"
+name: "Publish Manual Dispatch amd64/aarch64"
 
 on: [workflow_dispatch]
 
@@ -39,46 +39,6 @@ jobs:
         with:
           args: |
             --aarch64 \
-            --target emhass \
-            --docker-hub davidusb
-            --docker-user davidusb \
-            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
-  publish_armhf:
-    name: Publish-armhf
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --armhf \
-            --target emhass \
-            --docker-hub davidusb
-            --docker-user davidusb \
-            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
-  publish_armv7:
-    name: Publish-armv7
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --armv7 \
             --target emhass \
             --docker-hub davidusb
             --docker-user davidusb \
