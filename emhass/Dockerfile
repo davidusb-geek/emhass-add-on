@@ -31,6 +31,7 @@ RUN apt-get update \
         "https://bootstrap.pypa.io/get-pip.py" \
         | python3 \
     && pip3 install --no-cache-dir -U setuptools wheel \
+    && pip3 install --no-cache-dir --user numpy==1.22.3 scipy==1.8.0 pandas==1.4.2 \
     && pip3 install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
         python3-pip \
