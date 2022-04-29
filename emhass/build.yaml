@@ -1,6 +1,6 @@
 build_from:
   amd64: ghcr.io/home-assistant/amd64-base-debian:bullseye
-  armhf: ghcr.io/home-assistant/armhf-base-debian:bullseye
+  armhf: ghcr.io/home-assistant/armhf-base-raspbian:bullseye
   armv7: ghcr.io/home-assistant/armv7-base-debian:bullseye
   aarch64: ghcr.io/home-assistant/aarch64-base-debian:bullseye
 codenotary:
