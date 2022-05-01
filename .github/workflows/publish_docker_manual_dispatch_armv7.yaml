@@ -21,5 +21,3 @@ jobs:
             --armv7 \
             --target emhass \
             --docker-hub davidusb
-            --docker-user davidusb \
-            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}

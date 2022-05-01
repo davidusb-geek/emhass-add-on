@@ -21,8 +21,6 @@ jobs:
             --amd64 \
             --target emhass \
             --docker-hub davidusb
-            --docker-user davidusb \
-            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
   publish_aarch64:
     name: Publish-aarch64
     runs-on: ubuntu-latest
@@ -41,5 +39,3 @@ jobs:
             --aarch64 \
             --target emhass \
             --docker-hub davidusb
-            --docker-user davidusb \
-            --docker-password ${{ secrets.DOCKERHUB_TOKEN }}
