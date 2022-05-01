@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.1.39
+version: 0.1.40
 slug: emhass
 arch:
   - aarch64
@@ -71,10 +71,10 @@ schema:
   maximum_power_from_grid: int(0,)
   pv_module_model: str
   pv_inverter_model: str
-  surface_tilt: int(0,90)
-  surface_azimuth: int(0,360)
-  modules_per_string: int(1,)
-  strings_per_inverter: int(1,)
+  surface_tilt: str
+  surface_azimuth: str
+  modules_per_string: str
+  strings_per_inverter: str
   set_use_battery: bool
   battery_discharge_power_max: int(0,)
   battery_charge_power_max: int(0,)

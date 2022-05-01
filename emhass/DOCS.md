@@ -57,12 +57,12 @@ The following parameters are associated with the technical specifications of the
 We will define the technical parameters of the PV installation. For the modeling task we rely on the PVLib Python package. For more information see: [https://pvlib-python.readthedocs.io/en/stable/](https://pvlib-python.readthedocs.io/en/stable/)
 The complete list of supported modules and inverter models can be found here: [https://pvlib-python.readthedocs.io/en/stable/generated/pvlib.pvsystem.retrieve_sam.html](https://pvlib-python.readthedocs.io/en/stable/generated/pvlib.pvsystem.retrieve_sam.html)
 
-- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'
-- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'
-- surface_tilt: The tilt angle of your solar panels. Defaults to 30.
-- surface_azimuth: The azimuth of your PV installation. Defaults to 205.
-- modules_per_string: The number of modules per string. Defaults to 16.
-- strings_per_inverter: The number of used strings per inverter. Defaults to 1.
+- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- surface_tilt: The tilt angle of your solar panels. This is a value between 0 and 90. Defaults to 30. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- surface_azimuth: The azimuth of your PV installation. This is a value between 0 and 360. Defaults to 205. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- strings_per_inverter: The number of used strings per inverter. Defaults to 1. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - set_use_battery: Set to True if we should consider an energy storage device such as a Li-Ion battery. Defaults to False.
 
 If the `set_use_battery` is set to `true`, then the following parameters need to be defined properly. If you don't have a battery then just leave the default values, they will not be used.

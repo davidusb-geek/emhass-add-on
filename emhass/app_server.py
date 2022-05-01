@@ -100,12 +100,12 @@ def build_params(params, options):
     params['optim_conf'][15]['set_total_pv_sell'] = options['set_total_pv_sell']
     # Updating variables in plant_conf
     params['plant_conf'][0]['P_grid_max'] = options['maximum_power_from_grid']
-    params['plant_conf'][1]['module_model'] = options['pv_module_model']
-    params['plant_conf'][2]['inverter_model'] = options['pv_inverter_model']
-    params['plant_conf'][3]['surface_tilt'] = options['surface_tilt']
-    params['plant_conf'][4]['surface_azimuth'] = options['surface_azimuth']
-    params['plant_conf'][5]['modules_per_string'] = options['modules_per_string']
-    params['plant_conf'][6]['strings_per_inverter'] = options['strings_per_inverter']
+    params['plant_conf'][1]['module_model'] = options['pv_module_model'].split(',')
+    params['plant_conf'][2]['inverter_model'] = options['pv_inverter_model'].split(',')
+    params['plant_conf'][3]['surface_tilt'] = [int(i) for i in options['surface_tilt'].split(',')]
+    params['plant_conf'][4]['surface_azimuth'] = [int(i) for i in options['surface_azimuth'].split(',')]
+    params['plant_conf'][5]['modules_per_string'] = [int(i) for i in options['modules_per_string'].split(',')]
+    params['plant_conf'][6]['strings_per_inverter'] = [int(i) for i in options['strings_per_inverter'].split(',')]
     params['plant_conf'][7]['Pd_max'] = options['battery_discharge_power_max']
     params['plant_conf'][8]['Pc_max'] = options['battery_charge_power_max']
     params['plant_conf'][9]['eta_disch'] = options['battery_discharge_efficiency']

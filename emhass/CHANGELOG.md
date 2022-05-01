@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.40] - 2022-05-01
+### Improvement
+- Added support to pass list of PV plant parameters. This will enable to simulate mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+### Fix
+- Fixed issue computing correct final cost values. Updated to EMHASS >> v0.2.13
+
 ## [0.1.39] - 2022-04-29
 ### Improvement
 - Added new parameter to consider that all PV power is injected to the grid.
