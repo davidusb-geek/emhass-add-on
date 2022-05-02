@@ -189,7 +189,7 @@ The possible dictionnary keys to pass data are:
 
 ## Disclaimer
 
-The quality of the optimization results is bound to the quality of forecasts. To improve the forecast you can provide your own forecast results as CSV files input. This is fully implemented in the EMHASS module but not yet in this add-on. It is a work in progress and this will be added in the future.
+The quality of the optimization results is bound to the quality of forecasts.
 
 It is up to the user to test and validate the optimization results. Before control any deferrable load on your home, you should check that the results are coherent with your expectations. The webapp allows this with a visual inspection and an overview table of the optimization results, including the expected cost of the objective function choosed by the user.
 
