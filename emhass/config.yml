@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.1.40
+version: 0.1.41
 slug: emhass
 arch:
   - aarch64
@@ -27,20 +27,37 @@ options:
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
-  nominal_power_of_deferrable_loads: 3000,750
-  operating_hours_of_each_deferrable_load: 5,8
-  peak_hours_periods_start_hours: 02:54,17:24
-  peak_hours_periods_end_hours: 15:24,20:24
+  list_nominal_power_of_deferrable_loads: 
+    - nominal_power_of_deferrable_loads: 3000
+    - nominal_power_of_deferrable_loads: 750
+  list_operating_hours_of_each_deferrable_load: 
+    - operating_hours_of_each_deferrable_load: 5
+    - operating_hours_of_each_deferrable_load: 8
+  list_peak_hours_periods_start_hours: 
+    - peak_hours_periods_start_hours: 02:54
+    - peak_hours_periods_start_hours: 17:24
+  list_peak_hours_periods_end_hours: 
+    - peak_hours_periods_end_hours: 15:24
+    - peak_hours_periods_end_hours: 20:24
+  list_treat_deferrable_load_as_semi_cont:
+    - treat_deferrable_load_as_semi_cont: true
+    - treat_deferrable_load_as_semi_cont: true
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
   maximum_power_from_grid: 9000
-  pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
-  pv_inverter_model: Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_
-  surface_tilt: 30
-  surface_azimuth: 205
-  modules_per_string: 16
-  strings_per_inverter: 1
+  list_pv_module_model: 
+    - pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
+  list_pv_inverter_model: 
+    - pv_inverter_model: Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_
+  list_surface_tilt: 
+    - surface_tilt: 30
+  list_surface_azimuth: 
+    - surface_azimuth: 205
+  list_modules_per_string: 
+    - modules_per_string: 16
+  list_strings_per_inverter: 
+    - strings_per_inverter: 1
   set_use_battery: false
   battery_discharge_power_max: 1000
   battery_charge_power_max: 1000
@@ -61,20 +78,32 @@ schema:
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)
-  nominal_power_of_deferrable_loads: str
-  operating_hours_of_each_deferrable_load: str
-  peak_hours_periods_start_hours: str
-  peak_hours_periods_end_hours: str
+  list_nominal_power_of_deferrable_loads: 
+    - nominal_power_of_deferrable_loads: int(0,)
+  list_operating_hours_of_each_deferrable_load:
+    - operating_hours_of_each_deferrable_load: int(0,)
+  list_peak_hours_periods_start_hours: 
+    - peak_hours_periods_start_hours: str
+  list_peak_hours_periods_end_hours: 
+    - peak_hours_periods_end_hours: str
+  list_treat_deferrable_load_as_semi_cont:
+    - treat_deferrable_load_as_semi_cont: bool
   load_peak_hours_cost: float(0,)
   load_offpeak_hours_cost: float(0,)
   photovoltaic_production_sell_price: float(0,)
   maximum_power_from_grid: int(0,)
-  pv_module_model: str
-  pv_inverter_model: str
-  surface_tilt: str
-  surface_azimuth: str
-  modules_per_string: str
-  strings_per_inverter: str
+  list_pv_module_model: 
+    - pv_module_model: str
+  list_pv_inverter_model: 
+    - pv_inverter_model: str
+  list_surface_tilt: 
+    - surface_tilt: int(0,90)
+  list_surface_azimuth: 
+    - surface_azimuth: int(0,360)
+  list_modules_per_string: 
+    - modules_per_string: int(0,)
+  list_strings_per_inverter: 
+    - strings_per_inverter: int(0,)
   set_use_battery: bool
   battery_discharge_power_max: int(0,)
   battery_charge_power_max: int(0,)

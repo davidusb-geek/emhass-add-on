@@ -41,11 +41,12 @@ These are the configuration parameters needed to correctly use this module.
 
 We will define now the paramters associated with the energy cost.
 
-- peak_hours_periods_start_hours: This is a list of start hours of peak hours periods. A list of comma separated hours in 24h HH:MM format. For example for two peak hour periods: 02:54, 17:24
-- peak_hours_periods_end_hours: This is a list of end hours of peak hours periods. A list of comma separated hours in 24h HH:MM format. For example for two peak hour periods: 15:24, 20:24
+- peak_hours_periods_start_hours: This is a list of start hours of peak hours periods. A list of hours in 24h HH:MM format.
+- peak_hours_periods_end_hours: This is a list of end hours of peak hours periods. A list of hours in 24h HH:MM format.
 
-In this previous example the first peak hour will start at 02:54 and end at 15:24, and so on. If you don't have a peak/off-peak hours contract, then just leave these defaults period values and set the following peak/off-peak hours cost at the same value.
+In the default configuration example the first peak hour will start at 02:54 and end at 15:24, and so on. If you don't have a peak/off-peak hours contract, then just leave these defaults period values and set the following peak/off-peak hours cost at the same value.
 
+- treat_deferrable_load_as_semi_cont: Define if we should treat each deferrable load as a semi-continuous variable. Semi-continuous variables are variables that cana take either their nominal value or zero.
 - load_peak_hours_cost: The cost of the electrical energy from the grid during peak hours in €/kWh. Defaults to 0.1907.
 - load_offpeak_hours_cost: The cost of the electrical energy from the grid during non-peak hours in €/kWh. Defaults to 0.1419.
 - photovoltaic_production_sell_price: The paid price for energy injected to the grid from excedent PV production in €/kWh. Defaults to 0.065.
@@ -57,12 +58,12 @@ The following parameters are associated with the technical specifications of the
 We will define the technical parameters of the PV installation. For the modeling task we rely on the PVLib Python package. For more information see: [https://pvlib-python.readthedocs.io/en/stable/](https://pvlib-python.readthedocs.io/en/stable/)
 The complete list of supported modules and inverter models can be found here: [https://pvlib-python.readthedocs.io/en/stable/generated/pvlib.pvsystem.retrieve_sam.html](https://pvlib-python.readthedocs.io/en/stable/generated/pvlib.pvsystem.retrieve_sam.html)
 
-- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-- surface_tilt: The tilt angle of your solar panels. This is a value between 0 and 90. Defaults to 30. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-- surface_azimuth: The azimuth of your PV installation. This is a value between 0 and 360. Defaults to 205. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-- modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-- strings_per_inverter: The number of used strings per inverter. Defaults to 1. This parameter can be a list of comma separated strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- surface_tilt: The tilt angle of your solar panels. This is a value between 0 and 90. Defaults to 30. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- surface_azimuth: The azimuth of your PV installation. This is a value between 0 and 360. Defaults to 205. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- strings_per_inverter: The number of used strings per inverter. Defaults to 1. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - set_use_battery: Set to True if we should consider an energy storage device such as a Li-Ion battery. Defaults to False.
 
 If the `set_use_battery` is set to `true`, then the following parameters need to be defined properly. If you don't have a battery then just leave the default values, they will not be used.
@@ -86,7 +87,7 @@ This add-on exposes a simple webserver on port 5000. You can access it by clicki
 
 When you access the webserver you will be looking at the latests results stored in a csv file on the data folder inside the add-on. This will look something like this:
 
-![](./images/screenshot_emhass_webui.png)
+![](https://raw.githubusercontent.com/davidusb-geek/emhass-add-on/master/emhass/images/screenshot_emhass_webui.png)
 
 Each time that you launch the optimization task this csv file is rewritten and the graph and table in the UI can be refreshed. I left an initial csv file in the data folder so that the first time an user access the webserver it can check what type of results EMHASS will obtain when launching the optimization task. This initial csv was obtained with the default configuration presented in the configuration pane. The graph is interactive, so what you can do is use the legend to turn off the visualization of all variables except the deferrable load powers. In that example we have two deferrable loads and what you’re seeing is the result of the optimization. This is giving you the optimal evolution and turn on/off times of those deferrable loads in order to maximize profit for example, depending on what objective function you choose and all the forecast data that have been entered to EMHASS.
 

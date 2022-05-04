@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.41] - 2022-05-04
+### Improvement
+- Added support for semi-continuous deferrable loads.
+- Changed to plotting using stairs.
+- Using now lists directly defined in the options.json file.
+### Fix
+- Fixed issue on add-on installing caused by changed parameter type to strings.
+
 ## [0.1.40] - 2022-05-01
 ### Improvement
 - Added support to pass list of PV plant parameters. This will enable to simulate mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
