@@ -19,6 +19,7 @@ def get_injection_dict(df, plot_size = 1366):
     # Create plots
     fig = px.line(df, title='Systems powers and optimization cost results', 
                   template='seaborn', width=plot_size, height=0.75*plot_size)
+    fig.update_traces(line_shape="vh")
     # Get full path to image
     image_path_0 = fig.to_html(full_html=False, default_width='75%')
     # The tables
@@ -85,12 +86,12 @@ def build_params(params, options):
     # Updating variables in optim_conf
     params['optim_conf'][0]['set_use_battery'] = options['set_use_battery']
     params['optim_conf'][2]['num_def_loads'] = options['number_of_deferrable_loads']
-    params['optim_conf'][3]['P_deferrable_nom'] = [int(i) for i in options['nominal_power_of_deferrable_loads'].split(',')]
-    params['optim_conf'][4]['def_total_hours'] = [int(i) for i in options['operating_hours_of_each_deferrable_load'].split(',')]
-    params['optim_conf'][5]['treat_def_as_semi_cont'] = [True for i in range(len(params['optim_conf'][3]['P_deferrable_nom']))]
+    params['optim_conf'][3]['P_deferrable_nom'] = [i['nominal_power_of_deferrable_loads'] for i in options['list_nominal_power_of_deferrable_loads']]
+    params['optim_conf'][4]['def_total_hours'] = [i['operating_hours_of_each_deferrable_load'] for i in options['list_operating_hours_of_each_deferrable_load']]
+    params['optim_conf'][5]['treat_def_as_semi_cont'] = [i['treat_deferrable_load_as_semi_cont'] for i in options['list_treat_deferrable_load_as_semi_cont']]
     params['optim_conf'][6]['set_def_constant'] = [False for i in range(len(params['optim_conf'][3]['P_deferrable_nom']))]
-    start_hours_list = options['peak_hours_periods_start_hours'].split(',')
-    end_hours_list = options['peak_hours_periods_end_hours'].split(',')
+    start_hours_list = [i['peak_hours_periods_start_hours'] for i in options['list_peak_hours_periods_start_hours']]
+    end_hours_list = [i['peak_hours_periods_end_hours'] for i in options['list_peak_hours_periods_end_hours']]
     num_peak_hours = len(start_hours_list)
     list_hp_periods_list = [{'period_hp_'+str(i+1):[{'start':start_hours_list[i]},{'end':end_hours_list[i]}]} for i in range(num_peak_hours)]
     params['optim_conf'][10]['list_hp_periods'] = list_hp_periods_list
@@ -100,12 +101,12 @@ def build_params(params, options):
     params['optim_conf'][15]['set_total_pv_sell'] = options['set_total_pv_sell']
     # Updating variables in plant_conf
     params['plant_conf'][0]['P_grid_max'] = options['maximum_power_from_grid']
-    params['plant_conf'][1]['module_model'] = options['pv_module_model'].split(',')
-    params['plant_conf'][2]['inverter_model'] = options['pv_inverter_model'].split(',')
-    params['plant_conf'][3]['surface_tilt'] = [int(i) for i in options['surface_tilt'].split(',')]
-    params['plant_conf'][4]['surface_azimuth'] = [int(i) for i in options['surface_azimuth'].split(',')]
-    params['plant_conf'][5]['modules_per_string'] = [int(i) for i in options['modules_per_string'].split(',')]
-    params['plant_conf'][6]['strings_per_inverter'] = [int(i) for i in options['strings_per_inverter'].split(',')]
+    params['plant_conf'][1]['module_model'] = [i['pv_module_model'] for i in options['list_pv_module_model']]
+    params['plant_conf'][2]['inverter_model'] = [i['pv_inverter_model'] for i in options['list_pv_inverter_model']]
+    params['plant_conf'][3]['surface_tilt'] = [i['surface_tilt'] for i in options['list_surface_tilt']]
+    params['plant_conf'][4]['surface_azimuth'] = [i['surface_azimuth'] for i in options['list_surface_azimuth']]
+    params['plant_conf'][5]['modules_per_string'] = [i['modules_per_string'] for i in options['list_modules_per_string']]
+    params['plant_conf'][6]['strings_per_inverter'] = [i['strings_per_inverter'] for i in options['list_strings_per_inverter']]
     params['plant_conf'][7]['Pd_max'] = options['battery_discharge_power_max']
     params['plant_conf'][8]['Pc_max'] = options['battery_charge_power_max']
     params['plant_conf'][9]['eta_disch'] = options['battery_discharge_efficiency']

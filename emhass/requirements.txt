@@ -15,5 +15,5 @@ flask>=2.0.3
 #waitress>=2.1.1
 #Paste>=3.5.0
 plotly>=5.6.0
-emhass==0.2.13
+emhass==0.2.14
 #git+https://github.com/davidusb-geek/emhass.git@0f67c27
