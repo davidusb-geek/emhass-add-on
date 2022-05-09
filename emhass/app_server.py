@@ -10,8 +10,8 @@ import os, json, argparse, pickle
 from datetime import datetime, timedelta
 import pandas as pd
 import plotly.express as px
-from emhass.command_line import setUp
-from emhass.command_line import dayahead_forecast_optim
+from emhass.command_line import set_input_data_dict
+from emhass.command_line import perfect_forecast_optim, dayahead_forecast_optim, naive_mpc_optim
 from emhass.command_line import publish_data
 from emhass.utils import get_root
 
@@ -32,48 +32,6 @@ def get_injection_dict(df, plot_size = 1366):
     injection_dict['subsubtitle1'] = '<h4>Last run optimization results table</h4>'
     injection_dict['table1'] = table1
     return injection_dict
-
-def get_forecast_dates(freq, delta_forecast, timedelta_days = 0):
-    freq = pd.to_timedelta(freq, "minutes")
-    start_forecast = pd.Timestamp(datetime.now()).replace(hour=0, minute=0, second=0, microsecond=0)
-    end_forecast = (start_forecast + pd.Timedelta(days=delta_forecast)).replace(microsecond=0)
-    forecast_dates = pd.date_range(start=start_forecast, 
-        end=end_forecast+timedelta(days=timedelta_days)-freq, 
-        freq=freq).round(freq)
-    return forecast_dates
-
-def treat_data_params(data, params):
-    if data is not None:
-        forecast_dates = get_forecast_dates(params['retrieve_hass_conf'][0]['freq'], params['optim_conf'][1]['delta_forecast'])
-        if 'pv_power_forecast' in data.keys():
-            if type(data['pv_power_forecast']) == list and len(data['pv_power_forecast']) <= len(forecast_dates):
-                params['passed_data']['pv_power_forecast'] = data['pv_power_forecast']
-                params['optim_conf'][7]['weather_forecast_method'] = 'list'
-            else:
-                app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['pv_power_forecast']))+" and length is "+str(len(forecast_dates)))
-        if 'load_power_forecast' in data.keys():
-            if type(data['load_power_forecast']) == list and len(data['load_power_forecast']) <= len(forecast_dates):
-                params['passed_data']['load_power_forecast'] = data['load_power_forecast']
-                params['optim_conf'][8]['load_forecast_method'] = 'list'
-            else:
-                app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['load_power_forecast']))+" and length is "+str(len(forecast_dates)))
-        if 'load_cost_forecast' in data.keys():
-            if type(data['load_cost_forecast']) == list and len(data['load_cost_forecast']) <= len(forecast_dates):
-                params['passed_data']['load_cost_forecast'] = data['load_cost_forecast']
-                params['optim_conf'][9]['load_cost_forecast_method'] = 'list'
-            else:
-                app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['load_cost_forecast']))+" and length is "+str(len(forecast_dates)))
-        if 'prod_price_forecast' in data.keys():
-            if type(data['prod_price_forecast']) == list and len(data['prod_price_forecast']) <= len(forecast_dates):
-                params['passed_data']['prod_price_forecast'] = data['prod_price_forecast']
-                params['optim_conf'][13]['prod_price_forecast_method'] = 'list'
-            else:
-                app.logger.error("ERROR: The passed data is either not a list or the length is not correct, length should be "+str(len(forecast_dates)))
-                app.logger.error("Passed type is "+str(type(data['prod_price_forecast']))+" and length is "+str(len(forecast_dates)))
-    return params
 
 def build_params(params, options):
     # Updating variables in retrieve_hass_conf
@@ -178,28 +136,42 @@ def index():
     else:
         return make_response(template.render(injection_dict=injection_dict))
 
-@app.route('/action/<name>', methods=['POST'])
-def action_call(name):
+@app.route('/action/<action_name>', methods=['POST'])
+def action_call(action_name):
     with open(base_path+'/data/params.pkl', "rb") as fid:
         params = pickle.load(fid)
-    data = request.get_json(force=True)
-    params = treat_data_params(data, params)
-    with open(base_path+'/data/params.pkl', "wb") as fid:
-        pickle.dump(params, fid)
+    runtimeparams = request.get_json(force=True)
     params = json.dumps(params)
-    input_data_dict = setUp(config_path, base_path, costfun, params, app.logger)
-    if name == 'publish-data':
+    input_data_dict = set_input_data_dict(config_path, base_path, costfun, 
+        params, runtimeparams, action_name, app.logger)
+    if action_name == 'publish-data':
         app.logger.info("Publishing data...")
         _ = publish_data(input_data_dict, app.logger)
         msg = f'EMHASS >> Action publish-data executed... \n'
         return make_response(msg, 201)
-    elif name == 'dayahead-optim':
-        app.logger.info("Performing optimization...")
+    elif action_name == 'perfect-optim':
+        app.logger.info("Performing perfect optimization...")
+        opt_res = perfect_forecast_optim(input_data_dict, app.logger)
+        injection_dict = get_injection_dict(opt_res)
+        with open(base_path+'/data/injection_dict.pkl', "wb") as fid:
+            pickle.dump(injection_dict, fid)
+        msg = f'EMHASS >> Action perfect-optim executed... \n'
+        return make_response(msg, 201)
+    elif action_name == 'dayahead-optim':
+        app.logger.info("Performing dayahead optimization...")
         opt_res = dayahead_forecast_optim(input_data_dict, app.logger)
         injection_dict = get_injection_dict(opt_res)
         with open(base_path+'/data/injection_dict.pkl', "wb") as fid:
             pickle.dump(injection_dict, fid)
         msg = f'EMHASS >> Action dayahead-optim executed... \n'
+        return make_response(msg, 201)
+    elif action_name == 'naive-mpc-optim':
+        app.logger.info("Performing naive MPC optimization...")
+        opt_res = naive_mpc_optim(input_data_dict, app.logger)
+        injection_dict = get_injection_dict(opt_res)
+        with open(base_path+'/data/injection_dict.pkl', "wb") as fid:
+            pickle.dump(injection_dict, fid)
+        msg = f'EMHASS >> Action naive-mpc-optim executed... \n'
         return make_response(msg, 201)
     else:
         app.logger.error("ERROR: passed action is not valid")

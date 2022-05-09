@@ -46,7 +46,7 @@ We will define now the paramters associated with the energy cost.
 
 In the default configuration example the first peak hour will start at 02:54 and end at 15:24, and so on. If you don't have a peak/off-peak hours contract, then just leave these defaults period values and set the following peak/off-peak hours cost at the same value.
 
-- treat_deferrable_load_as_semi_cont: Define if we should treat each deferrable load as a semi-continuous variable. Semi-continuous variables are variables that cana take either their nominal value or zero.
+- treat_deferrable_load_as_semi_cont: Define if we should treat each deferrable load as a semi-continuous variable. Semi-continuous variables are variables that can take either their nominal value or zero.
 - load_peak_hours_cost: The cost of the electrical energy from the grid during peak hours in €/kWh. Defaults to 0.1907.
 - load_offpeak_hours_cost: The cost of the electrical energy from the grid during non-peak hours in €/kWh. Defaults to 0.1419.
 - photovoltaic_production_sell_price: The paid price for energy injected to the grid from excedent PV production in €/kWh. Defaults to 0.065.
