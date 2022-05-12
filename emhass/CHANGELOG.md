@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2022-05-13
+### Improvement
+- New version of this add-on following revamping of emhass core module and release v0.3.0
+- Moved the webserver to the core emhass module for easier development.
+- Added Model Predictive Control optimization.
+
 ## [0.1.42] - 2022-05-05
 ### Fix
 - Fixed issue on correct defferable load total energy computation, following emhass v0.2.14.
@@ -155,3 +161,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.25
 [0.1.26]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.26
 [0.1.27]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.27
+[0.1.28]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.28
+[0.1.29]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.29
+[0.1.30]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.30
+[0.1.31]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.31
+[0.1.32]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.32
+[0.1.33]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.33
+[0.1.34]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.34
+[0.1.35]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.35
+[0.1.36]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.36
+[0.1.37]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.37
+[0.1.38]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.38
+[0.1.39]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.39
+[0.1.40]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.40
+[0.1.41]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.41
+[0.1.42]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.42
+[0.2.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.0

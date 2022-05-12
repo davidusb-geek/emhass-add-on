@@ -49,10 +49,7 @@ RUN apt-get update \
 WORKDIR /
 
 # copy contents
-COPY app_server.py /usr/src
-COPY config_emhass.json /usr/src
-COPY templates /usr/src/templates
-COPY static /usr/src/static
+COPY config_emhass.yaml /usr/src
 COPY data /usr/src/data
 COPY rootfs /
 

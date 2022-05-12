@@ -187,6 +187,34 @@ The possible dictionnary keys to pass data are:
 
 - `prod_price_forecast` for the PV production selling price forecast.
 
+### A naive Model Predictive Controller
+
+A MPC controller was introduced in v0.3.0 of the core emhass moule. This an informal/naive representation of a MPC controller. 
+
+A MPC controller performs the following actions:
+
+- Set the prediction horizon and receiding horizon parameters.
+- Perform an optimization on the prediction horizon.
+- Apply the first element of the obtained optimized control variables.
+- Repeat at a relatively high frequency, ex: 5 min.
+
+This is the receiding horizon principle.
+
+When applyin this controller, the following `runtimeparams` should be defined:
+
+- `prediction_horizon` for the MPC prediction horizon. Fix this at at least 5 times the optimization time step.
+
+- `soc_init` for the initial value of the battery SOC for the current iteration of the MPC. 
+
+- `soc_final` for the final value of the battery SOC for the current iteration of the MPC. 
+
+- `def_total_hours` for the list of deferrable loads functioning hours. These values can decrease as the day advances to take into account receidding horizon daily energy objectives for each deferrable load.
+
+A correct call for a MPC optimization should look like:
+
+```
+curl -i -H "Content-Type: application/json" -X POST -d '{"pv_power_forecast":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 141.22, 246.18, 513.5, 753.27, 1049.89, 1797.93, 1697.3, 3078.93, 1164.33, 1046.68, 1559.1, 2091.26, 1556.76, 1166.73, 1516.63, 1391.13, 1720.13, 820.75, 804.41, 251.63, 79.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "prediction_horizon":10, "soc_init":0.5,"soc_final":0.6,"def_total_hours":[1,3]}' http://localhost:5000/action/naive-mpc-optim
+```
 
 ## Disclaimer
 
