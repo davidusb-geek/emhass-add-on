@@ -200,7 +200,7 @@ A MPC controller performs the following actions:
 
 This is the receiding horizon principle.
 
-When applyin this controller, the following `runtimeparams` should be defined:
+When applying this controller, the following `runtimeparams` should be defined:
 
 - `prediction_horizon` for the MPC prediction horizon. Fix this at at least 5 times the optimization time step.
 
