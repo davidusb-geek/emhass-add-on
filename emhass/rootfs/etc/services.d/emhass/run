@@ -3,4 +3,4 @@
 # Start EMHASS service
 # ==============================================================================
 
-exec python3 -m emhass.web_server --url "http://supervisor/core/api" --key "$SUPERVISOR_TOKEN" --add_on "True"
+exec python3 -m emhass.web_server --url "http://supervisor/core/api" --key "$SUPERVISOR_TOKEN" --addon "True"
