@@ -190,7 +190,7 @@ The possible dictionnary keys to pass data are:
 
 ### A naive Model Predictive Controller
 
-A MPC controller was introduced in v0.3.0 of the core emhass moule. This an informal/naive representation of a MPC controller. 
+A MPC controller was introduced in v0.3.0 of the core emhass moule. This is an informal/naive representation of a MPC controller. 
 
 A MPC controller performs the following actions:
 
@@ -228,8 +228,3 @@ It is up to the user to test and validate the optimization results. Before contr
 If you have any request or if you need any help using this add-on or EMHASS in general you can leave a message in this HA community thread: [https://community.home-assistant.io/t/emhass-an-energy-management-for-home-assistant](https://community.home-assistant.io/t/emhass-an-energy-management-for-home-assistant).
 
 If you find any problems with the code you can of course open new issues on the Github repository of [this add-on](https://github.com/davidusb-geek/emhass-add-on) or on the repository of the [core EMHASS code](https://github.com/davidusb-geek/emhass).
-
-## TODOs
-
-- [ ] Implement the different methods for weather, load power, production and load costs forecasting.
-- [ ] Currently this add-on is built locally on the user machine. It is expected to migrate to pre-built containers in the future.
