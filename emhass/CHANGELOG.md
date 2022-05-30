@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.15] - 2022-05-30
+### Improvement
+- Following new improvements and fixes on emhass v0.3.12
+
 ## [0.2.14] - 2022-05-23
 ### Improvement
 - Following new improvements on emhass v0.3.11
@@ -249,3 +253,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.2.12]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.12
 [0.2.13]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.13
 [0.2.14]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.14
+[0.2.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.15

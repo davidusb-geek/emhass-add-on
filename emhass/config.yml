@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.2.14
+version: 0.2.15
 slug: emhass
 arch:
   - aarch64
@@ -26,6 +26,8 @@ options:
   historic_days_to_retrieve: 2
   method_ts_round: nearest
   set_total_pv_sell: false
+  lp_solver: PULP_CBC_CMD
+  lp_solver_path: empty
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -78,6 +80,8 @@ schema:
   historic_days_to_retrieve: int(2,365)
   method_ts_round: str
   set_total_pv_sell: bool
+  lp_solver: str
+  lp_solver_path: str
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)
