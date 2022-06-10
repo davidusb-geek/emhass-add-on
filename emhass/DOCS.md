@@ -8,7 +8,21 @@ The complete documentation for this module can be found here: [https://emhass.re
 
 EMHASS is a Python module proposing an **optimized energy management** approach using the Linear Programming (LP) optimization technique.
 
-Right out the box EMHASS can be used to optimize the use of loads that are deferrable. This means that these loads can be “moved” around the day with “ideally” no impact on our everyday life. Good examples of these are: dishwasher, washing machine, etc. At my place I also considered as deferrable the water heater and the pool pump.
+## What is this?
+
+The goal here is to optimize the energy use of your home in order to maximize a pre-defined cost function, for example: autoconsumption.
+
+The main study case is a household where we have solar panels, a grid connection, one or more controllable (deferrable) electrical loads and an energy storage system with batteries. Of course, it is not necessary to have all these equipements to use EMHASS (PV panels, batteries, etc), in the minimal use case you have a contrllable/deferrable load and you just want to obtain the optimized daily schedule for your load.
+
+The package flow can be graphically represented as follows:
+
+![](https://raw.githubusercontent.com/davidusb-geek/emhass/master/docs/images/ems_schema.png)
+
+So we have some data entering EMHASS (PV power, load, cost and selling prices forecasts), we have defined an objective function and some contraints (this is simply defined in a configuration file) and we have some controllable/deferrable loads. A call to an EMHASS optimization will yield the deferrable load schedule for future timestamps, the battery optimal power/SOC and the obtained value of the cost function. This information can published as sensors with attributes to Home Assistant and then we use the HA magic to automate our home energy consumption based on the optimization results.
+
+The package is meant to be highly configurable with an object oriented modular approach and a main configuration file defined by the user.
+EMHASS was designed to be integrated with Home Assistant, hence it's name. 
+Installation instructions and example Home Assistant automation configurations are given below.
 
 You must follow these steps to make EMHASS work properly:
 

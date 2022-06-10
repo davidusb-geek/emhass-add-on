@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.18] - 2022-06-10
+### Improvement
+- Following new improvements on emhass v0.3.16
+- Improving documentation, added "what is this" section and added some infographics.
+- Added new forecasts methods chapter in documentation.
+- Added publish of sensors for p_grid_forecast & total value of cost function.
+- Implemented now/current value forecast correction when using MPC.
+
 ## [0.2.17] - 2022-06-06
 ### Fix
 - Following new fixes on emhass v0.3.15
