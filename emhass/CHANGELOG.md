@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.19] - 2022-06-12
+### Fix
+- Following new fixes on emhass v0.3.17
+- Fixed wrong variables names for mixed forecasts.
+- Fixed handling of load sensor name in command line setup function.
+
 ## [0.2.18] - 2022-06-10
 ### Improvement
 - Following new improvements on emhass v0.3.16
