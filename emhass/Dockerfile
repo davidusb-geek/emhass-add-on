@@ -30,9 +30,6 @@ RUN apt-get update \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
     && pip3 install netCDF4 \
-    && curl --silent --show-error --retry 5 \
-        "https://bootstrap.pypa.io/get-pip.py" \
-        | python3 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
