@@ -27,12 +27,11 @@ RUN apt-get update \
         pkg-config \
         python3-h5py \
         gfortran \
-    && curl --silent --show-error --retry 5 \
-        "https://bootstrap.pypa.io/get-pip.py" \
-        | python3 \
-    && pip3 install --no-cache-dir -U setuptools wheel \
-    && pip3 install --no-cache-dir --user numpy==1.22.3 scipy==1.8.0 pandas==1.4.2 \
-    && pip3 install --no-cache-dir -r requirements.txt \
+    && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
+    && export HDF5_DIR=/usr/include/hdf5 \
+    && pip3 install netCDF4 \
+    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
+    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \
         python3-pip \
         python3-dev \
