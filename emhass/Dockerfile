@@ -27,6 +27,7 @@ RUN apt-get update \
         pkg-config \
         python3-h5py \
         gfortran \
+        libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
     && pip3 install netCDF4 \
