@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.20] - 2022-08-27
+### Improvement
+- Improving documentation, added more information on forecast page.
+- Added support for SolCast PV production forecasts. 
+- Added possibility to pass some optimization parameters at runtime.
+- Added some unittest for passing data as list testing.
+### Fix
+- Fixed small bug on webserver using pandas sum function for non numeric data. This was throwing the following message: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated.
+
 ## [0.2.19] - 2022-06-12
 ### Fix
 - Following new fixes on emhass v0.3.17
