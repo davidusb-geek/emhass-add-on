@@ -40,7 +40,6 @@ You must follow these steps to make EMHASS work properly:
 
 These are the configuration parameters needed to correctly use this module.
 
-- web_ui_url: Provide the web ui url. Leave this at the default value to have the web ui at localhost. Otherwise provide your custom url.
 - hass_url: Enter the URL of your Home Assistant instance. For example: https://myhass.duckdns.org/ or http://localhost/. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - long_lived_token: A Long-Lived Access Token that can be created from the Lovelace profile page. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
@@ -48,8 +47,8 @@ These are the configuration parameters needed to correctly use this module.
 - historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.
 - method_ts_round: Set the method for timestamp rounding, options are: first, last and nearest.
 - set_total_pv_sell: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
-- lp_solver: Set the name of the linear programming solver that will be used. Defaults to 'PULP_CBC_CMD'. The options are 'PULP_CBC_CMD', 'GLPK_CMD' and 'COIN_CMD'. 
-- lp_solver_path: Set the path to the LP solver. Defaults to 'empty'. If using 'COIN_CMD' as the solver you will need to provide the correct path to this solver, ex: '/usr/bin/cbc'.
+- lp_solver: Set the name of the linear programming solver that will be used. Defaults to 'COIN_CMD'. The options are 'PULP_CBC_CMD', 'GLPK_CMD' and 'COIN_CMD'. 
+- lp_solver_path: Set the path to the LP solver. Defaults to '/usr/bin/cbc'.
 - sensor_power_photovoltaics: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example: 'sensor.power_photovoltaics'.
 - sensor_power_load_no_var_loads: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example: 'sensor.power_load_no_var_loads'
 - number_of_deferrable_loads: Define the number of deferrable loads to consider. Defaults to 2.

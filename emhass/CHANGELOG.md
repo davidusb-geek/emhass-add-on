@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.21] - 2022-09-14
+### Fix
+- Updated default values for a working LP solver.
+- Removed option to provide a custom web ui url.
+- Following new fixes on emhass v0.3.19
+
 ## [0.2.20] - 2022-08-27
 ### Improvement
 - Improving documentation, added more information on forecast page.
