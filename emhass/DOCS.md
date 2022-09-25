@@ -44,7 +44,7 @@ These are the configuration parameters needed to correctly use this module.
 - long_lived_token: A Long-Lived Access Token that can be created from the Lovelace profile page. This defaults to empty. If using the supervisor you can leave this to the default empty value.
 - costfun: Define the type of cost function, this is optional and the options are: `profit` (default), `cost`, `self-consumption`
 - optimization_time_step: The time step to resample retrieved data from hass. This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
-- historic_days_to_retrieve: We will retrieve data from now and up to days_to_retrieve days. Defaults to 2.
+- historic_days_to_retrieve: We will retrieve data from now and up to historic_days_to_retrieve days. Defaults to 2. This will be used for the `perfect-optim` task.
 - method_ts_round: Set the method for timestamp rounding, options are: first, last and nearest.
 - set_total_pv_sell: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
 - lp_solver: Set the name of the linear programming solver that will be used. Defaults to 'COIN_CMD'. The options are 'PULP_CBC_CMD', 'GLPK_CMD' and 'COIN_CMD'. 

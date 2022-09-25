@@ -1,0 +1,109 @@
+configuration:
+  hass_url:
+    name: The Home Assistant instance URL
+    description: Enter the URL of your Home Assistant instance. This defaults to empty. If using the supervisor you can leave this to the default empty value.
+  long_lived_token: 
+    name: A Long-Lived Access Token
+    description: This can be created from the Lovelace profile page. This defaults to empty. If using the supervisor you can leave this to the default empty value.
+  costfun:
+    name: Define the type of cost function
+    description: This is optional and the options are profit (default), cost and self-consumption
+  optimization_time_step:
+    name: The time step to resample retrieved data from hass
+    description: This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
+  historic_days_to_retrieve:
+    name: The number of history days to retrieve for perfect-optim
+    description: We will retrieve data from now and up to historic_days_to_retrieve days. Defaults to 2. This will be used for the perfect-optim task.
+  method_ts_round:
+    name: Set the method for timestamp rounding
+    description: options are first, last and nearest.
+  set_total_pv_sell:
+    name: Set the total PV prouction to sell
+    description: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
+  lp_solver:
+    name: Linear programming solver
+    description: Set the name of the linear programming solver that will be used. Defaults to COIN_CMD. The options are PULP_CBC_CMD, GLPK_CMD and COIN_CMD. 
+  lp_solver_path:
+    name: The path to the linear programming solver
+    description: Set the path to the LP solver. Defaults to /usr/bin/cbc.
+  sensor_power_photovoltaics:
+    name: The Home Assistant sensor for PV power production
+    description: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example sensor.power_photovoltaics.
+  sensor_power_load_no_var_loads:
+    name: The Home Assistant sensor for the load power without the deferrable loads
+    description: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example sensor.power_load_no_var_loads.
+  number_of_deferrable_loads:
+    name: The number of deferrable loads
+    description: Define the number of deferrable loads to consider. Defaults to 2.
+  list_nominal_power_of_deferrable_loads: 
+    name: The nominal power for each deferrable load in Watts
+    description: This is a list of comma separated values with a number of elements consistent with the number of deferrable loads defined before. For example 3000, 750
+  list_operating_hours_of_each_deferrable_load:
+    name: The total number of hours that each deferrable load should operate
+    description: A list of comma separated values. For example 5, 8
+  list_peak_hours_periods_start_hours: 
+    name: This is a list of start hours of peak hours periods
+    description:  A list of hours in 24h HH:MM format.
+  list_peak_hours_periods_end_hours: 
+    name: This is a list of end hours of peak hours periods
+    description: A list of hours in 24h HH:MM format.
+  list_treat_deferrable_load_as_semi_cont:
+    name: A list to define if we should treat each deferrable load as a semi-continuous variable
+    description: Semi-continuous variables are variables that can take either their nominal value or zero.
+  load_peak_hours_cost:
+    name: The cost of the electrical energy during peak hours
+    description: The cost of the electrical energy from the grid during peak hours in €/kWh. Defaults to 0.1907.
+  load_offpeak_hours_cost:
+    name: The cost of the electrical energy during non-peak hours
+    description: The cost of the electrical energy from the grid during non-peak hours in €/kWh. Defaults to 0.1419.
+  photovoltaic_production_sell_price:
+    name: The paid price for energy injected to the grid 
+    description: The paid price for energy injected to the grid from excedent PV production in €/kWh. Defaults to 0.065.
+  maximum_power_from_grid:
+    name: The maximum power from the grid
+    description: The maximum power that can be supplied by the utility grid in Watts. Defaults to 9000.
+  list_pv_module_model:
+    name: A list of the PV module model
+    description: For example 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
+  list_pv_inverter_model: 
+    name: A list of the PV inverter model
+    description: For example 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
+  list_surface_tilt: 
+    name: The tilt angle of your solar panels
+    description: This is a value between 0 and 90. Defaults to 30. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+  list_surface_azimuth: 
+    name: The azimuth of your PV installation
+    description: This is a value between 0 and 360. Defaults to 205. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+  list_modules_per_string: 
+    name: The number of modules per string
+    description: Defaults to 16. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
+  list_strings_per_inverter: 
+    name: The number of used strings per inverter
+    description: Defaults to 1. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
+  set_use_battery:
+    name: Set if a battery is present
+    description: Set to True if we should consider an energy storage device such as a Li-Ion battery. Defaults to False.
+  battery_discharge_power_max:
+    name: The maximum discharge power in Watts
+    description: Defaults to 1000. 
+  battery_charge_power_max:
+    name: The maximum charge power in Watts
+    description: Defaults to 1000.
+  battery_discharge_efficiency:
+    name: The discharge efficiency
+    description: Defaults to 0.95.
+  battery_charge_efficiency:
+    name: The charge efficiency
+    description: Defaults to 0.95.
+  battery_nominal_energy_capacity:
+    name: The total capacity of the battery stack in Wh
+    description: Defaults to 5000.
+  battery_minimum_state_of_charge:
+    name: The minimun allowable battery state of charge
+    description: Defaults to 0.3.
+  battery_maximum_state_of_charge:
+    name: The maximum allowable battery state of charge
+    description: Defaults to 0.9.
+  battery_target_state_of_charge:
+    name: The desired battery state of charge at the end of each optimization cycle
+    description: Defaults to 0.6.
