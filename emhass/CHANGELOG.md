@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.22] - 2022-10-05
+### Improvement
+- Following new fixes on emhass v0.3.20
+- Added more detailed examples to the forecast module documentation.
+- Improved handling of datatime indexes in DataFrames on forecast module.
+- Added warning messages if passed list values contains non numeric items.
+- Added missing unittests for forecast module with request.get dependencies using MagicMock.
+- Added the Solar.Forecast method.
+
 ## [0.2.21] - 2022-09-14
 ### Fix
 - Updated default values for a working LP solver.
