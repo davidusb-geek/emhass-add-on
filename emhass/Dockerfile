@@ -7,6 +7,9 @@ WORKDIR /usr/src
 # copy the requirements file into the image
 COPY ./requirements.txt /usr/src/requirements.txt
 
+# JUST FOR TESTING PURPOSES: copy developement emhass wheel
+COPY ./dist/emhass-0.3.20.dev4-py3-none-any.whl /usr/src/emhass-0.3.20.dev4-py3-none-any.whl
+
 # Setup
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -33,6 +36,7 @@ RUN apt-get update \
     && pip3 install netCDF4 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
+    && pip3 install emhass-0.3.20.dev4-py3-none-any.whl \
     && apt-get purge -y --auto-remove \
         python3-pip \
         python3-dev \

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.22] - 2022-09-24
+### Improvement
+- Added ingress support for this add-on.
+- Added a first translation file in english for easier add-on configuration.
+
 ## [0.2.21] - 2022-09-14
 ### Fix
 - Updated default values for a working LP solver.
