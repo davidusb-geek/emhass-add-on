@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.23] - 2022-11-05
+### Improvement
+- Following new fixes on emhass v0.3.21
+- Improved docstrings
+- Improved unittest for mock get requests
+- Added github worflows for coverage and automatic package compiling
+### Fix
+- Fixing interpolation for Forecast.Solar data
+
 ## [0.2.22] - 2022-10-05
 ### Improvement
 - Following new fixes on emhass v0.3.20
