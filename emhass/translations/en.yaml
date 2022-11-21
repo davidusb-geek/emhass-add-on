@@ -18,7 +18,7 @@ configuration:
     name: Set the method for timestamp rounding
     description: options are first, last and nearest.
   set_total_pv_sell:
-    name: Set the total PV prouction to sell
+    name: Set the total PV production to sell
     description: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
   lp_solver:
     name: Linear programming solver
