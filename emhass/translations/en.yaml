@@ -37,13 +37,13 @@ configuration:
     description: Define the number of deferrable loads to consider. Defaults to 2.
   list_nominal_power_of_deferrable_loads: 
     name: The nominal power for each deferrable load in Watts
-    description: This is a list of comma separated values with a number of elements consistent with the number of deferrable loads defined before. For example 3000, 750
+    description: This is a list of elements, the number of elements should be consistent with the number of deferrable loads defined before.
   list_operating_hours_of_each_deferrable_load:
     name: The total number of hours that each deferrable load should operate
-    description: A list of comma separated values. For example 5, 8
+    description: A list of elements.
   list_peak_hours_periods_start_hours: 
     name: This is a list of start hours of peak hours periods
-    description:  A list of hours in 24h HH:MM format.
+    description: A list of hours in 24h HH:MM format.
   list_peak_hours_periods_end_hours: 
     name: This is a list of end hours of peak hours periods
     description: A list of hours in 24h HH:MM format.
