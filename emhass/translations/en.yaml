@@ -26,6 +26,9 @@ configuration:
   lp_solver_path:
     name: The path to the linear programming solver
     description: Set the path to the LP solver. Defaults to /usr/bin/cbc.
+  set_nocharge_from_grid:
+    name: Set no charge from grid condition
+    description: Set this to true if you want to forbidden to charge the battery from the grid. The battery will only be charged from excess PV.
   sensor_power_photovoltaics:
     name: The Home Assistant sensor for PV power production
     description: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example sensor.power_photovoltaics.

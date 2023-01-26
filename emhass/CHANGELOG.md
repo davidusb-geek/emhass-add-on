@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.24] - 2023-01-26
+### Improvement
+- Following new fixes and improvements on emhass v0.3.23
+
 ## [0.2.23] - 2022-11-05
 ### Improvement
 - Following new fixes on emhass v0.3.21
