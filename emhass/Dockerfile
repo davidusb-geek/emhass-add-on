@@ -30,7 +30,7 @@ RUN apt-get update \
         libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
-    && pip3 install netCDF4 \
+    && pip3 install netCDF4==1.5.4 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove \

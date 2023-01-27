@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.25] - 2023-01-27
+### Improvement
+- Fixed dependencies, uniform working versions of Numpy, Pandas and Tables.
+
 ## [0.2.24] - 2023-01-26
 ### Improvement
 - Following new fixes and improvements on emhass v0.3.23
