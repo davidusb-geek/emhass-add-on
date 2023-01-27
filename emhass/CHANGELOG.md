@@ -1,7 +1,7 @@
 # Changelog
 
 ## [0.2.25] - 2023-01-27
-### Improvement
+### Fix
 - Fixed dependencies, uniform working versions of Numpy, Pandas and Tables.
 
 ## [0.2.24] - 2023-01-26
@@ -315,6 +315,14 @@
 [0.2.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.15
 [0.2.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.16
 [0.2.17]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.17
+[0.2.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.18
+[0.2.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.19
+[0.2.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.20
+[0.2.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.21
+[0.2.22]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.22
+[0.2.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.23
+[0.2.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.24
+[0.2.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.25
 
 # Notes
 All notable changes to this project will be documented in this file.
