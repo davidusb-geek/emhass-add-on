@@ -49,6 +49,7 @@ These are the configuration parameters needed to correctly use this module.
 - set_total_pv_sell: Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption. The default is false, for as system with direct self-consumption.
 - lp_solver: Set the name of the linear programming solver that will be used. Defaults to 'COIN_CMD'. The options are 'PULP_CBC_CMD', 'GLPK_CMD' and 'COIN_CMD'. 
 - lp_solver_path: Set the path to the LP solver. Defaults to '/usr/bin/cbc'.
+- set_nocharge_from_grid: Set this to true if you want to forbidden to charge the battery from the grid. The battery will only be charged from excess PV.
 - sensor_power_photovoltaics: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example: 'sensor.power_photovoltaics'.
 - sensor_power_load_no_var_loads: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example: 'sensor.power_load_no_var_loads'
 - number_of_deferrable_loads: Define the number of deferrable loads to consider. Defaults to 2.
@@ -112,10 +113,14 @@ Each time that you launch the optimization task this csv file is rewritten and t
 
 The webserver can be used to manually launch an optimization task or to publish the optimization data to some Home Assistant variables. For this use the manual buttons in the webserver. It can also be used to visualize optimization results with a graphic and table overview.
 
-Using this web server you can perform RESTful POST commands on one ENDPOINT called `action` with two main options:
+With this web server you can perform RESTful POST commands on one ENDPOINT called `action` with four options:
 
-- A POST call to `action/dayahead-optim` to perform a day-ahead optimization task of your home energy
-- A POST call to `action/publish-data ` to publish the optimization results data
+- A POST call to `action/perfect-optim` to perform a perfect optimization task on the historical data.
+- A POST call to `action/dayahead-optim` to perform a day-ahead optimization task of your home energy.
+- A POST call to `action/naive-mpc-optim` to perform a naive Model Predictive Controller optimization task. If using this option you will need to define the correct `runtimeparams` (see further below).
+- A POST call to `action/publish-data` to publish the optimization results data for the current timestamp.
+
+A `curl` command can then be used to launch an optimization task like this: `curl -i -H 'Content-Type:application/json' -X POST -d '{}' http://localhost:5000/action/dayahead-optim`.
 
 To integrate with home assistant we will need to define some shell commands in the `configuration.yaml` file and some basic automations in the `automations.yaml` file.
 
@@ -123,8 +128,8 @@ In `configuration.yaml`:
 
 ```
 shell_command:
-  dayahead_optim: "curl -i -H 'Content-Type:application/json' -X POST -d '{}' http://localhost:5000/action/dayahead-optim"
-  publish_data: "curl -i -H 'Content-Type:application/json' -X POST -d '{}' http://localhost:5000/action/publish-data"
+  dayahead_optim: "curl -i -H \"Content-Type:application/json\" -X POST -d '{}' http://localhost:5000/action/dayahead-optim"
+  publish_data: "curl -i -H \"Content-Type:application/json\" -X POST -d '{}' http://localhost:5000/action/publish-data"
 ```
 
 In `automations.yaml`:
@@ -213,6 +218,28 @@ The possible dictionnary keys to pass data are:
 - `load_cost_forecast` for the Load cost forecast.
 
 - `prod_price_forecast` for the PV production selling price forecast.
+
+### Passing other data
+
+It is possible to also pass other data during runtime in order to automate the energy management. For example, it could be useful to dynamically update the total number of hours for each deferrable load (`def_total_hours`) using for instance a correlation with the outdoor temperature (useful for water heater for example). 
+
+Here is the list of the other additional dictionnary keys that can be passed at runtime:
+
+- `num_def_loads` for the number of deferrable loads to consider.
+
+- `P_deferrable_nom` for the nominal power for each deferrable load in Watts.
+
+- `def_total_hours` for the total number of hours that each deferrable load should operate.
+
+- `treat_def_as_semi_cont` to define if we should treat each deferrable load as a semi-continuous variable.
+
+- `set_def_constant` to define if we should set each deferrable load as a constant fixed value variable with just one startup for each optimization task.
+
+- `solcast_api_key` for the SolCast API key if you want to use this service for PV power production forecast.
+
+- `solcast_rooftop_id` for the ID of your rooftop for the SolCast service implementation.
+
+- `solar_forecast_kwp` for the PV peak installed power in kW used for the solar.forecast API call. 
 
 ### A naive Model Predictive Controller
 

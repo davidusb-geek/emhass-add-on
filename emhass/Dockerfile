@@ -50,7 +50,6 @@ WORKDIR /
 
 # copy contents
 COPY config_emhass.yaml /usr/src
-COPY data /usr/src/data
 COPY rootfs /
 
 # Labels

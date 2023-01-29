@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.26] - 2023-01-29
+### Improvement
+- Implemented data storage to survive add-on restarts.
+
 ## [0.2.25] - 2023-01-27
 ### Improvement
 - Fixed dependencies, uniform working versions of Numpy, Pandas and Tables.
