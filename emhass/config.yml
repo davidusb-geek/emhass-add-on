@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.2.26
+version: 0.2.27
 slug: emhass
 arch:
   - aarch64
@@ -13,6 +13,7 @@ ports:
   5000/tcp: 5000
 map:
   - config:rw
+  - share:rw
 init: false
 hassio_role: default
 homeassistant_api: true

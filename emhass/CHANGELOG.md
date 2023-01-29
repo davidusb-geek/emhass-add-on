@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.27] - 2023-01-30
+### Fix
+- Fixed bugs on handling data folder name.
+- Add-on now suvives restarts properly.
+- Improved warning messages when passing list of values with items detected as non digits.
+
 ## [0.2.26] - 2023-01-29
 ### Improvement
 - Implemented data storage to survive add-on restarts.
