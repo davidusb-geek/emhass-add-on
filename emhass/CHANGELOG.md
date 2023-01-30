@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.28] - 2023-01-30
+### Fix
+- Fixed more bugs with paths, now using the official pathlib everywhere.
+
 ## [0.2.27] - 2023-01-30
 ### Fix
 - Fixed bugs on handling data folder name.
