@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.29] - 2023-01-31
+### Fix
+- Fixed access to injection_dict for the first time that emhass is used.
+- Fixed message handling from request module.
+
 ## [0.2.28] - 2023-01-30
 ### Fix
 - Fixed more bugs with paths, now using the official pathlib everywhere.
