@@ -241,7 +241,7 @@ Here is the list of the other additional dictionnary keys that can be passed at 
 
 - `solar_forecast_kwp` for the PV peak installed power in kW used for the solar.forecast API call. 
 
-### A naive Model Predictive Controller
+## A naive Model Predictive Controller
 
 A MPC controller was introduced in v0.3.0. This is an informal/naive representation of a MPC controller. 
 
@@ -269,6 +269,10 @@ A correct call for a MPC optimization should look like:
 ```
 curl -i -H 'Content-Type:application/json' -X POST -d '{"pv_power_forecast":[0, 70, 141.22, 246.18, 513.5, 753.27, 1049.89, 1797.93, 1697.3, 3078.93], "prediction_horizon":10, "soc_init":0.5,"soc_final":0.6,"def_total_hours":[1,3]}' http://localhost:5000/action/naive-mpc-optim
 ```
+
+## A machine learning forecaster
+
+Starting in v0.4.0 a new machine learning forecaster class was introduced. Check the dedicated section in the documentation here: [https://emhass.readthedocs.io/en/latest/mlforecaster.html](https://emhass.readthedocs.io/en/latest/mlforecaster.html)
 
 ## Disclaimer
 

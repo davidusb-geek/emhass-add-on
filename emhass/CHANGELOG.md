@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0] - 2023-03-06
+The new machine learning forecast module is here! Check the updated documentation with the dedicated section here: [https://emhass.readthedocs.io/en/latest/mlforecaster.html](https://emhass.readthedocs.io/en/latest/mlforecaster.html)
+
+### Improvement
+- A brand new load forecast module and more... The new forecast module can actually be used to foreast any Home Assistant variable. The API provides fit, predict and tune methods. By the default it provides a more efficient way to forecast the power load consumption. It is based on the skforecast module that uses scikit-learn regression models considering auto-regression lags as features. The hyperparameter optimization is proposed using bayesian optimization from the optuna module.
+- A new documentation section covering the new forecast module.
+- Improved the documentation and the in-code docstrings.
+- Added the possibility to save the optimized model after a tuning routine.
+- Added the possibility to publish predict results to a Home Assistant sensor.
+- Added the possibility to provide custom entity_id, unit_of_measurement and friendly_name for each published data.
+
+### Fix
+- Fixed Solar.Forecast issues with lists of parameters.
+- Fixed latex equations rendering on documentation, dropped Mathjax.
+- Refactored images in documentation, now using only SVG for plotly figures.
+- Bumped requirements to latest non-conflicting versions.
+
 ## [0.2.29] - 2023-01-31
 ### Fix
 - Fixed access to injection_dict for the first time that emhass is used.
@@ -342,6 +359,11 @@
 [0.2.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.23
 [0.2.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.24
 [0.2.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.25
+[0.2.26]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.26
+[0.2.27]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.27
+[0.2.28]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.28
+[0.2.29]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.29
+[0.3.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.0
 
 # Notes
 All notable changes to this project will be documented in this file.
