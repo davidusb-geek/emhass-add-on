@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.1] - 2023-03-07
+### Fix
+- Fixed handling of default passed params.
+
 ## [0.3.0] - 2023-03-06
 The new machine learning forecast module is here! Check the updated documentation with the dedicated section here: [https://emhass.readthedocs.io/en/latest/mlforecaster.html](https://emhass.readthedocs.io/en/latest/mlforecaster.html)
 
