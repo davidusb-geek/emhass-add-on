@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.2] - 2023-03-09
+### Fix
+- Fixed logging.
+- Fixed missing module on docker standalone mode.
+
 ## [0.3.1] - 2023-03-07
 ### Fix
 - Fixed handling of default passed params.
@@ -368,6 +373,8 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.2.28]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.28
 [0.2.29]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.29
 [0.3.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.0
+[0.3.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.1
+[0.3.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.2
 
 # Notes
 All notable changes to this project will be documented in this file.
