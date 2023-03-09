@@ -50,6 +50,7 @@ These are the configuration parameters needed to correctly use this module.
 - lp_solver: Set the name of the linear programming solver that will be used. Defaults to 'COIN_CMD'. The options are 'PULP_CBC_CMD', 'GLPK_CMD' and 'COIN_CMD'. 
 - lp_solver_path: Set the path to the LP solver. Defaults to '/usr/bin/cbc'.
 - set_nocharge_from_grid: Set this to true if you want to forbidden to charge the battery from the grid. The battery will only be charged from excess PV.
+- load_forecast_method: The load forecast method. This defaults to 'naive'. The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
 - sensor_power_photovoltaics: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example: 'sensor.power_photovoltaics'.
 - sensor_power_load_no_var_loads: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example: 'sensor.power_load_no_var_loads'
 - number_of_deferrable_loads: Define the number of deferrable loads to consider. Defaults to 2.

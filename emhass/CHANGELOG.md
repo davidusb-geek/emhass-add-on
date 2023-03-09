@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.3] - 2023-03-09
+### Fix
+- Added missing possibility to set the method for load forecast to 'mlforecaster'.
+- Fixed logging formatting.
+
 ## [0.3.2] - 2023-03-09
 ### Fix
 - Fixed logging.
@@ -375,6 +380,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.0
 [0.3.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.1
 [0.3.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.2
+[0.3.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.3
 
 # Notes
 All notable changes to this project will be documented in this file.

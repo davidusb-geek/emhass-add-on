@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.3.2
+version: 0.3.3
 slug: emhass
 arch:
   - aarch64
@@ -31,6 +31,7 @@ options:
   lp_solver: COIN_CMD
   lp_solver_path: /usr/bin/cbc
   set_nocharge_from_grid: false
+  load_forecast_method: 'naive'
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -85,6 +86,7 @@ schema:
   lp_solver: str
   lp_solver_path: str
   set_nocharge_from_grid: bool
+  load_forecast_method: str
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)
