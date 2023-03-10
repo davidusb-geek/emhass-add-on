@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.5] - 2023-03-10
+### Fix
+- Fixed default behavior for passed data.
+- Added a new graph for tune results.
+
 ## [0.3.4] - 2023-03-10
 ### Fix
 - Fixed missing emhass module.
@@ -386,6 +391,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.2
 [0.3.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.3
 [0.3.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.4
+[0.3.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.5
 
 # Notes
 All notable changes to this project will be documented in this file.
