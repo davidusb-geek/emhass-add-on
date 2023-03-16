@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.3.5
+version: 0.3.6
 slug: emhass
 arch:
   - aarch64
@@ -11,6 +11,7 @@ arch:
 image: "davidusb/image-{arch}-emhass"
 ports:
   5000/tcp: 5000
+webui: http://[HOST]:[PORT:5000]
 map:
   - config:rw
   - share:rw
@@ -18,8 +19,13 @@ init: false
 hassio_role: default
 homeassistant_api: true
 # ingress: true
+# ingress_port: 0
+# ingress_stream: true
 # host_network: true
-webui: http://[HOST]:[PORT:5000]
+# ports:
+#   80/tcp: null
+# ports_description:
+#   80/tcp: Web interface (Not required for Ingress)
 options:
   hass_url: empty
   long_lived_token: empty

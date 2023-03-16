@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.6] - 2023-03-16
+### Fix
+- Fixed wrong path for saved ML forecaster model.
+- Fixed wrong column name for var_load when using predict with ML forecaster.
+
 ## [0.3.5] - 2023-03-10
 ### Fix
 - Fixed default behavior for passed data.
@@ -392,6 +397,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.3
 [0.3.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.4
 [0.3.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.5
+[0.3.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.6
 
 # Notes
 All notable changes to this project will be documented in this file.
