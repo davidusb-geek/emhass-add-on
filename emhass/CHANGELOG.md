@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.7] - 2023-03-17
+### Fix
+- Fixed to correct index length for ML forecaster prediction series.
+
 ## [0.3.6] - 2023-03-16
 ### Fix
 - Fixed wrong path for saved ML forecaster model.
@@ -398,6 +402,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.4
 [0.3.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.5
 [0.3.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.6
+[0.3.7]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.7
 
 # Notes
 All notable changes to this project will be documented in this file.
