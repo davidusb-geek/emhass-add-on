@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.8] - 2023-05-20
+### Fix
+- Following update of EMHASS code v0.4.9
+- Updated default value for total number of days for ML model training.
+- Added publish of unit_load_cost and unit_prod_price sensors.
+- Improved docs intro.
+- Bump myst-parser from 0.18.1 to 1.0.0
+
 ## [0.3.7] - 2023-03-17
 ### Fix
 - Fixed to correct index length for ML forecaster prediction series.
