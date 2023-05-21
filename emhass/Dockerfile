@@ -6,7 +6,7 @@ WORKDIR /usr/src
 
 # copy the requirements file into the image
 COPY ./requirements.txt /usr/src/requirements.txt
-# COPY ./emhass-0.4.7-py3-none-any.whl /usr/src/emhass-0.4.7-py3-none-any.whl
+# COPY ./emhass-0.4.10-py3-none-any.whl /usr/src/emhass-0.4.10-py3-none-any.whl
 
 # Setup
 RUN apt-get update \

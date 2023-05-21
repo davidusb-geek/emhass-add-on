@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.9] - 2023-05-21
+### Fix
+- Following update of EMHASS code v0.4.10
+- Fixed wrong name of new cost sensor.
+- Fixed units of measurements of costs to €/kWh.
+- Added color sequence to plot figures, now avery line should be plotted with a different color.
+
 ## [0.3.8] - 2023-05-20
 ### Fix
 - Following update of EMHASS code v0.4.9
