@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.3.9
+version: 0.3.10
 slug: emhass
 arch:
   - aarch64
@@ -30,6 +30,7 @@ options:
   hass_url: empty
   long_lived_token: empty
   costfun: profit
+  logging_level: INFO
   optimization_time_step: 30
   historic_days_to_retrieve: 2
   method_ts_round: nearest
@@ -37,6 +38,10 @@ options:
   lp_solver: COIN_CMD
   lp_solver_path: /usr/bin/cbc
   set_nocharge_from_grid: false
+  set_nodischarge_to_grid: false
+  set_battery_dynamic: false
+  battery_dynamic_max: 0.9
+  battery_dynamic_min: -0.9
   load_forecast_method: 'naive'
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
@@ -85,6 +90,7 @@ schema:
   hass_url: str
   long_lived_token: str
   costfun: list(profit|cost|self-consumption)
+  logging_level: list(DEBUG|INFO|WARNING|ERROR)
   optimization_time_step: int(10,1440)
   historic_days_to_retrieve: int(2,365)
   method_ts_round: str
@@ -92,6 +98,10 @@ schema:
   lp_solver: str
   lp_solver_path: str
   set_nocharge_from_grid: bool
+  set_nodischarge_to_grid: bool
+  set_battery_dynamic: bool
+  battery_dynamic_max: float(0.0,1.0)
+  battery_dynamic_min: float(-1.0,0.0)
   load_forecast_method: str
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str

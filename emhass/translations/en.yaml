@@ -8,6 +8,9 @@ configuration:
   costfun:
     name: Define the type of cost function
     description: This is optional and the options are profit (default), cost and self-consumption
+  logging_level:
+    name: Set the logger level
+    description: This sets the logger level. The default is INFO. Change to WARNING or ERROR to reduce logging if needed.
   optimization_time_step:
     name: The time step to resample retrieved data from hass
     description: This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization. Defaults to 30. 
@@ -29,6 +32,18 @@ configuration:
   set_nocharge_from_grid:
     name: Set no charge from grid condition
     description: Set this to true if you want to forbidden to charge the battery from the grid. The battery will only be charged from excess PV.
+  set_nodischarge_to_grid:
+    name: Set no discharge to grid condition
+    description: Set this to true if you want to forbidden to discharge the battery power to the grid.
+  set_battery_dynamic:
+    name: Set a power dynamic limiting condition to the battery power
+    description: This is an additional constraint on the power dynamic in power per unit of time.
+  battery_dynamic_max:
+    name: The maximum positive battery power dynamic
+    description: This is the power variation in percentage of battery maximum power.
+  battery_dynamic_min:
+    name: The minimum negative battery power dynamic
+    description: This is the power variation in percentage of battery maximum power.
   load_forecast_method:
     name: The load forecast method
     description: This defaults to 'naive'. The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
