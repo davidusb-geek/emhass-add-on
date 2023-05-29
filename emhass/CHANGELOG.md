@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.11] - 2023-05-29
+### Fix
+- Fixed error in type entry on add-on config.yaml.
+
 ## [0.3.10] - 2023-05-27
 Improvements and fixes following update of EMHASS code v0.4.11
 ### Improvement
