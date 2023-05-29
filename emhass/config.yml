@@ -101,7 +101,7 @@ schema:
   set_nodischarge_to_grid: bool
   set_battery_dynamic: bool
   battery_dynamic_max: float(0.0,1.0)
-  battery_dynamic_min: float(-1.0,0.0)
+  battery_dynamic_min: "float(-1.0,0.0)"
   load_forecast_method: str
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
