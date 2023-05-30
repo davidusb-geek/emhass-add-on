@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.12] - 2023-05-30
+### Fix
+- Updated the EMHASS config.yaml template with missing entries.
+
 ## [0.3.11] - 2023-05-29
 ### Fix
 - Fixed error in type entry on add-on config.yaml.
