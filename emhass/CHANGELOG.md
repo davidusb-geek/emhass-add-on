@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.12] - 2023-06-03
+Improvements and fixes following update of EMHASS code v0.4.12
+### Improvement
+- Added forecasts for unit_prod_price and unit_load_cost.
+- Improved documentation.
+### Fix
+- Bump skforecast from 0.8.0 to 0.8.1
+
 ## [0.3.11] - 2023-05-29
 ### Fix
 - Fixed error in type entry on add-on config.yaml.
@@ -11,7 +19,7 @@ Improvements and fixes following update of EMHASS code v0.4.11
 - Added new constraint to avoid battery discharging to the grid.
 - Added possibility to set the logging level.
 ### Fix
-- Bumped version of skforecast from 0.6.0 to 0.8.1. Doing this mainly implies changing how the exogenous data is passed to fit and predict methods.
+- Bumped version of skforecast from 0.6.0 to 0.8.0. Doing this mainly implies changing how the exogenous data is passed to fit and predict methods.
 - Fixed wrong path for csv files when using load cost and prod price forecasts.
 
 ## [0.3.9] - 2023-05-21
