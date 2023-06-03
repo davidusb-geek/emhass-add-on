@@ -1,12 +1,16 @@
 # Changelog
 
-## [0.3.12] - 2023-06-03
+## [0.3.13] - 2023-06-03
 Improvements and fixes following update of EMHASS code v0.4.12
 ### Improvement
 - Added forecasts for unit_prod_price and unit_load_cost.
 - Improved documentation.
 ### Fix
 - Bump skforecast from 0.8.0 to 0.8.1
+
+## [0.3.12] - 2023-05-30
+### Fix
+- Updated the EMHASS config.yaml template with missing entries.
 
 ## [0.3.11] - 2023-05-29
 ### Fix
