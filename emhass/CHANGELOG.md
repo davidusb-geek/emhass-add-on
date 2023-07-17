@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.15] - 2023-07-17
+Improvements and fixes following update of EMHASS code v0.4.14
+### Improvement
+- Bumped skforecast to latest 0.9.1.
+- The standalone dockerfile was updated by @majorforg to include the CBC solver.
+### Fix
+- Fix rounding for price & cost forecasts by @purcell-lab
+
 ## [0.3.14] - 2023-06-29
 Improvements and fixes following update of EMHASS code v0.4.13
 ### Improvement
