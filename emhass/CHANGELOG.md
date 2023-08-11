@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.16] - 2023-08-11
+Improvements and fixes following update of EMHASS code v0.4.15
+### Improvement
+- Bumped pvlib to 0.10.1
+- Updated documentation for forecasts methods.
+### Fix
+- Fixed error message on utils.py
+
 ## [0.3.15] - 2023-07-17
 Improvements and fixes following update of EMHASS code v0.4.14
 ### Improvement
@@ -463,6 +471,15 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.5
 [0.3.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.6
 [0.3.7]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.7
+[0.3.8]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.8
+[0.3.9]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.9
+[0.3.10]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.10
+[0.3.11]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.11
+[0.3.12]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.12
+[0.3.13]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.13
+[0.3.14]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.14
+[0.3.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.15
+[0.3.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.16
 
 # Notes
 All notable changes to this project will be documented in this file.

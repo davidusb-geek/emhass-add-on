@@ -23,15 +23,15 @@ RUN apt-get update \
         glpk-utils \
         libhdf5-dev \
         libhdf5-serial-dev \
-        netcdf-bin \
-        libnetcdf-dev \
+        #netcdf-bin \
+        #libnetcdf-dev \
         pkg-config \
         python3-h5py \
         gfortran \
         libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
-    && pip3 install netCDF4==1.5.4 \
+    #&& pip3 install netCDF4==1.5.4 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
     #&& pip3 install emhass-0.4.11-py3-none-any.whl \
@@ -42,8 +42,8 @@ RUN apt-get update \
         build-essential \
         libhdf5-dev \
         libhdf5-serial-dev \
-        netcdf-bin \
-        libnetcdf-dev \
+        #netcdf-bin \
+        #libnetcdf-dev \
         pkg-config \
         gfortran \
     && rm -rf /var/lib/apt/lists/*
