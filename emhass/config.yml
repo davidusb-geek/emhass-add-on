@@ -23,11 +23,6 @@ homeassistant_api: true
 ingress: true
 ingress_port: 5000
 ingress_stream: true
-# host_network: true
-# ports:
-#   80/tcp: null
-# ports_description:
-#   80/tcp: Web interface (Not required for Ingress)
 options:
   hass_url: empty
   long_lived_token: empty
