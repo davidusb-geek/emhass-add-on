@@ -10,7 +10,9 @@ arch:
   - armv7
 image: "davidusb/image-{arch}-emhass"
 ports:
-  5000/tcp: 5000
+  5000/tcp: null
+ports_description:
+  5000/tcp: Web interface (Not required for Ingress)
 webui: http://[HOST]:[PORT:5000]
 map:
   - config:rw
@@ -18,9 +20,9 @@ map:
 init: false
 hassio_role: default
 homeassistant_api: true
-# ingress: true
-# ingress_port: 0
-# ingress_stream: true
+ingress: true
+ingress_port: 5000
+ingress_stream: true
 # host_network: true
 # ports:
 #   80/tcp: null
@@ -42,20 +44,20 @@ options:
   set_battery_dynamic: false
   battery_dynamic_max: 0.9
   battery_dynamic_min: -0.9
-  load_forecast_method: 'naive'
+  load_forecast_method: "naive"
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
-  list_nominal_power_of_deferrable_loads: 
+  list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: 3000
     - nominal_power_of_deferrable_loads: 750
-  list_operating_hours_of_each_deferrable_load: 
+  list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: 5
     - operating_hours_of_each_deferrable_load: 8
-  list_peak_hours_periods_start_hours: 
+  list_peak_hours_periods_start_hours:
     - peak_hours_periods_start_hours: 02:54
     - peak_hours_periods_start_hours: 17:24
-  list_peak_hours_periods_end_hours: 
+  list_peak_hours_periods_end_hours:
     - peak_hours_periods_end_hours: 15:24
     - peak_hours_periods_end_hours: 20:24
   list_treat_deferrable_load_as_semi_cont:
@@ -65,17 +67,17 @@ options:
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
   maximum_power_from_grid: 9000
-  list_pv_module_model: 
+  list_pv_module_model:
     - pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
-  list_pv_inverter_model: 
+  list_pv_inverter_model:
     - pv_inverter_model: Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_
-  list_surface_tilt: 
+  list_surface_tilt:
     - surface_tilt: 30
-  list_surface_azimuth: 
+  list_surface_azimuth:
     - surface_azimuth: 205
-  list_modules_per_string: 
+  list_modules_per_string:
     - modules_per_string: 16
-  list_strings_per_inverter: 
+  list_strings_per_inverter:
     - strings_per_inverter: 1
   set_use_battery: false
   battery_discharge_power_max: 1000
@@ -106,13 +108,13 @@ schema:
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)
-  list_nominal_power_of_deferrable_loads: 
+  list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: int(0,)
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: int(0,)
-  list_peak_hours_periods_start_hours: 
+  list_peak_hours_periods_start_hours:
     - peak_hours_periods_start_hours: str
-  list_peak_hours_periods_end_hours: 
+  list_peak_hours_periods_end_hours:
     - peak_hours_periods_end_hours: str
   list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: bool
@@ -120,17 +122,17 @@ schema:
   load_offpeak_hours_cost: float(0,)
   photovoltaic_production_sell_price: float(0,)
   maximum_power_from_grid: int(0,)
-  list_pv_module_model: 
+  list_pv_module_model:
     - pv_module_model: str
-  list_pv_inverter_model: 
+  list_pv_inverter_model:
     - pv_inverter_model: str
-  list_surface_tilt: 
+  list_surface_tilt:
     - surface_tilt: int(0,90)
-  list_surface_azimuth: 
+  list_surface_azimuth:
     - surface_azimuth: int(0,360)
-  list_modules_per_string: 
+  list_modules_per_string:
     - modules_per_string: int(0,)
-  list_strings_per_inverter: 
+  list_strings_per_inverter:
     - strings_per_inverter: int(0,)
   set_use_battery: bool
   battery_discharge_power_max: int(0,)
