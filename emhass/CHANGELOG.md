@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0] - 2023-09-03
+Improvements and fixes following update of EMHASS code v0.5.0
+### Improvement
+- Finally added support for ingress thanks to the work from @siku2
+- Added a devcontainer and pave the way for ingress access
+### Fix
+- Added some code to fix some numerical syntax issues in tables
+
 ## [0.3.16] - 2023-08-11
 Improvements and fixes following update of EMHASS code v0.4.15
 ### Improvement
