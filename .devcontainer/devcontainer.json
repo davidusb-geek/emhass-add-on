@@ -1,0 +1,37 @@
+{
+	"name": "Add-on",
+	"image": "ghcr.io/home-assistant/devcontainer:addons",
+	"appPort": [
+		"7123:8123",
+		"7357:4357"
+	],
+	"postStartCommand": "bash devcontainer_bootstrap",
+	"runArgs": [
+		"-e",
+		"GIT_EDITOR=code --wait",
+		"--privileged"
+	],
+	"remoteUser":"root",
+	"containerEnv": {
+		"WORKSPACE_DIRECTORY": "${containerWorkspaceFolder}"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"timonwong.shellcheck",
+				"esbenp.prettier-vscode"
+			],
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"zsh": {
+						"path": "/usr/bin/zsh"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
+		}
+	},
+	"mounts": [
+		"type=volume,target=/var/lib/docker"
+	]
+}
