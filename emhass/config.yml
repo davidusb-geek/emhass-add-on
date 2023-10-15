@@ -50,11 +50,11 @@ options:
     - operating_hours_of_each_deferrable_load: 5
     - operating_hours_of_each_deferrable_load: 8
   list_peak_hours_periods_start_hours:
-    - peak_hours_periods_start_hours: 02:54
-    - peak_hours_periods_start_hours: 17:24
+    - peak_hours_periods_start_hours: 05:54
+    - peak_hours_periods_start_hours: 10:24
   list_peak_hours_periods_end_hours:
-    - peak_hours_periods_end_hours: 15:24
-    - peak_hours_periods_end_hours: 20:24
+    - peak_hours_periods_end_hours: 09:24
+    - peak_hours_periods_end_hours: 11:54
   list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: true
     - treat_deferrable_load_as_semi_cont: true
