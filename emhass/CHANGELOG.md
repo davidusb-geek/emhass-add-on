@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.2] - 2023-10-19
+### Fix
+- Updated requirements.txt with skforecast 0.10.1
+
 ## [0.4.1] - 2023-10-19
 Improvements and fixes following update of EMHASS code v0.5.1
 ### Improvement
