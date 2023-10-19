@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.1] - 2023-10-19
+Improvements and fixes following update of EMHASS code v0.5.1
+### Improvement
+- Improved documentation, thanks to @g1za
+- Bumped skforecast to 0.10.1
+- Added a new initial script for exploration of time series clustering. This will one day replace the need to configure the house load sensor with substracted deferrable load consumption
+### Fix
+- Updated automated tesing, dropped support for Python 3.8
+- Patched config for bad hour formatting preventing add-on to start, thanks to @jatty
+
 ## [0.4.0] - 2023-09-03
 Improvements and fixes following update of EMHASS code v0.5.0
 ### Improvement
@@ -488,6 +498,8 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.14]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.14
 [0.3.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.15
 [0.3.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.16
+[0.4.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.0
+[0.4.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.1
 
 # Notes
 All notable changes to this project will be documented in this file.
