@@ -1,7 +1,7 @@
 numpy==1.26.0
 pandas==2.0.3
 scipy==1.11.3
-pvlib>=0.10.1
+pvlib>=0.10.2
 protobuf>=3.0.0
 pytz>=2021.1
 requests>=2.25.1

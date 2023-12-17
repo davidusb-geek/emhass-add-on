@@ -17,14 +17,12 @@ RUN apt-get update \
         python3-dev \
         git \
         build-essential \
-        coinor-libcbc-dev \
         coinor-cbc \
+        coinor-libcbc-dev \
         libglpk-dev \
         glpk-utils \
         libhdf5-dev \
         libhdf5-serial-dev \
-        #netcdf-bin \
-        #libnetcdf-dev \
         pkg-config \
         python3-h5py \
         gfortran \
@@ -42,8 +40,6 @@ RUN apt-get update \
         build-essential \
         libhdf5-dev \
         libhdf5-serial-dev \
-        #netcdf-bin \
-        #libnetcdf-dev \
         pkg-config \
         gfortran \
     && rm -rf /var/lib/apt/lists/*
