@@ -17,21 +17,22 @@ RUN apt-get update \
         python3-dev \
         git \
         build-essential \
+        gcc \
         coinor-cbc \
         coinor-libcbc-dev \
         libglpk-dev \
         glpk-utils \
         libhdf5-dev \
         libhdf5-serial-dev \
+        netcdf-bin \
+        libnetcdf-dev \
         pkg-config \
-        python3-h5py \
         gfortran \
         libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
-    #&& pip3 install netCDF4==1.5.4 \
-    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -U setuptools wheel \
-    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir -r requirements.txt \
+    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -U setuptools wheel \
+    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt \
     # && pip3 install emhass-0.5.0-py3-none-any.whl \
     && apt-get purge -y --auto-remove \
         python3-pip \

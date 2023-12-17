@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.5.2] - 2023-12-18
+### Fix
+- Fixes following update of EMHASS code v0.6.1
+- Added --break-system-packages option to buil docker image to solve for PEP 668
+
 ## [0.5.1] - 2023-12-17
 ### Fix
 - Patching v0.5.0. Updated to Python 3.11 using bookworm debian version
