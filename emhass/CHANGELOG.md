@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.5.0] - 2023-12-17
+Improvements and fixes following update of EMHASS code v0.6.0
+### Improvement
+- Now Python 3.11 is fully supported, thanks to @pail23
+- We now publish the optimization status on sensor.optim_status
+- Bumped setuptools, skforecast, numpy, scipy, pandas
+- A good bunch of documentation improvements thanks to @g1za
+- Improved code coverage (a little bit ;-)
+### Fix
+- Some fixes managing time zones, thanks to @pail23
+- Bug fix on grid cost function equation, thanks to @michaelpiron
+- Applying a first set of fixes proposed by @smurfix:
+  - Don't ignore HTTP errors
+  - Handle missing variable correctly
+  - Slight error message improvement
+  - Just use the default solver
+  - Get locations from environment in non-app mode
+  - Tolerate running directly from source
+
 ## [0.4.2] - 2023-10-19
 ### Fix
 - Updated requirements.txt with skforecast 0.10.1
