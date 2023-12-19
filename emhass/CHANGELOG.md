@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.3] - 2023-12-19
+### Fix
+- Stepping down to Python 3.9 for ARMHF architectures.
+
 ## [0.5.2] - 2023-12-18
 ### Fix
 - Fixes following update of EMHASS code v0.6.1
