@@ -54,6 +54,8 @@ These are the configuration parameters needed to correctly use this module.
 - set_battery_dynamic: Set a power dynamic limiting condition to the battery power. This is an additional constraint on the battery dynamic in power per unit of time.
 - battery_dynamic_max: The maximum positive battery power dynamic. This is the power variation in percentage of battery maximum power.
 - battery_dynamic_min: The minimum negative battery power dynamic. This is the power variation in percentage of battery maximum power.
+- weight_battery_discharge: An additional weight applied in cost function to battery usage for discharge.
+- weight_battery_charge: An additional weight applied in cost function to battery usage for charge.
 - load_forecast_method: The load forecast method. This defaults to 'naive'. The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
 - sensor_power_photovoltaics: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example: 'sensor.power_photovoltaics'.
 - sensor_power_load_no_var_loads: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example: 'sensor.power_load_no_var_loads'

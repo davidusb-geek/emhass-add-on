@@ -44,6 +44,12 @@ configuration:
   battery_dynamic_min:
     name: The minimum negative battery power dynamic
     description: This is the power variation in percentage of battery maximum power.
+  weight_battery_discharge:
+    name: A weight to the cost function for battery discharge
+    description: This is an additional weight applied in cost function to battery usage for discharge.
+  weight_battery_charge:
+    name: A weight to the cost function for battery charge
+    description: This is an additional weight applied in cost function to battery usage for charge.
   load_forecast_method:
     name: The load forecast method
     description: This defaults to 'naive'. The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.4] - 2023-12-19
+Following update of EMHASS code v0.6.2
+### Improvement
+- Added option to pass additional weight for battery usage
+- Improved coverage
+### Fix
+- Updated optimization constraints to solve conflict for `set_def_constant` and `treat_def_as_semi_cont` cases
+
 ## [0.5.3] - 2023-12-19
 ### Fix
 - Stepping down to Python 3.9 for ARMHF architectures.
