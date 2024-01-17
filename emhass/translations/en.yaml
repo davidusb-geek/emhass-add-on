@@ -53,6 +53,9 @@ configuration:
   load_forecast_method:
     name: The load forecast method
     description: This defaults to 'naive'. The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
+  weather_forecast_method:
+    name: The weather/production forecast method
+    description: This defaults to 'scrapper'. The available options are 'scrapper', 'csv', 'solcast' or 'solar.forecast'. See (wiki)[https://emhass.readthedocs.io/en/latest/forecasts.html#pv-power-production-forecast] for more information.
   sensor_power_photovoltaics:
     name: The Home Assistant sensor for PV power production
     description: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example sensor.power_photovoltaics.
