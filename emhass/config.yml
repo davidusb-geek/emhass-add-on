@@ -42,6 +42,7 @@ options:
   weight_battery_discharge: 1.0
   weight_battery_charge: 1.0
   load_forecast_method: "naive"
+  weather_forecast_method: "scrapper"
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -104,6 +105,7 @@ schema:
   weight_battery_discharge: float
   weight_battery_charge: float
   load_forecast_method: str
+  weather_forecast_method: list(scrapper|solcast|csv|solar.forecast)
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
   number_of_deferrable_loads: int(1,10)
