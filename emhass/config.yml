@@ -51,6 +51,9 @@ options:
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: 5
     - operating_hours_of_each_deferrable_load: 8
+  list_end_timesteps_of_each_deferrable_load:
+    - end_timesteps_of_each_deferrable_load: 0
+    - end_timesteps_of_each_deferrable_load: 3
   list_peak_hours_periods_start_hours:
     - peak_hours_periods_start_hours: 05:54
     - peak_hours_periods_start_hours: 10:24
