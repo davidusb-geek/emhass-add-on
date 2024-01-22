@@ -1,4 +1,4 @@
-# EMHASS Add-on - test version
+# EMHASS Add-on
 
 A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
 
