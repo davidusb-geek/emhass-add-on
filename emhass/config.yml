@@ -42,9 +42,16 @@ options:
   weight_battery_discharge: 1.0
   weight_battery_charge: 1.0
   load_forecast_method: "naive"
+  delta_forecast_daily: 1
   weather_forecast_method: "scrapper"
+  optional_solcast_api_key: "empty"
+  optional_solcast_rooftop_id: "empty"
+  optional_solar_forecast_kwp: 0   
+  load_cost_forecast_method: "hp_hc_periods"
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
+  load_negative: false        
+  set_zero_min: true  
   number_of_deferrable_loads: 2
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: 3000
@@ -61,8 +68,12 @@ options:
   list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: true
     - treat_deferrable_load_as_semi_cont: true
+  list_set_deferrable_load_single_constant:
+    - set_deferrable_load_single_constant: false
+    - set_deferrable_load_single_constant: false    
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
+  production_price_forecast_method: "constant"
   photovoltaic_production_sell_price: 0.065
   maximum_power_from_grid: 9000
   list_pv_module_model:
@@ -105,9 +116,16 @@ schema:
   weight_battery_discharge: float
   weight_battery_charge: float
   load_forecast_method: str
+  delta_forecast_daily: int
   weather_forecast_method: list(scrapper|solcast|csv|solar.forecast)
+  optional_solcast_api_key: str
+  optional_solcast_rooftop_id: str
+  optional_solar_forecast_kwp: float
+  load_cost_forecast_method: list(hp_hc_periods|csv)
   sensor_power_photovoltaics: str
   sensor_power_load_no_var_loads: str
+  load_negative: bool
+  set_zero_min: bool
   number_of_deferrable_loads: int(1,10)
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: int(0,)
@@ -119,8 +137,11 @@ schema:
     - peak_hours_periods_end_hours: str
   list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: bool
+  list_set_deferrable_load_single_constant:
+    - set_deferrable_load_single_constant: bool
   load_peak_hours_cost: float(0,)
   load_offpeak_hours_cost: float(0,)
+  production_price_forecast_method: list(constant|csv)
   photovoltaic_production_sell_price: float(0,)
   maximum_power_from_grid: int(0,)
   list_pv_module_model:
