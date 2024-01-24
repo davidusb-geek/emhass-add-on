@@ -104,9 +104,9 @@ schema:
   logging_level: list(DEBUG|INFO|WARNING|ERROR)
   optimization_time_step: int(10,1440)
   historic_days_to_retrieve: int(2,365)
-  method_ts_round: str
+  method_ts_round: list(first|last|nearest)
   set_total_pv_sell: bool
-  lp_solver: str
+  lp_solver: list(PULP_CBC_CMD|GLPK_CMD|COIN_CMD)
   lp_solver_path: str
   set_nocharge_from_grid: bool
   set_nodischarge_to_grid: bool
@@ -115,7 +115,7 @@ schema:
   battery_dynamic_min: float
   weight_battery_discharge: float
   weight_battery_charge: float
-  load_forecast_method: str
+  load_forecast_method: list(naive|csv|list|mlforecaster)
   delta_forecast_daily: int
   weather_forecast_method: list(scrapper|solcast|csv|solar.forecast)
   optional_solcast_api_key: password
