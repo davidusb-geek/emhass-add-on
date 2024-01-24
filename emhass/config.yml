@@ -1,14 +1,14 @@
 name: EMHASS
 description: Energy Management for Home Assistant
-url: https://github.com/davidusb-geek/emhass
-version: 0.5.4
+url: https://github.com/onIon-energy/emhass
+version: 0.5.4-testonion
 slug: emhass
 arch:
   - aarch64
   - amd64
   - armhf
   - armv7
-image: "davidusb/image-{arch}-emhass"
+#image: "davidusb/image-{arch}-emhass"
 ports:
   5000/tcp: 5000
 ports_description:
@@ -51,6 +51,9 @@ options:
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: 5
     - operating_hours_of_each_deferrable_load: 8
+  list_start_timesteps_of_each_deferrable_load:
+    - start_timesteps_of_each_deferrable_load: 0
+    - start_timesteps_of_each_deferrable_load: 0
   list_end_timesteps_of_each_deferrable_load:
     - end_timesteps_of_each_deferrable_load: 0
     - end_timesteps_of_each_deferrable_load: 0
@@ -114,6 +117,8 @@ schema:
     - nominal_power_of_deferrable_loads: int(0,)
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: int(0,)
+  list_start_timesteps_of_each_deferrable_load:
+    - start_timesteps_of_each_deferrable_load: int(0,)
   list_end_timesteps_of_each_deferrable_load:
     - end_timesteps_of_each_deferrable_load: int(0,)
   list_peak_hours_periods_start_hours:
