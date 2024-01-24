@@ -99,7 +99,7 @@ options:
   battery_target_state_of_charge: 0.6
 schema:
   hass_url: str
-  long_lived_token: str
+  long_lived_token: password
   costfun: list(profit|cost|self-consumption)
   logging_level: list(DEBUG|INFO|WARNING|ERROR)
   optimization_time_step: int(10,1440)
@@ -118,7 +118,7 @@ schema:
   load_forecast_method: str
   delta_forecast_daily: int
   weather_forecast_method: list(scrapper|solcast|csv|solar.forecast)
-  optional_solcast_api_key: str
+  optional_solcast_api_key: password
   optional_solcast_rooftop_id: str
   optional_solar_forecast_kwp: float
   load_cost_forecast_method: list(hp_hc_periods|csv)
