@@ -51,6 +51,12 @@ options:
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: 5
     - operating_hours_of_each_deferrable_load: 8
+  list_start_timesteps_of_each_deferrable_load:
+    - start_timesteps_of_each_deferrable_load: 0
+    - start_timesteps_of_each_deferrable_load: 0
+  list_end_timesteps_of_each_deferrable_load:
+    - end_timesteps_of_each_deferrable_load: 0
+    - end_timesteps_of_each_deferrable_load: 0
   list_peak_hours_periods_start_hours:
     - peak_hours_periods_start_hours: 05:54
     - peak_hours_periods_start_hours: 10:24
@@ -111,6 +117,10 @@ schema:
     - nominal_power_of_deferrable_loads: int(0,)
   list_operating_hours_of_each_deferrable_load:
     - operating_hours_of_each_deferrable_load: int(0,)
+  list_start_timesteps_of_each_deferrable_load:
+    - start_timesteps_of_each_deferrable_load: int(0,)
+  list_end_timesteps_of_each_deferrable_load:
+    - end_timesteps_of_each_deferrable_load: int(0,)
   list_peak_hours_periods_start_hours:
     - peak_hours_periods_start_hours: str
   list_peak_hours_periods_end_hours:

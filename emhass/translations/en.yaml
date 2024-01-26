@@ -68,6 +68,12 @@ configuration:
   list_operating_hours_of_each_deferrable_load:
     name: The total number of hours that each deferrable load should operate
     description: A list of elements.
+  list_start_timesteps_of_each_deferrable_load:
+    name: The timestep as from which each deferrable load is allowed to operate. Operation before this timestep is not allowed.
+    description: A list of elements. If value 0 is given, the deferrable load will be optimized as from the beginning of the complete prediction horizon window.
+  list_end_timesteps_of_each_deferrable_load:
+    name: The timestep before which each deferrable load should operate. Operation after this timestep is not allowed.
+    description: A list of elements. If value 0 is given, the deferrable load optimization window will extend up to the end of the prediction horizon window.
   list_peak_hours_periods_start_hours: 
     name: This is a list of start hours of peak hours periods
     description: A list of hours in 24h HH:MM format.
