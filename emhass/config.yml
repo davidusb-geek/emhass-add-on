@@ -25,6 +25,7 @@ ingress_port: 5000
 ingress_stream: true
 options:
   costfun: profit
+  logging_level: INFO
   set_total_pv_sell: false
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
@@ -47,6 +48,12 @@ options:
   list_peak_hours_periods_end_hours:
     - peak_hours_periods_end_hours: "09:24"
     - peak_hours_periods_end_hours: "11:54"
+  list_treat_deferrable_load_as_semi_cont:
+    - treat_deferrable_load_as_semi_cont: true
+    - treat_deferrable_load_as_semi_cont: true
+  list_set_deferrable_load_single_constant:
+    - set_deferrable_load_single_constant: false
+    - set_deferrable_load_single_constant: false
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
@@ -69,10 +76,10 @@ schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
   costfun: "list(profit|cost|self-consumption)?"
-  logging_level: "list(DEBUG|INFO|WARNING|ERROR)?" #optional
+  logging_level: "list(DEBUG|INFO|WARNING|ERROR)?"
   optimization_time_step: "int(10,1440)?" #optional
   historic_days_to_retrieve: "int(2,365)?" #optional
-  method_ts_round: "list(first|last|nearest)?" #optional
+  method_ts_round: "list(nearest|first|last)?" #optional
   set_total_pv_sell: "bool?"
   lp_solver: "list(PULP_CBC_CMD|GLPK_CMD|COIN_CMD)?" #optional
   lp_solver_path: "str?" #optional
@@ -107,9 +114,9 @@ schema:
     - peak_hours_periods_start_hours: "str?"
   list_peak_hours_periods_end_hours:
     - peak_hours_periods_end_hours: "str?"
-  list_treat_deferrable_load_as_semi_cont: #optional
+  list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: "bool?"
-  list_set_deferrable_load_single_constant: #optional
+  list_set_deferrable_load_single_constant:
     - set_deferrable_load_single_constant: "bool?"
   load_peak_hours_cost: "float(0,)?"
   load_offpeak_hours_cost: "float(0,)?"
@@ -137,3 +144,27 @@ schema:
   battery_minimum_state_of_charge: "float(0.0,1.0)?" #optional
   battery_maximum_state_of_charge: "float(0.0,1.0)?" #optional
   battery_target_state_of_charge: "float(0.0,1.0)?" #optional
+  # custom_deferrable_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_batt_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_grid_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_cost_fun_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_unit_load_cost_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_unit_prod_price_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"

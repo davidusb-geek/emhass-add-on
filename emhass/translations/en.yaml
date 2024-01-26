@@ -1,10 +1,10 @@
 configuration:
   hass_url:
     name: hass_url, The Home Assistant instance URL
-    description: (Default empty). Enter the URL of your Home Assistant instance. If using the supervisor you can leave this to the default "empty" value.
+    description: (Default "empty"). Enter the URL of your Home Assistant instance. If using the supervisor you can leave this to the default "empty" value.
   long_lived_token:
     name: long_lived_token, A Long-Lived Access Token
-    description: (Default empty). This can be created from the Lovelace profile page. If using the supervisor you can leave this to the default "empty" value.
+    description: (Default "empty"). This can be created from the Lovelace profile page. If using the supervisor you can leave this to the default "empty" value.
   costfun:
     name: costfun, Define the type of cost function
     description: (Default profit). This is optional and the options are profit, cost and self-consumption
@@ -112,10 +112,10 @@ configuration:
     description: A list of hours in 24h HH:MM format.
   list_treat_deferrable_load_as_semi_cont:
     name: list_treat_deferrable_load_as_semi_cont, Treat each deferrable load as a semi-continuous variable
-    description: (Default True). Semi-continuous variables are variables that can take either their nominal value or zero.
+    description: "(Default treat_deferrable_load_as_semi_cont: true). Semi-continuous variables are variables that can take either their nominal value or zero."
   list_set_deferrable_load_single_constant:
     name: list_set_deferrable_load_single_constant, Set each deferrable load as a constant fixed value variable with just one startup for each optimization task (ex. each 24h)
-    description: (Default False). Options are True or False (to enable or disable)
+    description: "(Default treat_deferrable_load_as_semi_cont: false). Options are True or False (to enable or disable)"
   load_peak_hours_cost:
     name: load_peak_hours_cost, The cost of the electrical energy during peak hours
     description: (Default 0.1907). The cost of the electrical energy from the grid during peak hours in €/kWh.

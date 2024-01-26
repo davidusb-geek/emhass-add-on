@@ -13,6 +13,8 @@ retrieve_hass_conf:
     - "sensor.power_photovoltaics"
     - "sensor.power_load_no_var_loads"
   method_ts_round: "nearest" # Set the method for timestamp rounding, options are: first, last and nearest
+  hass_url: empty
+  long_lived_token: empty
 
 optim_conf:
   set_use_battery: False # consider a battery storage
