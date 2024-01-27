@@ -105,23 +105,23 @@ configuration:
     name: list_operating_hours_of_each_deferrable_load, The total number of hours that each deferrable load should operate
     description: A list of elements. (number of items = number_of_deferrable_loads)
   list_peak_hours_periods_start_hours:
-    name: list_peak_hours_periods_start_hours, This is a list of start hours of peak hours periods
-    description: A list of hours in 24h HH:MM format.
+    name: list_peak_hours_periods_start_hours, The total number of hours that each deferrable load should operate
+    description: A list of hours in 24h HH:MM format (number of items = number_of_deferrable_loads) 
   list_peak_hours_periods_end_hours:
     name: list_peak_hours_periods_end_hours, This is a list of end hours of peak hours periods
-    description: A list of hours in 24h HH:MM format.
+    description: A list of hours in 24h HH:MM format. (number of items = number_of_deferrable_loads)   
+  list_start_timesteps_of_each_deferrable_load:
+    name: list_start_timesteps_of_each_deferrable_load, The timestep as from which each deferrable load is allowed to operate. Operation before this timestep is not allowed.
+    description: (Default 0). A list of elements. If value 0 is given, the deferrable load will be optimized as from the beginning of the complete prediction horizon window. (number of items = number_of_deferrable_loads)  
+  list_end_timesteps_of_each_deferrable_load:
+    name: list_end_timesteps_of_each_deferrable_load,The timestep before which each deferrable load should operate. Operation after this timestep is not allowed.
+    description: (Default 0). A list of elements. If value 0 is given, the deferrable load optimization window will extend up to the end of the prediction horizon window. (number of items = number_of_deferrable_loads)  
   list_treat_deferrable_load_as_semi_cont:
     name: list_treat_deferrable_load_as_semi_cont, Treat each deferrable load as a semi-continuous variable
     description: "(Default treat_deferrable_load_as_semi_cont: true). Semi-continuous variables are variables that can take either their nominal value or zero."
   list_set_deferrable_load_single_constant:
     name: list_set_deferrable_load_single_constant, Set each deferrable load as a constant fixed value variable with just one startup for each optimization task (ex. each 24h)
-    description: "(Default treat_deferrable_load_as_semi_cont: false). Options are True or False (to enable or disable)"
-  list_start_timesteps_of_each_deferrable_load:
-    name: list_start_timesteps_of_each_deferrable_load, For the timestep as from which each deferrable load is allowed to operate (if you don't want the deferrable load to use the whole optimization timewindow)
-    description: (Default 0). If you specify a value of 0 (or negative), the deferrable load will be optimized as from the beginning of the complete prediction horizon window. (number of items = number_of_deferrable_loads)
-  list_end_timesteps_of_each_deferrable_load:
-    name: list_end_timesteps_of_each_deferrable_load, For the timestep before which each deferrable load should operate (if you don't want the deferrable load to use the whole optimization timewindow)
-    description: (Default 0).If you specify a value of 0 (or negative), the deferrable load will be optimized over the complete prediction horizon window. (number of items = number_of_deferrable_loads)  
+    description: "(Default treat_deferrable_load_as_semi_cont: false). Options are True or False (to enable or disable)"  
   load_peak_hours_cost:
     name: load_peak_hours_cost, The cost of the electrical energy during peak hours
     description: (Default 0.1907). The cost of the electrical energy from the grid during peak hours in €/kWh.
