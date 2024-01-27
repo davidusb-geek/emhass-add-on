@@ -29,10 +29,6 @@ options:
   set_total_pv_sell: false
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
-  time_zone: "Europe/Paris"
-  Latitude: 45.83
-  Longitude: 6.86
-  Altitude: 4807.8
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -54,6 +50,12 @@ options:
   list_set_deferrable_load_single_constant:
     - set_deferrable_load_single_constant: false
     - set_deferrable_load_single_constant: false
+  list_start_timesteps_of_each_deferrable_load:
+    - start_timesteps_of_each_deferrable_load: 0
+    - start_timesteps_of_each_deferrable_load: 0
+  list_end_timesteps_of_each_deferrable_load:
+    - end_timesteps_of_each_deferrable_load: 0
+    - end_timesteps_of_each_deferrable_load: 0
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
@@ -93,10 +95,12 @@ schema:
   load_forecast_method: "list(naive|csv|list|mlforecaster)?" #optional
   delta_forecast_daily: "int?" #optional
   weather_forecast_method: "list(scrapper|solcast|csv|solar.forecast)?" #optional
-  time_zone: "match((\\w+)?(\\/)(\\w+))?"
-  Latitude: "float?"
-  Longitude: "float?"
-  Altitude: "float?"
+  #passed by the HA
+  # time_zone: "match((\\w+)?(\\/)(\\w+))?"
+  # Latitude: "float?"
+  # Longitude: "float?"
+  #not used
+  # Altitude: "float?"
   optional_solcast_api_key: "password?" #optional
   optional_solcast_rooftop_id: "str?" #optional
   optional_solar_forecast_kwp: "float?" #optional
@@ -118,10 +122,10 @@ schema:
     - treat_deferrable_load_as_semi_cont: "bool?"
   list_set_deferrable_load_single_constant:
     - set_deferrable_load_single_constant: "bool?"
-  list_start_timesteps_of_each_deferrable_load:  #optional
+  list_start_timesteps_of_each_deferrable_load: #optional
     - start_timesteps_of_each_deferrable_load: "int?"
-  list_end_timesteps_of_each_deferrable_load:  #optional
-    - end_timesteps_of_each_deferrable_load: "int? "   
+  list_end_timesteps_of_each_deferrable_load: #optional
+    - end_timesteps_of_each_deferrable_load: "int?"
   load_peak_hours_cost: "float(0,)?"
   load_offpeak_hours_cost: "float(0,)?"
   production_price_forecast_method: "list(constant|csv)?" #optional
@@ -148,6 +152,7 @@ schema:
   battery_minimum_state_of_charge: "float(0.0,1.0)?" #optional
   battery_maximum_state_of_charge: "float(0.0,1.0)?" #optional
   battery_target_state_of_charge: "float(0.0,1.0)?" #optional
+  # not implmented
   # custom_deferrable_forecast_id:
   #   - entity_id: "str?"
   #   - unit_of_measurement: "str?"
