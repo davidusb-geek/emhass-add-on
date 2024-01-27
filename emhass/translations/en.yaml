@@ -116,6 +116,12 @@ configuration:
   list_set_deferrable_load_single_constant:
     name: list_set_deferrable_load_single_constant, Set each deferrable load as a constant fixed value variable with just one startup for each optimization task (ex. each 24h)
     description: "(Default treat_deferrable_load_as_semi_cont: false). Options are True or False (to enable or disable)"
+  list_start_timesteps_of_each_deferrable_load:
+    name: list_start_timesteps_of_each_deferrable_load, For the timestep as from which each deferrable load is allowed to operate (if you don't want the deferrable load to use the whole optimization timewindow)
+    description: (Default 0). If you specify a value of 0 (or negative), the deferrable load will be optimized as from the beginning of the complete prediction horizon window. (number of items = number_of_deferrable_loads)
+  list_end_timesteps_of_each_deferrable_load:
+    name: list_end_timesteps_of_each_deferrable_load, For the timestep before which each deferrable load should operate (if you don't want the deferrable load to use the whole optimization timewindow)
+    description: (Default 0).If you specify a value of 0 (or negative), the deferrable load will be optimized over the complete prediction horizon window. (number of items = number_of_deferrable_loads)  
   load_peak_hours_cost:
     name: load_peak_hours_cost, The cost of the electrical energy during peak hours
     description: (Default 0.1907). The cost of the electrical energy from the grid during peak hours in €/kWh.

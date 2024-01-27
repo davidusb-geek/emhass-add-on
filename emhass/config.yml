@@ -118,6 +118,10 @@ schema:
     - treat_deferrable_load_as_semi_cont: "bool?"
   list_set_deferrable_load_single_constant:
     - set_deferrable_load_single_constant: "bool?"
+  list_start_timesteps_of_each_deferrable_load:  #optional
+    - start_timesteps_of_each_deferrable_load: "int?"
+  list_end_timesteps_of_each_deferrable_load:  #optional
+    - end_timesteps_of_each_deferrable_load: "int? "   
   load_peak_hours_cost: "float(0,)?"
   load_offpeak_hours_cost: "float(0,)?"
   production_price_forecast_method: "list(constant|csv)?" #optional
