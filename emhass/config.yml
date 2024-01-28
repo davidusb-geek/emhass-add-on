@@ -24,24 +24,11 @@ ingress: true
 ingress_port: 5000
 ingress_stream: true
 options:
-  hass_url: empty
-  long_lived_token: empty
   costfun: profit
   logging_level: INFO
-  optimization_time_step: 30
-  historic_days_to_retrieve: 2
-  method_ts_round: nearest
   set_total_pv_sell: false
-  lp_solver: COIN_CMD
-  lp_solver_path: /usr/bin/cbc
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
-  set_battery_dynamic: false
-  battery_dynamic_max: 0.9
-  battery_dynamic_min: -0.9
-  weight_battery_discharge: 1.0
-  weight_battery_charge: 1.0
-  load_forecast_method: "naive"
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   number_of_deferrable_loads: 2
@@ -58,14 +45,17 @@ options:
     - end_timesteps_of_each_deferrable_load: 0
     - end_timesteps_of_each_deferrable_load: 0
   list_peak_hours_periods_start_hours:
-    - peak_hours_periods_start_hours: 05:54
-    - peak_hours_periods_start_hours: 10:24
+    - peak_hours_periods_start_hours: "05:54"
+    - peak_hours_periods_start_hours: "10:24"
   list_peak_hours_periods_end_hours:
-    - peak_hours_periods_end_hours: 09:24
-    - peak_hours_periods_end_hours: 11:54
+    - peak_hours_periods_end_hours: "09:24"
+    - peak_hours_periods_end_hours: "11:54"
   list_treat_deferrable_load_as_semi_cont:
     - treat_deferrable_load_as_semi_cont: true
     - treat_deferrable_load_as_semi_cont: true
+  list_set_deferrable_load_single_constant:
+    - set_deferrable_load_single_constant: false
+    - set_deferrable_load_single_constant: false
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
@@ -83,72 +73,107 @@ options:
   list_strings_per_inverter:
     - strings_per_inverter: 1
   set_use_battery: false
-  battery_discharge_power_max: 1000
-  battery_charge_power_max: 1000
-  battery_discharge_efficiency: 0.95
-  battery_charge_efficiency: 0.95
   battery_nominal_energy_capacity: 5000
-  battery_minimum_state_of_charge: 0.3
-  battery_maximum_state_of_charge: 0.9
-  battery_target_state_of_charge: 0.6
 schema:
-  hass_url: str
-  long_lived_token: str
-  costfun: list(profit|cost|self-consumption)
-  logging_level: list(DEBUG|INFO|WARNING|ERROR)
-  optimization_time_step: int(10,1440)
-  historic_days_to_retrieve: int(2,365)
-  method_ts_round: str
-  set_total_pv_sell: bool
-  lp_solver: str
-  lp_solver_path: str
-  set_nocharge_from_grid: bool
-  set_nodischarge_to_grid: bool
-  set_battery_dynamic: bool
-  battery_dynamic_max: float(0.0,1.0)
-  battery_dynamic_min: float
-  weight_battery_discharge: float
-  weight_battery_charge: float
-  load_forecast_method: str
-  sensor_power_photovoltaics: str
-  sensor_power_load_no_var_loads: str
-  number_of_deferrable_loads: int(1,10)
+  hass_url: "str?" #optional
+  long_lived_token: "password?" #optional
+  costfun: "list(profit|cost|self-consumption)?"
+  logging_level: "list(DEBUG|INFO|WARNING|ERROR)?"
+  optimization_time_step: "int(10,1440)?" #optional
+  historic_days_to_retrieve: "int(2,365)?" #optional
+  method_ts_round: "list(nearest|first|last)?" #optional
+  set_total_pv_sell: "bool?"
+  lp_solver: "list(PULP_CBC_CMD|GLPK_CMD|COIN_CMD)?" #optional
+  lp_solver_path: "str?" #optional
+  set_nocharge_from_grid: "bool?"
+  set_nodischarge_to_grid: "bool?"
+  set_battery_dynamic: "bool?" #optional
+  battery_dynamic_max: "float(0.0,1.0)?" #optional
+  battery_dynamic_min: "float?" #optional
+  weight_battery_discharge: "float?" #optional
+  weight_battery_charge: "float?" #optional
+  load_forecast_method: "list(naive|csv|list|mlforecaster)?" #optional
+  delta_forecast_daily: "int?" #optional
+  weather_forecast_method: "list(scrapper|solcast|csv|solar.forecast)?" #optional
+  #passed by the HA
+  # time_zone: "match((\\w+)?(\\/)(\\w+))?"
+  # Latitude: "float?"
+  # Longitude: "float?"
+  #not used
+  # Altitude: "float?"
+  optional_solcast_api_key: "password?" #optional
+  optional_solcast_rooftop_id: "str?" #optional
+  optional_solar_forecast_kwp: "float?" #optional
+  load_cost_forecast_method: "list(hp_hc_periods|csv)?"
+  sensor_power_photovoltaics: "str?"
+  sensor_power_load_no_var_loads: "str?"
+  load_negative: "bool?" #optional
+  set_zero_min: "bool?" #optional
+  number_of_deferrable_loads: "int(1,10)?"
   list_nominal_power_of_deferrable_loads:
-    - nominal_power_of_deferrable_loads: int(0,)
+    - nominal_power_of_deferrable_loads: "int(0,)?"
   list_operating_hours_of_each_deferrable_load:
-    - operating_hours_of_each_deferrable_load: int(0,)
+    - operating_hours_of_each_deferrable_load: "int(0,)?"
   list_start_timesteps_of_each_deferrable_load:
-    - start_timesteps_of_each_deferrable_load: int(0,)
+    - start_timesteps_of_each_deferrable_load: "int(0,)?"
   list_end_timesteps_of_each_deferrable_load:
-    - end_timesteps_of_each_deferrable_load: int(0,)
+    - end_timesteps_of_each_deferrable_load: "int(0,)?"
   list_peak_hours_periods_start_hours:
-    - peak_hours_periods_start_hours: str
+    - peak_hours_periods_start_hours: "str?"
   list_peak_hours_periods_end_hours:
-    - peak_hours_periods_end_hours: str
+    - peak_hours_periods_end_hours: "str?"
   list_treat_deferrable_load_as_semi_cont:
-    - treat_deferrable_load_as_semi_cont: bool
-  load_peak_hours_cost: float(0,)
-  load_offpeak_hours_cost: float(0,)
-  photovoltaic_production_sell_price: float(0,)
-  maximum_power_from_grid: int(0,)
+    - treat_deferrable_load_as_semi_cont: "bool?"
+  list_set_deferrable_load_single_constant:
+    - set_deferrable_load_single_constant: "bool?"
+  load_peak_hours_cost: "float(0,)?"
+  load_offpeak_hours_cost: "float(0,)?"
+  production_price_forecast_method: "list(constant|csv)?" #optional
+  photovoltaic_production_sell_price: "float(0,)?"
+  maximum_power_from_grid: "int(0,)?"
   list_pv_module_model:
-    - pv_module_model: str
+    - pv_module_model: "str?"
   list_pv_inverter_model:
-    - pv_inverter_model: str
+    - pv_inverter_model: "str?"
   list_surface_tilt:
-    - surface_tilt: int(0,90)
+    - surface_tilt: "int(0,90)?"
   list_surface_azimuth:
-    - surface_azimuth: int(0,360)
+    - surface_azimuth: "int(0,360)?"
   list_modules_per_string:
-    - modules_per_string: int(0,)
+    - modules_per_string: "int(0,)?"
   list_strings_per_inverter:
-    - strings_per_inverter: int(0,)
-  set_use_battery: bool
-  battery_discharge_power_max: int(0,)
-  battery_charge_power_max: int(0,)
-  battery_discharge_efficiency: float(0.0,1.0)
-  battery_charge_efficiency: float(0.0,1.0)
-  battery_nominal_energy_capacity: int(0,)
-  battery_minimum_state_of_charge: float(0.0,1.0)
-  battery_maximum_state_of_charge: float(0.0,1.0)
-  battery_target_state_of_charge: float(0.0,1.0)
+    - strings_per_inverter: "int(0,)?"
+  set_use_battery: "bool?"
+  battery_discharge_power_max: "int(0,)?" #optional
+  battery_charge_power_max: "int(0,)?" #optional
+  battery_discharge_efficiency: "float(0.0,1.0)?" #optional
+  battery_charge_efficiency: "float(0.0,1.0)?" #optional
+  battery_nominal_energy_capacity: "int(0,)?"
+  battery_minimum_state_of_charge: "float(0.0,1.0)?" #optional
+  battery_maximum_state_of_charge: "float(0.0,1.0)?" #optional
+  battery_target_state_of_charge: "float(0.0,1.0)?" #optional
+  # not implmented
+  # custom_deferrable_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_batt_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_grid_forecast_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_cost_fun_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_unit_load_cost_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
+  # custom_unit_prod_price_id:
+  #   - entity_id: "str?"
+  #   - unit_of_measurement: "str?"
+  #   - friendly_name: "str?"
