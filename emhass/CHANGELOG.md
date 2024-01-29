@@ -1,7 +1,7 @@
 # Changelog
 
 ## [0.6.0] - 2024-01-28
-Following update of EMHASS code v0.7.0
+Following update of EMHASS code v0.7.1
 
 ## [0.5.4] - 2023-12-19
 Following update of EMHASS code v0.6.2
