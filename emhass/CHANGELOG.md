@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.6.1] - 2024-01-30
+Patched new version with bug fixes on ptahs and missing list types
+
 ## [0.6.0] - 2024-01-28
 Following update of EMHASS code v0.7.1
 ### Improvement
