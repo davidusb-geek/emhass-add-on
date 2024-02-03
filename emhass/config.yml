@@ -24,13 +24,14 @@ ingress: true
 ingress_port: 5000
 ingress_stream: true
 options:
-  costfun: profit
   logging_level: INFO
+  costfun: profit
+  sensor_power_photovoltaics: sensor.power_photovoltaics
+  sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
   set_total_pv_sell: false
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
-  sensor_power_photovoltaics: sensor.power_photovoltaics
-  sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
+  maximum_power_from_grid: 9000
   number_of_deferrable_loads: 2
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: 3000
@@ -59,7 +60,6 @@ options:
   load_peak_hours_cost: 0.1907
   load_offpeak_hours_cost: 0.1419
   photovoltaic_production_sell_price: 0.065
-  maximum_power_from_grid: 9000
   list_pv_module_model:
     - pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
   list_pv_inverter_model:
@@ -77,21 +77,20 @@ options:
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
-  costfun: "list(profit|cost|self-consumption)?"
   logging_level: "list(DEBUG|INFO|WARNING|ERROR)?"
+  costfun: "list(profit|cost|self-consumption)?"
+  sensor_power_photovoltaics: "str?"
+  sensor_power_load_no_var_loads: "str?"
   optimization_time_step: "int(10,1440)?" #optional
   historic_days_to_retrieve: "int(2,365)?" #optional
   method_ts_round: "list(nearest|first|last)?" #optional
   set_total_pv_sell: "bool?"
   lp_solver: "list(PULP_CBC_CMD|GLPK_CMD|COIN_CMD)?" #optional
   lp_solver_path: "str?" #optional
+  load_negative: "bool?" #optional
+  set_zero_min: "bool?" #optional
   set_nocharge_from_grid: "bool?"
   set_nodischarge_to_grid: "bool?"
-  set_battery_dynamic: "bool?" #optional
-  battery_dynamic_max: "float(0.0,1.0)?" #optional
-  battery_dynamic_min: "float?" #optional
-  weight_battery_discharge: "float?" #optional
-  weight_battery_charge: "float?" #optional
   load_forecast_method: "list(naive|csv|list|mlforecaster)?" #optional
   delta_forecast_daily: "int?" #optional
   weather_forecast_method: "list(scrapper|solcast|csv|solar.forecast)?" #optional
@@ -104,11 +103,7 @@ schema:
   optional_solcast_api_key: "password?" #optional
   optional_solcast_rooftop_id: "str?" #optional
   optional_solar_forecast_kwp: "float?" #optional
-  load_cost_forecast_method: "list(hp_hc_periods|csv)?"
-  sensor_power_photovoltaics: "str?"
-  sensor_power_load_no_var_loads: "str?"
-  load_negative: "bool?" #optional
-  set_zero_min: "bool?" #optional
+  maximum_power_from_grid: "int(0,)?"
   number_of_deferrable_loads: "int(1,10)?"
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: "int(0,)?"
@@ -126,11 +121,11 @@ schema:
     - treat_deferrable_load_as_semi_cont: "bool?"
   list_set_deferrable_load_single_constant:
     - set_deferrable_load_single_constant: "bool?"
+  load_cost_forecast_method: "list(hp_hc_periods|csv)?"
+  production_price_forecast_method: "list(constant|csv)?" #optional
   load_peak_hours_cost: "float(0,)?"
   load_offpeak_hours_cost: "float(0,)?"
-  production_price_forecast_method: "list(constant|csv)?" #optional
   photovoltaic_production_sell_price: "float(0,)?"
-  maximum_power_from_grid: "int(0,)?"
   list_pv_module_model:
     - pv_module_model: "str?"
   list_pv_inverter_model:
@@ -144,6 +139,11 @@ schema:
   list_strings_per_inverter:
     - strings_per_inverter: "int(0,)?"
   set_use_battery: "bool?"
+  set_battery_dynamic: "bool?" #optional
+  battery_dynamic_max: "float(0.0,1.0)?" #optional
+  battery_dynamic_min: "float?" #optional
+  weight_battery_discharge: "float?" #optional
+  weight_battery_charge: "float?" #optional
   battery_discharge_power_max: "int(0,)?" #optional
   battery_charge_power_max: "int(0,)?" #optional
   battery_discharge_efficiency: "float(0.0,1.0)?" #optional
