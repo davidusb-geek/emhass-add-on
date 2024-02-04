@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.3] - 2024-02-04
+### Fix
+- Fixed broken build params method. Reverting back to alternate PR from @GeoDerp
+
 ## [0.6.2] - 2024-02-04
 Following update of EMHASS code v0.7.3
 ### Fix
