@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.4] - 2024-02-04
+### Fix
+- Following new patch on "perform_backtest": "false" has no effect
+
 ## [0.6.3] - 2024-02-04
 ### Fix
 - Fixed broken build params method. Reverting back to alternate PR from @GeoDerp
