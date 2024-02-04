@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.6.1] - 2024-02-04
+## [0.6.2] - 2024-02-04
 Following update of EMHASS code v0.7.3
 ### Fix
 - Fixed bug when booleans, solving "perform_backtest": "false" has no effect
