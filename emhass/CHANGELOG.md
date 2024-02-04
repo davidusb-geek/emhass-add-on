@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.1] - 2024-02-04
+Following update of EMHASS code v0.7.3
+### Fix
+- Fixed bug when booleans, solving "perform_backtest": "false" has no effect
+- Refactored util.py method to handle optional parameters
+- Updated web server, solving runtime issues
+- Solved issue passing solcast and solar.forecast runtime params 
+- Updated documentation requirements
+
 ## [0.6.1] - 2024-01-30
 Patched new version with bug fixes on ptahs and missing list types
 
