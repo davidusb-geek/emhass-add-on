@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.5] - 2024-02-06
+### Fix
+- Fixed number of startups constraint for deferrable load at the begining of the optimization period
+- Fixed list of bools from options.json
+- Fixed some testing and debugging scripts
+
 ## [0.6.4] - 2024-02-04
 ### Fix
 - Following new patch on "perform_backtest": "false" has no effect
@@ -579,6 +585,18 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.3.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.16
 [0.4.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.0
 [0.4.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.1
+[0.4.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.2
+[0.5.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.0
+[0.5.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.1
+[0.5.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.2
+[0.5.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.3
+[0.5.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.4
+[0.6.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.0
+[0.6.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.1
+[0.6.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.2
+[0.6.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.3
+[0.6.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.4
+[0.6.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.5
 
 # Notes
 All notable changes to this project will be documented in this file.
