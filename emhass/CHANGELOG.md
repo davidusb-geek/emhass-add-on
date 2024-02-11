@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.6] - 2024-02-11
+### Improvement
+- Bumped the webui. Some great new features and styling. Now it is possible to pass data directly as lsit of values when using the buttons in the webui. Thanks to @GeoDerp
+- Added two additional testing environment options. Thanks to @GeoDerp
+### Fix
+- Bump markupsafe from 2.1.4 to 2.1.5
+
 ## [0.6.5] - 2024-02-06
 ### Fix
 - Fixed number of startups constraint for deferrable load at the begining of the optimization period
@@ -597,6 +604,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.6.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.3
 [0.6.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.4
 [0.6.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.5
+[0.6.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.6
 
 # Notes
 All notable changes to this project will be documented in this file.
