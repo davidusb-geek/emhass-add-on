@@ -1,11 +1,11 @@
 ## EMHASS Docker 
 ## Docker run ADD-ON testing example: 
 ## docker build -t emhass/docker --build-arg build_version=addon-local .
-## docker run -it -p 5000:5000 --name emhass-test -e LAT="45.83" -e LON="6.86" -e ALT="4807.8" emhass/docker --url YOURHAURLHERE --key YOURHAKEYHERE
+## docker run -it -p 5000:5000 --name emhass-container -e LAT="45.83" -e LON="6.86" -e ALT="4807.8" emhass/docker --url YOURHAURLHERE --key YOURHAKEYHERE
 ##
 ## Docker run Standalone example 
 ## docker build -t emhass/docker --build-arg build_version=standalone .
-## docker run -it -p 5000:5000 --name emhass-test -v $(pwd)/config_emhass.yaml:/data/config_emhass.yaml -v $(pwd)/secrets_emhass.yaml:/data/secrets_emhass.yaml emhass/docker 
+## docker run -it -p 5000:5000 --name emhass-container -v $(pwd)/config_emhass.yaml:/data/config_emhass.yaml -v $(pwd)/secrets_emhass.yaml:/data/secrets_emhass.yaml emhass/docker 
 
 #build_version options are: addon, addon-pip, addon-git, addon-local standalone
 ARG build_version
@@ -18,35 +18,35 @@ COPY requirements.txt /data/
 # Setup
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        libffi-dev \
-        python3 \
-        python3-pip \
-        python3-dev \
-        git \
-        build-essential \
-        gcc \
-        coinor-cbc \
-        coinor-libcbc-dev \
-        libglpk-dev \
-        glpk-utils \
-        libhdf5-dev \
-        libhdf5-serial-dev \
-        netcdf-bin \
-        libnetcdf-dev \
-        pkg-config \
-        gfortran \
-        libatlas-base-dev \
+    libffi-dev \
+    python3 \
+    python3-pip \
+    python3-dev \
+    git \
+    build-essential \
+    gcc \
+    coinor-cbc \
+    coinor-libcbc-dev \
+    libglpk-dev \
+    glpk-utils \
+    libhdf5-dev \
+    libhdf5-serial-dev \
+    netcdf-bin \
+    libnetcdf-dev \
+    pkg-config \
+    gfortran \
+    libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt \
     && apt-get purge -y --auto-remove \
-        gcc \
-        build-essential \
-        libhdf5-dev \
-        libhdf5-serial-dev \
-        pkg-config \
-        gfortran \
+    gcc \
+    build-essential \
+    libhdf5-dev \
+    libhdf5-serial-dev \
+    pkg-config \
+    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -59,13 +59,13 @@ FROM base as addon
 COPY ./requirements_addon.txt /data/requirements.txt
 
 LABEL \
-  io.hass.name="emhass" \
-  io.hass.description="EMHASS: Energy Management for Home Assistant" \
-  io.hass.version=${BUILD_VERSION} \
-  io.hass.type="addon" \
-  io.hass.arch="aarch64|amd64|armhf|armv7"
+    io.hass.name="emhass" \
+    io.hass.description="EMHASS: Energy Management for Home Assistant" \
+    io.hass.version=${BUILD_VERSION} \
+    io.hass.type="addon" \
+    io.hass.arch="aarch64|amd64|armhf|armv7"
 
-ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api", "--key", "$SUPERVISOR_TOKEN" ]
+ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api"]
 
 #-----------
 #EMHASS-ADD-ON Testing with pip emhass (closest testing reference) 
@@ -132,6 +132,7 @@ ENV PYTHONUNBUFFERED 1
 RUN python3 setup.py install
 ENTRYPOINT [ "python3", "-m", "emhass.web_server"]
 #-------------------------
+
 
 #check build arguments and build
 FROM ${build_version} AS final
