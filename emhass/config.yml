@@ -8,7 +8,7 @@ arch:
   - amd64
   - armhf
   - armv7
-image: "davidusb/image-{arch}-emhass"
+# image: "davidusb/image-{arch}-emhass"
 ports:
   5000/tcp: 5000
 ports_description:
@@ -25,6 +25,8 @@ ingress_port: 5000
 ingress_stream: true
 panel_icon: mdi:home-lightning-bolt-outline
 panel_title: EMHASS
+environment:
+  options_path: "/data/options.json"
 options:
   logging_level: INFO
   costfun: profit
