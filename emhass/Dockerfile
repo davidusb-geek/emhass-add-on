@@ -68,7 +68,7 @@ LABEL \
 ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api"]
 
 #-----------
-#EMHASS-ADD-ON testing via git
+#EMHASS-ADD-ON testing with git
 FROM addon as addon-git
 WORKDIR /tmp/
 RUN git clone https://github.com/davidusb-geek/emhass

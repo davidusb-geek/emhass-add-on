@@ -1,5 +1,5 @@
 args:
-  build_version: addon-git
+  build_version: addon
 codenotary:
   signer: notary@home-assistant.io
   base_image: notary@home-assistant.io
