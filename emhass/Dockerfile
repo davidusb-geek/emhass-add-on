@@ -71,10 +71,17 @@ ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "h
 #EMHASS-ADD-ON testing with git
 FROM addon as addon-git
 WORKDIR /tmp/
-RUN git clone https://github.com/davidusb-geek/emhass
+#Repo
+RUN git clone https://github.com/davidusb-geek/emhass.git
 WORKDIR /tmp/emhass
+#Branch
 RUN git checkout master
-RUN cp -r /tmp/emhass/. /app/
+RUN mkdir -p /app/src/emhass/
+RUN mkdir -p /app/data/
+RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/
+RUN cp /tmp/emhass/data/opt_res_latest.csv  /app/data/
+RUN cp /tmp/emhass/setup.py /app/
+RUN cp /tmp/emhass/README.md /app/
 WORKDIR /app
 RUN python3 -m pip install --no-cache-dir --break-system-packages -U  .
 ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api"]

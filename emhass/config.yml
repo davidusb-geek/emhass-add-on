@@ -26,7 +26,7 @@ ingress_stream: true
 panel_icon: mdi:home-lightning-bolt-outline
 panel_title: EMHASS
 environment:
-  options_path: "/data/options.json"
+  OPTIONS_PATH: /data/options.json
 options:
   logging_level: INFO
   costfun: profit
