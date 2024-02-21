@@ -1,0 +1,22 @@
+name: "EMHASS-Add-on Build Test"
+
+on:
+  pull_request:
+  workflow_dispatch: #on manuall trigger
+jobs:
+  build:
+    strategy:
+      matrix:
+        architecture: [amd64,aarch64,armhf,armv7]
+    name: Test action build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: Test_Build_${{ matrix.architecture }}
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --test \
+            --${{ matrix.architecture }} \
+            --target emhass \
