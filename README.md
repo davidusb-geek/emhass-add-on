@@ -18,6 +18,12 @@ Be patient, the installation may take some time depending on your hardware.
 
 When the installation has finished go to the `Configuration` tab to set the add-on parameters.
 
+## Developing EMHASS/EMHASS-Add-on
+- EMHASS 
+    - For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). *(EMHASS docs)*
+- EMHASS-Add-on 
+    - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./Test.md).
+
 ## License
 
 MIT License
