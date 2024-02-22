@@ -84,7 +84,7 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
 
 ## Test EMHASS-Add-On build
 
-We can check to see if EMHASS-Add-On will successfully build as an docker image using the Home Assistant builder used for publishing the addon.
+You can test the EMHASS-Add-On docker image build using the Home Assistant builder.
 
 **emhass-add-on local repo**
 
