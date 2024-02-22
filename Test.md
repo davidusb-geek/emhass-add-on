@@ -11,7 +11,7 @@ See the following steps for both options.
 
 _The following examples are for testing the EMHASS-Add-on integration. To Develop/test the EMHASS itself, check EMHASS [Develop page](https://emhass.readthedocs.io/en/latest/develop.html)_.
 
-_See [Test EMHASS-Add-On build on different architectures](#Test-EMHASS-Add-On-build-on-different-architectures) for an example of testing on each architecture using Docker._
+_See [Test EMHASS-Add-On build](#Test-EMHASS-Add-On-build) for an example Docker Image build testing._
 
 ## Develop on VS-Code DevContainer with Home Assistant test environment
 
@@ -82,19 +82,18 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
   - Install and test addon
   - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the addon.
 
-## Test EMHASS-Add-On build on different architectures
+## Test EMHASS-Add-On build
 
-Before submitting a pull request, its good practice to test the build of all supported architectures (`armhf`,` armv7`, `amd64`,`aarch64`). We can do this with docker:
+We can check to see if EMHASS-Add-On will successfully build as an docker image using the Home Assistant builder used for publishing the addon.
 
 **emhass-add-on local repo**
 
 Linux example:
 
 ```bash
-architecture=armhf #architecture to test
-TARGETARCH=amd64 #your host machine architecture
+architecture=amd64 #your host machine architecture
 
-docker run --rm --privileged -v ~/.docker:/root/.docker -v ${PWD}:/data ghcr.io/home-assistant/${TARGETARCH}-builder:latest --test --${architecture} --target /data/emhass
+docker run --rm --privileged -v ~/.docker:/root/.docker -v ${PWD}:/data ghcr.io/home-assistant/${architecture}-builder:latest --test --${architecture} --target /data/emhass
 ```
 
 _confirm terminal directory is in root `emhass-add-on` folder_
@@ -104,11 +103,10 @@ _confirm terminal directory is in root `emhass-add-on` folder_
 Linux example:
 
 ```bash
-architecture=armhf #architecture to test
-TARGETARCH=amd64 #your host machine architecture
+architecture=amd64 #your host machine architecture
 
 repo=https://github.com/davidusb-geek/emhass-add-on.git #repo example
 branch=main #branch example
 
-docker run --rm --privileged -v ~/.docker:/root/.docker ghcr.io/home-assistant/${TARGETARCH}-builder:latest --test --${architecture} --target emhass -r ${repo} -b ${branch}
+docker run --rm --privileged -v ~/.docker:/root/.docker ghcr.io/home-assistant/${architecture}-builder:latest --test --${architecture} --target emhass -r ${repo} -b ${branch}
 ```
