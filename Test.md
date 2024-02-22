@@ -11,7 +11,7 @@ See the following steps for both options.
 
 _The following examples are for testing the EMHASS-Add-on integration. To Develop/test the EMHASS itself, check EMHASS [Develop page](https://emhass.readthedocs.io/en/latest/develop.html)_.
 
-_See [Test EMHASS-Add-On on different architectures](#Test-EMHASS-Add-On-on-different-architectures) for an example of testing on each architecture using Docker._
+_See [Test EMHASS-Add-On build on different architectures](#Test-EMHASS-Add-On-build-on-different-architectures) for an example of testing on each architecture using Docker._
 
 ## Develop on VS-Code DevContainer with Home Assistant test environment
 
@@ -82,9 +82,9 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
   - Install and test addon
   - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the addon.
 
-## Test EMHASS-Add-On on different architectures
+## Test EMHASS-Add-On build on different architectures
 
-Before submitting a pull request, its good practice to test the build of all supported architectures (`armhf`,` armv7`, `amd64`,`aarch64`). We can do this via docker:
+Before submitting a pull request, its good practice to test the build of all supported architectures (`armhf`,` armv7`, `amd64`,`aarch64`). We can do this with docker:
 
 **emhass-add-on local repo**
 
@@ -99,7 +99,7 @@ docker run --rm --privileged -v ~/.docker:/root/.docker -v ${PWD}:/data ghcr.io/
 
 _confirm terminal directory is in root `emhass-add-on` folder_
 
-**emhass-add-on repo git repo**
+**emhass-add-on git repo**
 
 Linux example:
 
