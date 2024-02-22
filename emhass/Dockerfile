@@ -7,8 +7,8 @@
 ## docker build -t emhass/docker --build-arg build_version=standalone .
 ## docker run -it -p 5000:5000 --name emhass-container -v $(pwd)/config_emhass.yaml:/app/config_emhass.yaml -v $(pwd)/secrets_emhass.yaml:/app/secrets_emhass.yaml emhass/docker
 
-#build_version options are: addon, addon-pip, addon-git, addon-local standalone
-ARG build_version
+#build_version options are: addon (default), addon-pip, addon-git, addon-local standalone
+ARG build_version=addon
 ARG BUILD_ARCH
 
 FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
