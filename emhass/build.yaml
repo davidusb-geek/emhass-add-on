@@ -1,5 +1,7 @@
 args:
   build_version: addon
+  build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode
+  build_branch: master #addon-git mode
 codenotary:
   signer: notary@home-assistant.io
   base_image: notary@home-assistant.io

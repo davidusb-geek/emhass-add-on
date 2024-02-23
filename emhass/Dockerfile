@@ -1,15 +1,12 @@
-## EMHASS Docker
-## Docker run ADD-ON testing example:
-## docker build -t emhass/docker --build-arg build_version=addon-local .
-## docker run -it -p 5000:5000 --name emhass-container -e LAT="45.83" -e LON="6.86" -e ALT="4807.8" emhass/docker --url YOURHAURLHERE --key YOURHAKEYHERE
-##
-## Docker run Standalone example
-## docker build -t emhass/docker --build-arg build_version=standalone .
-## docker run -it -p 5000:5000 --name emhass-container -v $(pwd)/config_emhass.yaml:/app/config_emhass.yaml -v $(pwd)/secrets_emhass.yaml:/app/secrets_emhass.yaml emhass/docker
+## EMHASS-Add-On Docker 
 
-#build_version options are: addon (default), addon-pip, addon-git, addon-local standalone
+#build_version options are: addon (default), addon-git
 ARG build_version=addon
 ARG BUILD_ARCH
+
+#For addon-git mode (if specified)
+ARG build_repo=https://github.com/davidusb-geek/emhass.git
+ARG build_branch=master
 
 FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 
@@ -70,12 +67,14 @@ ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "h
 #-----------
 #EMHASS-ADD-ON testing with git
 FROM addon as addon-git
+ARG build_repo
+ARG build_branch
 WORKDIR /tmp/
 #Repo
-RUN git clone https://github.com/davidusb-geek/emhass.git
+RUN git clone $build_repo
 WORKDIR /tmp/emhass
 #Branch
-RUN git checkout master
+RUN git checkout $build_branch
 RUN mkdir -p /app/src/emhass/
 RUN mkdir -p /app/data/
 RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/

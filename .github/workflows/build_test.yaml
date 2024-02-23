@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        architecture: [amd64,aarch64,armhf,armv7]
+        architecture: [amd64,aarch64,armv7]
     name: Test action build
     runs-on: ubuntu-latest
     steps:
@@ -20,3 +20,10 @@ jobs:
             --test \
             --${{ matrix.architecture }} \
             --target emhass \
+      - name: Test_Build_armhf
+        uses: home-assistant/builder@master
+        with:
+          args: |        
+            --test \
+            --${{ matrix.architecture }} \
+            --target emhass \      
