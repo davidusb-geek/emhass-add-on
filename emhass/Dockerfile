@@ -1,12 +1,9 @@
-## EMHASS-Add-On Docker 
+## EMHASS-Add-On Docker
 
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
 ARG BUILD_ARCH
 
-#For addon-git mode (if specified)
-ARG build_repo=https://github.com/davidusb-geek/emhass.git
-ARG build_branch=master
 
 FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 
@@ -67,8 +64,8 @@ ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "h
 #-----------
 #EMHASS-ADD-ON testing with git
 FROM addon as addon-git
-ARG build_repo
-ARG build_branch
+ARG build_repo=https://github.com/davidusb-geek/emhass.git
+ARG build_branch=master
 WORKDIR /tmp/
 #Repo
 RUN git clone $build_repo
