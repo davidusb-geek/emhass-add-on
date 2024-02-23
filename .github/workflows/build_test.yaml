@@ -19,11 +19,11 @@ jobs:
           args: |
             --test \
             --${{ matrix.architecture }} \
-            --target emhass \
-      - name: Test_Build_armhf
+            --target emhass
+      - name: Test_Build_armhf #test armhf seperatly 
         uses: home-assistant/builder@master
         with:
           args: |        
             --test \
-            --${{ matrix.architecture }} \
-            --target emhass \      
+            --armhf \
+            --target emhass
