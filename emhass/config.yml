@@ -28,6 +28,7 @@ panel_title: EMHASS
 environment:
   OPTIONS_PATH: '/data/options.json'
   CONFIG_PATH: '/app/config_emhass.yaml'
+  DATA_PATH: '/app/data/'
 options:
   logging_level: INFO
   costfun: profit
