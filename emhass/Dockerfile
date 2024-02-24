@@ -59,7 +59,7 @@ LABEL \
     io.hass.type="addon" \
     io.hass.arch="aarch64|amd64|armhf|armv7"
 
-ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api"]
+ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #-----------
 #EMHASS-ADD-ON testing with git
@@ -80,7 +80,7 @@ RUN cp /tmp/emhass/setup.py /app/
 RUN cp /tmp/emhass/README.md /app/
 WORKDIR /app
 RUN python3 -m pip install --no-cache-dir --break-system-packages -U  .
-ENTRYPOINT [ "python3", "-m", "emhass.web_server","--addon", "True", "--url", "http://supervisor/core/api"]
+ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #check build arguments and build
 FROM ${build_version} AS final
