@@ -15,7 +15,7 @@ _See [Test EMHASS-Add-On build](#Test-EMHASS-Add-On-build) for an example of tes
 
 ## Develop on VS-Code DevContainer with Home Assistant test environment
 
-Using VS-Code DevContainers, you can generate a Home Assistant test environment for the addon before release. We can pull a version of the EMHASS package (required with EMHASS-Add-on) from a Git repo/branch, or via pip. Alternately, we can specify different pre-built EMHASS-Add-On versions _(EMHASS-Add-On Docker images)_ from DockerHub.
+Using VS-Code DevContainers, you can generate a Home Assistant test environment for the Add-on before release. We can pull a version of the EMHASS package (required with EMHASS-Add-on) from a Git repo/branch, or via pip. Alternately, we can specify different pre-built EMHASS-Add-On versions _(EMHASS-Add-On Docker images)_ from DockerHub.
 
 See the following steps:
 
@@ -28,6 +28,7 @@ See the following steps:
     - To specify the Git repo and branch, change lines accordingly in [*build.yaml*](/emhass/build.yaml).
       - repo: `#build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode`
       - branch: `#build_branch: master #addon-git mode`
+
   - pip
     - Change `emhass` version in [requirements.txt](/emhass/requirements.txt) to pull EMHASS via pip version.
       - You may need to modify the other python packages to different versions to match
@@ -38,6 +39,9 @@ See the following steps:
     - Navigate to Home Assistant: `Add-ons` > `ADD-ON STORE`
     - Install/Run and Test Add-on
       - For more infomation see Home Assistant's [local addon testing](https://developers.home-assistant.io/docs/add-ons/testing).
+
+_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, `check for updates` on Add-on Store page, and re-installing._  
+  _If you have chosen Git, also try removing the `emhass` python package from requirements.txt ._
 
 ## Adding EMHASS-Add-on into pre-existing Home Assistant environment
 
@@ -73,7 +77,7 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
         ```
 
 - If you want EMHASS from **Git**:
-  - Tell the addon to use Git, and specify what EMHASS repo and branch you would like to pull.
+  - Tell the Add-on to use Git, and specify what EMHASS repo and branch you would like to pull.
 
     - To tell Docker to pull from Git, change the build argument from `addon` to `addon-git` in the [_build.yaml_](./emhass/build.yaml).
       - ssh example:
@@ -82,7 +86,7 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
         ```
     - To specify the EMHASS Git repository and branch values, _(optional)_ change lines in [*build.yaml*](/emhass/build.yaml):
       - `#build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode`
-      - `#build_branch: master #addon-git mode`
+      - `#build_branch: master #addon-git mode`  _
 
       - ssh example:
 
@@ -93,13 +97,17 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
         sed -i.bak "s%build_repo:\s.*%build_repo: $repo%g"  ~/addons/emhass-add-on/emhass/build.yaml
         sed -i.bak "s/build_branch:\s.*/build_repo: $branch/g"  ~/addons/emhass-add-on/emhass/build.yaml
         ```
-
 - Finally:
   - head to Home Assistant: `Add-ons` > `ADD-ON STORE`
-    - you should see an `EMHASS` addon under `Local add-ons`
+    - you should see an `EMHASS` Add-on under `Local add-ons`
       - If you don't, try hamburger button _(3 dots)_ on top right > check updates > refresh page
-  - Install and test addon
-  - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the addon.
+  - Install and test Add-on
+  - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the Add-on.
+
+</br>
+
+_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, check for updates on Add-on Store page, and re-installing._  
+  _If you have chosen Git, also try removing the emhass python package from requirements.txt ._
 
 ## Test EMHASS-Add-On build
 
