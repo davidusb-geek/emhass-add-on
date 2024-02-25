@@ -1,61 +1,89 @@
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
+## EMHASS-Add-On Docker
 
-# switch working directory
-WORKDIR /usr/src
+#build_version options are: addon (default), addon-git
+ARG build_version=addon
+ARG BUILD_ARCH
 
-# copy the requirements file into the image
-COPY ./requirements.txt /usr/src/requirements.txt
-# COPY ./emhass-0.5.0-py3-none-any.whl /usr/src/emhass-0.5.0-py3-none-any.whl
+
+FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
+
+WORKDIR /app
+COPY requirements.txt /app/
 
 # Setup
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        libffi-dev \
-        python3 \
-        python3-pip \
-        python3-dev \
-        git \
-        build-essential \
-        gcc \
-        coinor-cbc \
-        coinor-libcbc-dev \
-        libglpk-dev \
-        glpk-utils \
-        libhdf5-dev \
-        libhdf5-serial-dev \
-        netcdf-bin \
-        libnetcdf-dev \
-        pkg-config \
-        gfortran \
-        libatlas-base-dev \
+    libffi-dev \
+    python3 \
+    python3-pip \
+    python3-dev \
+    git \
+    build-essential \
+    gcc \
+    coinor-cbc \
+    coinor-libcbc-dev \
+    libglpk-dev \
+    glpk-utils \
+    libhdf5-dev \
+    libhdf5-serial-dev \
+    netcdf-bin \
+    libnetcdf-dev \
+    pkg-config \
+    gfortran \
+    libatlas-base-dev \
     && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
     && export HDF5_DIR=/usr/include/hdf5 \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -U setuptools wheel \
     && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt \
-    # && pip3 install emhass-0.5.0-py3-none-any.whl \
     && apt-get purge -y --auto-remove \
-        python3-pip \
-        python3-dev \
-        git \
-        build-essential \
-        libhdf5-dev \
-        libhdf5-serial-dev \
-        pkg-config \
-        gfortran \
+    gcc \
+    build-essential \
+    libhdf5-dev \
+    libhdf5-serial-dev \
+    pkg-config \
+    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /
 
-# copy contents
-COPY config_emhass.yaml /usr/src
-COPY rootfs /
+#copy config file (on all builds)
+COPY config_emhass.yaml /app/
 
-# Labels
+# Make sure data directory exists
+RUN mkdir -p /app/data/
+
+#-------------------------
+#EMHASS-ADDON Default
+FROM base as addon
+
 LABEL \
-  io.hass.name="emhass" \
-  io.hass.description="EMHASS: Energy Management for Home Assistant" \
-  io.hass.version=${BUILD_VERSION} \
-  io.hass.type="addon" \
-  io.hass.arch="aarch64|amd64|armhf|armv7"
+    io.hass.name="emhass" \
+    io.hass.description="EMHASS: Energy Management for Home Assistant" \
+    io.hass.version=${BUILD_VERSION} \
+    io.hass.type="addon" \
+    io.hass.arch="aarch64|amd64|armhf|armv7"
 
+ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
+
+#-----------
+#EMHASS-ADD-ON testing with git
+FROM addon as addon-git
+ARG build_repo=https://github.com/davidusb-geek/emhass.git
+ARG build_branch=master
+WORKDIR /tmp/
+#Repo
+RUN git clone $build_repo
+WORKDIR /tmp/emhass
+#Branch
+RUN git checkout $build_branch
+RUN mkdir -p /app/src/emhass/
+RUN mkdir -p /app/data/
+RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/
+RUN cp /tmp/emhass/data/opt_res_latest.csv  /app/data/
+RUN cp /tmp/emhass/setup.py /app/
+RUN cp /tmp/emhass/README.md /app/
+WORKDIR /app
+RUN python3 -m pip install --no-cache-dir --break-system-packages -U  .
+ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
+
+#check build arguments and build
+FROM ${build_version} AS final
