@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.0] - 2024-02-25
+### Improvement
+- Thanks to the great work from @GeoDerp we now have a unified/centralized Dockerfile that allows for testing different installation configuration methods in one place. This greatly helps testing, notably emulating the add-on environment. This will improve overall testing for both teh core code and the add-on. Again many thanks!
+- There were also a lot of nice improveements from @GeoDerp to the webui, namely: styling, dynamic table, optimization feedback after button press, logging, a new clear button, etc.
+- From now on we will unify the semantic versioning for both the main core code and the add-on.
+
 ## [0.6.6] - 2024-02-11
 ### Improvement
 - Bumped the webui. Some great new features and styling. Now it is possible to pass data directly as lsit of values when using the buttons in the webui. Thanks to @GeoDerp
@@ -605,6 +611,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.6.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.4
 [0.6.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.5
 [0.6.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.6
+[0.8.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.0
 
 # Notes
 All notable changes to this project will be documented in this file.
