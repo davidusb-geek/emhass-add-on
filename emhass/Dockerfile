@@ -48,9 +48,6 @@ RUN apt-get update \
 #copy config file (on all builds)
 COPY config_emhass.yaml /app/
 
-# Make sure data directory exists
-RUN mkdir -p /app/data/
-
 #-------------------------
 #EMHASS-ADDON Default
 FROM base as addon
