@@ -6,14 +6,16 @@ ARG BUILD_ARCH
 
 FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 
+
+#check if BUILD_ARCH passed by build-arg
+ARG BUILD_ARCH
+ENV BUILD_ARCH=${BUILD_ARCH}
+
 WORKDIR /app
 COPY requirements.txt /app/
 
 #if arch is armhf add armhf package library 
 RUN [[ "${BUILD_ARCH}" == "armhf" ]] && dpkg --add-architecture armhf ; dpkg --remove-architecture armel || echo "not armf"
-
-#check if BUILD_ARCH passed by build-arg
-ENV BUILD_ARCH=${BUILD_ARCH}
 
 #setup
 RUN apt-get update \
@@ -22,12 +24,6 @@ RUN apt-get update \
     python3 \
     python3-pip \
     python3-dev \
-    coinor-cbc \
-    coinor-libcbc-dev \
-    libglpk-dev \
-    glpk-utils \
-    libatlas-base-dev \
-    libopenblas-dev \
     git \
     gcc \
     patchelf \
@@ -40,7 +36,13 @@ RUN apt-get update \
     pkg-config \
     gfortran \
     netcdf-bin \
-    libnetcdf-dev
+    libnetcdf-dev \
+    coinor-cbc \
+    coinor-libcbc-dev \
+    libglpk-dev \
+    glpk-utils \
+    libatlas-base-dev \
+    libopenblas-dev
 RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include 
 RUN export HDF5_DIR=/usr/include/hdf5 
 
