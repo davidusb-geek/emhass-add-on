@@ -13,7 +13,7 @@ COPY requirements.txt /app/
 RUN [[ "${BUILD_ARCH}" == "armhf" ]] && dpkg --add-architecture armhf ; dpkg --remove-architecture armel || echo "not armf"
 
 #check if BUILD_ARCH passed by build-arg
-ENV BUILD_ARCH=${BUILD_ARCH:?}
+ENV BUILD_ARCH=${BUILD_ARCH}
 
 #setup
 RUN apt-get update \
