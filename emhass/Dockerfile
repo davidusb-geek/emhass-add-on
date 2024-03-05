@@ -3,13 +3,12 @@
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
 #BUILD_ARCH, HA equivalent to TARGETARCH
-ARG BUILD_ARCH
-#os_version 
-    #armhf = raspbian
-    #amd64, armv7, aarch64 = debian
-ARG os_version=debian 
+ARG BUILD_ARCH  
+#BUILD_FROM, os_version equivalent
+ARG BUILD_FROM
 
-FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
+
+FROM ghcr.io/home-assistant/$BUILD_ARCH-base-$BUILD_FROM:bookworm AS base
 
 
 #check if BUILD_ARCH passed by build-arg

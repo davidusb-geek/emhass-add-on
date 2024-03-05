@@ -1,3 +1,8 @@
+build_from: #choose between debian or raspbian images
+  armhf: raspbian
+  aarch64: debian
+  amd64: debian
+  armv7: debian
 args:
   build_version: addon
   build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode
