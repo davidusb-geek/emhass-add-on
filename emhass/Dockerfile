@@ -2,7 +2,12 @@
 
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
+#BUILD_ARCH, HA equivalent to TARGETARCH
 ARG BUILD_ARCH
+#os_version 
+    #armhf = raspbian
+    #amd64, armv7, aarch64 = debian
+ARG os_version=debian 
 
 FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 
@@ -11,13 +16,11 @@ FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 ARG BUILD_ARCH
 ENV BUILD_ARCH=${BUILD_ARCH}
 
+
 WORKDIR /app
 COPY requirements.txt /app/
 
-#if arch is armhf add armhf package library 
-RUN [[ "${BUILD_ARCH}" == "armhf" ]] && dpkg --add-architecture armhf ; dpkg --remove-architecture armel || echo "not armf"
-
-#setup
+#apt package install
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     libffi-dev \
@@ -42,12 +45,12 @@ RUN apt-get update \
     libglpk-dev \
     glpk-utils \
     libatlas-base-dev \
-    libopenblas-dev
+    libopenblas-dev 
 RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include 
 RUN export HDF5_DIR=/usr/include/hdf5 
 
 #install packages from pip, use piwheels if arm
-RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7" ]] &&  pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt ||  pip3 install --no-cache-dir --break-system-packages -r requirements.txt 
+RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7" ]] &&  pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt ||  pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 #remove build only packages
 RUN apt-get purge -y --auto-remove \
@@ -58,8 +61,6 @@ RUN apt-get purge -y --auto-remove \
     meson \
     ninja-build \
     build-essential \
-    libhdf5-dev \
-    libhdf5-serial-dev \
     pkg-config \
     gfortran \
     netcdf-bin \
@@ -71,7 +72,7 @@ RUN apt-get purge -y --auto-remove \
 COPY config_emhass.yaml /app/
 
 #-------------------------
-#EMHASS-ADDON Default
+#EMHASS-ADDON Default (EMHASS from requirements)
 FROM base as addon
 
 LABEL \
@@ -101,7 +102,7 @@ RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/
 RUN cp /tmp/emhass/setup.py /app/
 RUN cp /tmp/emhass/README.md /app/
 WORKDIR /app
-RUN python3 -m pip install --no-cache-dir --break-system-packages -U  .
+RUN pip3 install --no-cache-dir --break-system-packages --no-deps --force-reinstall  .
 ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #check build arguments and build
