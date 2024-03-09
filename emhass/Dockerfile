@@ -1,5 +1,4 @@
 ## EMHASS-Add-On Docker
-
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
 #see build.yaml for all docker images according to host architecture
@@ -44,15 +43,14 @@ RUN apt-get update \
 #specify hdf5
 RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include && export HDF5_DIR=/usr/include/hdf5
 
-#install packages from pip, use piwheels if arm
+#install packages from pip, use piwheels if arm 32bit
 RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7" ]] &&  pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt ||  pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
-#try symlink apt cbc to pulp cbc in python directory (for 32bit)
-RUN [[ "${BUILD_ARCH}" == "armhf" ]] &&  ln -sf /usr/bin/cbc /usr/local/lib/python3.11/dist-packages/pulp/solverdir/cbc/linux/32/cbc || echo "cbc symlink didnt work/not required"
+#try, symlink apt cbc, to pulp cbc, in python directory (for 32bit)
+RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7"  ]] &&  ln -sf /usr/bin/cbc /usr/local/lib/python3.11/dist-packages/pulp/solverdir/cbc/linux/32/cbc || echo "cbc symlink didnt work/not required"
 
-#if armv7 try install libatomic1 to fix scipy issue
+#if armv7, try install libatomic1 to fix scipy issue
 RUN [[ "${BUILD_ARCH}" == "armv7" ]] && apt-get update && apt-get install libatomic1 || echo "libatomic1 cant be installed"
-
 
 #remove build only packages
 RUN apt-get purge -y --auto-remove \
@@ -74,7 +72,7 @@ RUN apt-get purge -y --auto-remove \
 COPY config_emhass.yaml /app/
 
 #-------------------------
-#EMHASS-ADDON Default (EMHASS from requirements)
+#EMHASS-Add-on Default
 FROM base as addon
 
 LABEL \
@@ -87,7 +85,7 @@ LABEL \
 ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #-----------
-#EMHASS-ADD-ON testing with git
+#EMHASS-Add-on  testing with git
 FROM addon as addon-git
 ARG build_repo=https://github.com/davidusb-geek/emhass.git
 ARG build_branch=master
