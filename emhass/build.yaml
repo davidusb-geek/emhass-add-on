@@ -1,8 +1,8 @@
 build_from: #choose between debian or raspbian images
-  armhf: raspbian
-  aarch64: debian
-  amd64: debian
-  armv7: debian
+  amd64: ghcr.io/home-assistant/amd64-base-debian:bookworm
+  armhf: ghcr.io/home-assistant/armhf-base-raspbian:bookworm
+  armv7: ghcr.io/home-assistant/armv7-base-debian:bookworm
+  aarch64: ghcr.io/home-assistant/aarch64-base-debian:bookworm
 args:
   build_version: addon
   build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode

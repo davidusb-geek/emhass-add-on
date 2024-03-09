@@ -2,14 +2,10 @@
 
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
-#BUILD_ARCH, HA equivalent to TARGETARCH
-ARG BUILD_ARCH  
-#BUILD_FROM, os_version equivalent
+#see build.yaml for all docker images according to host architecture
 ARG BUILD_FROM
 
-
-FROM ghcr.io/home-assistant/$BUILD_ARCH-base-$BUILD_FROM:bookworm AS base
-
+FROM ${BUILD_FROM} AS base
 
 #check if BUILD_ARCH passed by build-arg
 ARG BUILD_ARCH
@@ -44,14 +40,19 @@ RUN apt-get update \
     libglpk-dev \
     glpk-utils \
     libatlas-base-dev \
-    libopenblas-dev 
+    libopenblas-dev
 #specify hdf5
 RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include && export HDF5_DIR=/usr/include/hdf5
-#try symlink apt cbc to pulp python directory
-RUN ln -sf /usr/bin/cbc /usr/local/lib/python3.11/dist-packages/pulp/solverdir/cbc/linux/32/cbc || echo "cbc link didnt work"
 
 #install packages from pip, use piwheels if arm
 RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7" ]] &&  pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt ||  pip3 install --no-cache-dir --break-system-packages -r requirements.txt
+
+#try symlink apt cbc to pulp cbc in python directory (for 32bit)
+RUN [[ "${BUILD_ARCH}" == "armhf" ]] &&  ln -sf /usr/bin/cbc /usr/local/lib/python3.11/dist-packages/pulp/solverdir/cbc/linux/32/cbc || echo "cbc symlink didnt work/not required"
+
+#if armv7 try install libatomic1 to fix scipy issue
+RUN [[ "${BUILD_ARCH}" == "armv7" ]] && apt-get update && apt-get install libatomic1 || echo "libatomic1 cant be installed"
+
 
 #remove build only packages
 RUN apt-get purge -y --auto-remove \
