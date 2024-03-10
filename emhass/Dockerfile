@@ -85,7 +85,7 @@ LABEL \
 ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #-----------
-#EMHASS-Add-on  testing with git
+#EMHASS-Add-on testing with git
 FROM addon as addon-git
 ARG build_repo=https://github.com/davidusb-geek/emhass.git
 ARG build_branch=master
