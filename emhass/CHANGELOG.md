@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.2] - 2024-03-10
+### Improvement
+- Proposed a new solution to survive DST using special option of Pandas `round` method
+- Added option to `web_server` to init `data_path` as an options param
+- Styling docs and html files on webui
+- Advanced and basic pages improvements on webui
+### Fix
+- Fixed support for ARM achitectures
+
 ## [0.8.1] - 2024-02-28
 ### Improvement
 - Improved documentation
@@ -619,6 +628,8 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.6.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.5
 [0.6.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.6
 [0.8.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.0
+[0.8.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.1
+[0.8.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.2
 
 # Notes
 All notable changes to this project will be documented in this file.
