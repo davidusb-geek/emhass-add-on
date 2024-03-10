@@ -1,16 +1,20 @@
 ## EMHASS-Add-On Docker
-
 #build_version options are: addon (default), addon-git
 ARG build_version=addon
+#see build.yaml for all docker images according to host architecture
+ARG BUILD_FROM
+
+FROM ${BUILD_FROM} AS base
+
+#check if BUILD_ARCH passed by build-arg
 ARG BUILD_ARCH
+ENV BUILD_ARCH=${BUILD_ARCH}
 
-
-FROM ghcr.io/home-assistant/$BUILD_ARCH-base-debian:bookworm AS base
 
 WORKDIR /app
 COPY requirements.txt /app/
 
-# Setup
+#apt package install
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     libffi-dev \
@@ -18,30 +22,49 @@ RUN apt-get update \
     python3-pip \
     python3-dev \
     git \
-    build-essential \
     gcc \
+    patchelf \
+    cmake \
+    meson \
+    ninja-build \
+    build-essential \
+    libhdf5-dev \
+    libhdf5-serial-dev \
+    pkg-config \
+    gfortran \
+    netcdf-bin \
+    libnetcdf-dev \
     coinor-cbc \
     coinor-libcbc-dev \
     libglpk-dev \
     glpk-utils \
-    libhdf5-dev \
-    libhdf5-serial-dev \
+    libatlas-base-dev \
+    libopenblas-dev
+#specify hdf5
+RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include && export HDF5_DIR=/usr/include/hdf5
+
+#install packages from pip, use piwheels if arm 32bit
+RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7" ]] &&  pip3 install --index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt ||  pip3 install --no-cache-dir --break-system-packages -r requirements.txt
+
+#try, symlink apt cbc, to pulp cbc, in python directory (for 32bit)
+RUN [[ "${BUILD_ARCH}" == "armhf" || "${BUILD_ARCH}" == "armv7"  ]] &&  ln -sf /usr/bin/cbc /usr/local/lib/python3.11/dist-packages/pulp/solverdir/cbc/linux/32/cbc || echo "cbc symlink didnt work/not required"
+
+#if armv7, try install libatomic1 to fix scipy issue
+RUN [[ "${BUILD_ARCH}" == "armv7" ]] && apt-get update && apt-get install libatomic1 || echo "libatomic1 cant be installed"
+
+#remove build only packages
+RUN apt-get purge -y --auto-remove \
+    git \
+    gcc \
+    patchelf \
+    cmake \
+    meson \
+    ninja-build \
+    build-essential \
+    pkg-config \
+    gfortran \
     netcdf-bin \
     libnetcdf-dev \
-    pkg-config \
-    gfortran \
-    libatlas-base-dev \
-    && ln -s /usr/include/hdf5/serial /usr/include/hdf5/include \
-    && export HDF5_DIR=/usr/include/hdf5 \
-    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -U setuptools wheel \
-    && pip3 install --extra-index-url=https://www.piwheels.org/simple --no-cache-dir --break-system-packages -r requirements.txt \
-    && apt-get purge -y --auto-remove \
-    gcc \
-    build-essential \
-    libhdf5-dev \
-    libhdf5-serial-dev \
-    pkg-config \
-    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -49,7 +72,7 @@ RUN apt-get update \
 COPY config_emhass.yaml /app/
 
 #-------------------------
-#EMHASS-ADDON Default
+#EMHASS-Add-on Default
 FROM base as addon
 
 LABEL \
@@ -62,7 +85,7 @@ LABEL \
 ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #-----------
-#EMHASS-ADD-ON testing with git
+#EMHASS-Add-on  testing with git
 FROM addon as addon-git
 ARG build_repo=https://github.com/davidusb-geek/emhass.git
 ARG build_branch=master
@@ -79,7 +102,7 @@ RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/
 RUN cp /tmp/emhass/setup.py /app/
 RUN cp /tmp/emhass/README.md /app/
 WORKDIR /app
-RUN python3 -m pip install --no-cache-dir --break-system-packages -U  .
+RUN pip3 install --no-cache-dir --break-system-packages --no-deps --force-reinstall  .
 ENTRYPOINT python3 -m emhass.web_server --addon True --url http://supervisor/core/api --key $SUPERVISOR_TOKEN
 
 #check build arguments and build
