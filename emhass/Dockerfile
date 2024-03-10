@@ -54,7 +54,6 @@ RUN [[ "${BUILD_ARCH}" == "armv7" ]] && apt-get update && apt-get install libato
 
 #remove build only packages
 RUN apt-get purge -y --auto-remove \
-    git \
     gcc \
     patchelf \
     cmake \
