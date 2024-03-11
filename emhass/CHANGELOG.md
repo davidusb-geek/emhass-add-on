@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.3] - 2024-03-11
+### Fix
+- Fixed web_server options_json bug in standalone fix 
+
 ## [0.8.2] - 2024-03-10
 ### Improvement
 - Proposed a new solution to survive DST using special option of Pandas `round` method
@@ -630,6 +634,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 [0.8.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.0
 [0.8.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.1
 [0.8.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.2
+[0.8.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.3
 
 # Notes
 All notable changes to this project will be documented in this file.
