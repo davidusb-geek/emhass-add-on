@@ -49,10 +49,10 @@ configuration:
     description: (Default -0.9). This is the power variation in percentage of battery maximum power.
   weight_battery_discharge:
     name: weight_battery_discharge, A weight to the cost function for battery discharge
-    description: (Default 1.0). This is an additional weight applied in cost function to battery usage for discharge.
+    description: (Default 0.0). This is an additional weight (currency/ kWh) applied in cost function to battery usage for discharge.
   weight_battery_charge:
     name: weight_battery_charge, A weight to the cost function for battery charge
-    description: (Default 1.0). This is an additional weight applied in cost function to battery usage for charge.
+    description: (Default 0.0). This is an additional weight (currency/ kWh) applied in cost function to battery usage for charge.
   load_forecast_method:
     name: load_forecast_method, The load forecast method
     description: (Default naive). The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
