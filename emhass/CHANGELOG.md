@@ -1,10 +1,18 @@
 # Changelog
 
-## [0.8.3] - 2024-03-11
+## 0.8.4 - 2024-03-13
+### Improvement
+- Improved documentation
+- Improved logging errors on missing day info
+### Fix
+- Missing round treatment for DST survival in utils.py 
+- Webui large icons fix
+
+## 0.8.3 - 2024-03-11
 ### Fix
 - Fixed web_server options_json bug in standalone fix 
 
-## [0.8.2] - 2024-03-10
+## 0.8.2 - 2024-03-10
 ### Improvement
 - Proposed a new solution to survive DST using special option of Pandas `round` method
 - Added option to `web_server` to init `data_path` as an options param
@@ -13,41 +21,41 @@
 ### Fix
 - Fixed support for ARM achitectures
 
-## [0.8.1] - 2024-02-28
+## 0.8.1 - 2024-02-28
 ### Improvement
 - Improved documentation
 ### Fix
 - Persistent data storage fix
 - Docker Standalone Publish Workspace Fix
 
-## [0.8.0] - 2024-02-25
+## 0.8.0 - 2024-02-25
 ### Improvement
 - Thanks to the great work from @GeoDerp we now have a unified/centralized Dockerfile that allows for testing different installation configuration methods in one place. This greatly helps testing, notably emulating the add-on environment. This will improve overall testing for both teh core code and the add-on. Again many thanks!
 - There were also a lot of nice improveements from @GeoDerp to the webui, namely: styling, dynamic table, optimization feedback after button press, logging, a new clear button, etc.
 - From now on we will unify the semantic versioning for both the main core code and the add-on.
 
-## [0.6.6] - 2024-02-11
+## 0.6.6 - 2024-02-11
 ### Improvement
 - Bumped the webui. Some great new features and styling. Now it is possible to pass data directly as lsit of values when using the buttons in the webui. Thanks to @GeoDerp
 - Added two additional testing environment options. Thanks to @GeoDerp
 ### Fix
 - Bump markupsafe from 2.1.4 to 2.1.5
 
-## [0.6.5] - 2024-02-06
+## 0.6.5 - 2024-02-06
 ### Fix
 - Fixed number of startups constraint for deferrable load at the begining of the optimization period
 - Fixed list of bools from options.json
 - Fixed some testing and debugging scripts
 
-## [0.6.4] - 2024-02-04
+## 0.6.4 - 2024-02-04
 ### Fix
 - Following new patch on "perform_backtest": "false" has no effect
 
-## [0.6.3] - 2024-02-04
+## 0.6.3 - 2024-02-04
 ### Fix
 - Fixed broken build params method. Reverting back to alternate PR from @GeoDerp
 
-## [0.6.2] - 2024-02-04
+## 0.6.2 - 2024-02-04
 Following update of EMHASS code v0.7.3
 ### Fix
 - Fixed bug when booleans, solving "perform_backtest": "false" has no effect
@@ -56,10 +64,10 @@ Following update of EMHASS code v0.7.3
 - Solved issue passing solcast and solar.forecast runtime params 
 - Updated documentation requirements
 
-## [0.6.1] - 2024-01-30
+## 0.6.1 - 2024-01-30
 Patched new version with bug fixes on ptahs and missing list types
 
-## [0.6.0] - 2024-01-28
+## 0.6.0 - 2024-01-28
 Following update of EMHASS code v0.7.1
 ### Improvement
 - Added a new feature to provide operating time windows for deferrable loads. Thanks to @michaelpiron
@@ -74,7 +82,7 @@ Following update of EMHASS code v0.7.1
 - Renamed classes to conform to PEP8
 - Bump markupsafe from 2.1.3 to 2.1.4 
 
-## [0.5.4] - 2023-12-19
+## 0.5.4 - 2023-12-19
 Following update of EMHASS code v0.6.2
 ### Improvement
 - Added option to pass additional weight for battery usage
@@ -82,20 +90,20 @@ Following update of EMHASS code v0.6.2
 ### Fix
 - Updated optimization constraints to solve conflict for `set_def_constant` and `treat_def_as_semi_cont` cases
 
-## [0.5.3] - 2023-12-19
+## 0.5.3 - 2023-12-19
 ### Fix
 - Stepping down to Python 3.9 for ARMHF architectures.
 
-## [0.5.2] - 2023-12-18
+## 0.5.2 - 2023-12-18
 ### Fix
 - Fixes following update of EMHASS code v0.6.1
 - Added --break-system-packages option to buil docker image to solve for PEP 668
 
-## [0.5.1] - 2023-12-17
+## 0.5.1 - 2023-12-17
 ### Fix
 - Patching v0.5.0. Updated to Python 3.11 using bookworm debian version
 
-## [0.5.0] - 2023-12-17
+## 0.5.0 - 2023-12-17
 Improvements and fixes following update of EMHASS code v0.6.0
 ### Improvement
 - Now Python 3.11 is fully supported, thanks to @pail23
@@ -114,11 +122,11 @@ Improvements and fixes following update of EMHASS code v0.6.0
   - Get locations from environment in non-app mode
   - Tolerate running directly from source
 
-## [0.4.2] - 2023-10-19
+## 0.4.2 - 2023-10-19
 ### Fix
 - Updated requirements.txt with skforecast 0.10.1
 
-## [0.4.1] - 2023-10-19
+## 0.4.1 - 2023-10-19
 Improvements and fixes following update of EMHASS code v0.5.1
 ### Improvement
 - Improved documentation, thanks to @g1za
@@ -128,7 +136,7 @@ Improvements and fixes following update of EMHASS code v0.5.1
 - Updated automated tesing, dropped support for Python 3.8
 - Patched config for bad hour formatting preventing add-on to start, thanks to @jatty
 
-## [0.4.0] - 2023-09-03
+## 0.4.0 - 2023-09-03
 Improvements and fixes following update of EMHASS code v0.5.0
 ### Improvement
 - Finally added support for ingress thanks to the work from @siku2
@@ -136,7 +144,7 @@ Improvements and fixes following update of EMHASS code v0.5.0
 ### Fix
 - Added some code to fix some numerical syntax issues in tables
 
-## [0.3.16] - 2023-08-11
+## 0.3.16 - 2023-08-11
 Improvements and fixes following update of EMHASS code v0.4.15
 ### Improvement
 - Bumped pvlib to 0.10.1
@@ -144,7 +152,7 @@ Improvements and fixes following update of EMHASS code v0.4.15
 ### Fix
 - Fixed error message on utils.py
 
-## [0.3.15] - 2023-07-17
+## 0.3.15 - 2023-07-17
 Improvements and fixes following update of EMHASS code v0.4.14
 ### Improvement
 - Bumped skforecast to latest 0.9.1.
@@ -152,7 +160,7 @@ Improvements and fixes following update of EMHASS code v0.4.14
 ### Fix
 - Fix rounding for price & cost forecasts by @purcell-lab
 
-## [0.3.14] - 2023-06-29
+## 0.3.14 - 2023-06-29
 Improvements and fixes following update of EMHASS code v0.4.13
 ### Improvement
 - Added support for data reconstruction when missing values on last window for ML forecaster prediction.
@@ -163,7 +171,7 @@ Improvements and fixes following update of EMHASS code v0.4.13
 - Bump myst-parser from 1.0.0 to 2.0.0
 - Fixed missing attributes is the sensors when using the custom IDs.
 
-## [0.3.13] - 2023-06-03
+## 0.3.13 - 2023-06-03
 Improvements and fixes following update of EMHASS code v0.4.12
 ### Improvement
 - Added forecasts for unit_prod_price and unit_load_cost.
@@ -171,15 +179,15 @@ Improvements and fixes following update of EMHASS code v0.4.12
 ### Fix
 - Bump skforecast from 0.8.0 to 0.8.1
 
-## [0.3.12] - 2023-05-30
+## 0.3.12 - 2023-05-30
 ### Fix
 - Updated the EMHASS config.yaml template with missing entries.
 
-## [0.3.11] - 2023-05-29
+## 0.3.11 - 2023-05-29
 ### Fix
 - Fixed error in type entry on add-on config.yaml.
 
-## [0.3.10] - 2023-05-27
+## 0.3.10 - 2023-05-27
 Improvements and fixes following update of EMHASS code v0.4.11
 ### Improvement
 - Adding new constraints to limit the dynamics (kW/sec) of deferrable loads and battery power. The LP formulation works correctly and a work should be done on integrating the user input parameters to control this functionality.
@@ -189,14 +197,14 @@ Improvements and fixes following update of EMHASS code v0.4.11
 - Bumped version of skforecast from 0.6.0 to 0.8.0. Doing this mainly implies changing how the exogenous data is passed to fit and predict methods.
 - Fixed wrong path for csv files when using load cost and prod price forecasts.
 
-## [0.3.9] - 2023-05-21
+## 0.3.9 - 2023-05-21
 ### Fix
 - Following update of EMHASS code v0.4.10
 - Fixed wrong name of new cost sensor.
 - Fixed units of measurements of costs to €/kWh.
 - Added color sequence to plot figures, now avery line should be plotted with a different color.
 
-## [0.3.8] - 2023-05-20
+## 0.3.8 - 2023-05-20
 ### Fix
 - Following update of EMHASS code v0.4.9
 - Updated default value for total number of days for ML model training.
@@ -204,39 +212,39 @@ Improvements and fixes following update of EMHASS code v0.4.11
 - Improved docs intro.
 - Bump myst-parser from 0.18.1 to 1.0.0
 
-## [0.3.7] - 2023-03-17
+## 0.3.7 - 2023-03-17
 ### Fix
 - Fixed to correct index length for ML forecaster prediction series.
 
-## [0.3.6] - 2023-03-16
+## 0.3.6 - 2023-03-16
 ### Fix
 - Fixed wrong path for saved ML forecaster model.
 - Fixed wrong column name for var_load when using predict with ML forecaster.
 
-## [0.3.5] - 2023-03-10
+## 0.3.5 - 2023-03-10
 ### Fix
 - Fixed default behavior for passed data.
 - Added a new graph for tune results.
 
-## [0.3.4] - 2023-03-10
+## 0.3.4 - 2023-03-10
 ### Fix
 - Fixed missing emhass module.
 
-## [0.3.3] - 2023-03-09
+## 0.3.3 - 2023-03-09
 ### Fix
 - Added missing possibility to set the method for load forecast to 'mlforecaster'.
 - Fixed logging formatting.
 
-## [0.3.2] - 2023-03-09
+## 0.3.2 - 2023-03-09
 ### Fix
 - Fixed logging.
 - Fixed missing module on docker standalone mode.
 
-## [0.3.1] - 2023-03-07
+## 0.3.1 - 2023-03-07
 ### Fix
 - Fixed handling of default passed params.
 
-## [0.3.0] - 2023-03-06
+## 0.3.0 - 2023-03-06
 The new machine learning forecast module is here! Check the updated documentation with the dedicated section here: [https://emhass.readthedocs.io/en/latest/mlforecaster.html](https://emhass.readthedocs.io/en/latest/mlforecaster.html)
 
 ### Improvement
@@ -253,34 +261,34 @@ The new machine learning forecast module is here! Check the updated documentatio
 - Refactored images in documentation, now using only SVG for plotly figures.
 - Bumped requirements to latest non-conflicting versions.
 
-## [0.2.29] - 2023-01-31
+## 0.2.29 - 2023-01-31
 ### Fix
 - Fixed access to injection_dict for the first time that emhass is used.
 - Fixed message handling from request module.
 
-## [0.2.28] - 2023-01-30
+## 0.2.28 - 2023-01-30
 ### Fix
 - Fixed more bugs with paths, now using the official pathlib everywhere.
 
-## [0.2.27] - 2023-01-30
+## 0.2.27 - 2023-01-30
 ### Fix
 - Fixed bugs on handling data folder name.
 - Add-on now suvives restarts properly.
 - Improved warning messages when passing list of values with items detected as non digits.
 
-## [0.2.26] - 2023-01-29
+## 0.2.26 - 2023-01-29
 ### Improvement
 - Implemented data storage to survive add-on restarts.
 
-## [0.2.25] - 2023-01-27
+## 0.2.25 - 2023-01-27
 ### Fix
 - Fixed dependencies, uniform working versions of Numpy, Pandas and Tables.
 
-## [0.2.24] - 2023-01-26
+## 0.2.24 - 2023-01-26
 ### Improvement
 - Following new fixes and improvements on emhass v0.3.23
 
-## [0.2.23] - 2022-11-05
+## 0.2.23 - 2022-11-05
 ### Improvement
 - Following new fixes on emhass v0.3.21
 - Improved docstrings
@@ -289,7 +297,7 @@ The new machine learning forecast module is here! Check the updated documentatio
 ### Fix
 - Fixing interpolation for Forecast.Solar data
 
-## [0.2.22] - 2022-10-05
+## 0.2.22 - 2022-10-05
 ### Improvement
 - Following new fixes on emhass v0.3.20
 - Added more detailed examples to the forecast module documentation.
@@ -298,13 +306,13 @@ The new machine learning forecast module is here! Check the updated documentatio
 - Added missing unittests for forecast module with request.get dependencies using MagicMock.
 - Added the Solar.Forecast method.
 
-## [0.2.21] - 2022-09-14
+## 0.2.21 - 2022-09-14
 ### Fix
 - Updated default values for a working LP solver.
 - Removed option to provide a custom web ui url.
 - Following new fixes on emhass v0.3.19
 
-## [0.2.20] - 2022-08-27
+## 0.2.20 - 2022-08-27
 ### Improvement
 - Improving documentation, added more information on forecast page.
 - Added support for SolCast PV production forecasts. 
@@ -313,13 +321,13 @@ The new machine learning forecast module is here! Check the updated documentatio
 ### Fix
 - Fixed small bug on webserver using pandas sum function for non numeric data. This was throwing the following message: Dropping of nuisance columns in DataFrame reductions (with 'numeric_only=None') is deprecated.
 
-## [0.2.19] - 2022-06-12
+## 0.2.19 - 2022-06-12
 ### Fix
 - Following new fixes on emhass v0.3.17
 - Fixed wrong variables names for mixed forecasts.
 - Fixed handling of load sensor name in command line setup function.
 
-## [0.2.18] - 2022-06-10
+## 0.2.18 - 2022-06-10
 ### Improvement
 - Following new improvements on emhass v0.3.16
 - Improving documentation, added "what is this" section and added some infographics.
@@ -327,87 +335,87 @@ The new machine learning forecast module is here! Check the updated documentatio
 - Added publish of sensors for p_grid_forecast & total value of cost function.
 - Implemented now/current value forecast correction when using MPC.
 
-## [0.2.17] - 2022-06-06
+## 0.2.17 - 2022-06-06
 ### Fix
 - Following new fixes on emhass v0.3.15
 
-## [0.2.16] - 2022-06-05
+## 0.2.16 - 2022-06-05
 ### Fix
 - Following new improvements and fixes on emhass v0.3.14
 
-## [0.2.15] - 2022-05-30
+## 0.2.15 - 2022-05-30
 ### Improvement
 - Following new improvements and fixes on emhass v0.3.12
 
-## [0.2.14] - 2022-05-23
+## 0.2.14 - 2022-05-23
 ### Improvement
 - Following new improvements on emhass v0.3.11
 
-## [0.2.13] - 2022-05-19
+## 0.2.13 - 2022-05-19
 ### Fix
 - Added correct config file.
 
-## [0.2.12] - 2022-05-19
+## 0.2.12 - 2022-05-19
 ### Fix
 - Following fixes on emhass v0.3.9
 
-## [0.2.11] - 2022-05-17
+## 0.2.11 - 2022-05-17
 ### Fix
 - Following fixes on emhass v0.3.8
 - Fixing more problems when loading passed data as lists.
 
-## [0.2.10] - 2022-05-16
+## 0.2.10 - 2022-05-16
 ### Fix
 - Following fixes on emhass v0.3.6
 - Properly unittested the MPC implementation.
 
-## [0.2.9] - 2022-05-16
+## 0.2.9 - 2022-05-16
 ### Fix
 - Following fixes on emhass v0.3.5
 
-## [0.2.8] - 2022-05-16
+## 0.2.8 - 2022-05-16
 ### Fix
 - Following fixes on emhass v0.3.4
 
-## [0.2.7] - 2022-05-16
+## 0.2.7 - 2022-05-16
 ### Fix
 - Fix small error in run args, following PR.
 
-## [0.2.6] - 2022-05-15
+## 0.2.6 - 2022-05-15
 ### Fix
 - Following emhass v0.3.3. Template package loading should be solved.
 
-## [0.2.5] - 2022-05-14
+## 0.2.5 - 2022-05-14
 ### Fix
 - Added 777 chmod permission to run file.
 
-## [0.2.4] - 2022-05-14
+## 0.2.4 - 2022-05-14
 ### Fix
 - Trying to fix s6 overlay issues.
 
-## [0.2.3] - 2022-05-13
+## 0.2.3 - 2022-05-13
 ### Fix
 - Trying to fix current problem using init=false in config.
 
-## [0.2.2] - 2022-05-13
+## 0.2.2 - 2022-05-13
 ### Fix
 - Following fixes on emhass v0.3.2
 
-## [0.2.1] - 2022-05-13
+## 0.2.1 - 2022-05-13
 ### Fix
 - Following fixes on emhass v0.3.1
 
-## [0.2.0] - 2022-05-13
+## 0.2.0 - 2022-05-13
 ### Improvement
 - New version of this add-on following revamping of emhass core module and release v0.3.0
 - Moved the webserver to the core emhass module for easier development.
 - Added Model Predictive Control optimization.
 
-## [0.1.42] - 2022-05-05
+## 0.1.42 - 2022-05-05
 ### Fix
 - Fixed issue on correct defferable load total energy computation, following emhass v0.2.14.
 
-## [0.1.41] - 2022-05-04
+## 0.1.41 - 2022-05-04
 ### Improvement
 - Added support for semi-continuous deferrable loads.
 - Changed to plotting using stairs.
@@ -415,111 +423,111 @@ The new machine learning forecast module is here! Check the updated documentatio
 ### Fix
 - Fixed issue on add-on installing caused by changed parameter type to strings.
 
-## [0.1.40] - 2022-05-01
+## 0.1.40 - 2022-05-01
 ### Improvement
 - Added support to pass list of PV plant parameters. This will enable to simulate mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 ### Fix
 - Fixed issue computing correct final cost values. Updated to EMHASS >> v0.2.13
 
-## [0.1.39] - 2022-04-29
+## 0.1.39 - 2022-04-29
 ### Improvement
 - Added new parameter to consider that all PV power is injected to the grid.
 ### Fix
 - Updated to core emhass module v0.2.12.
 
-## [0.1.38] - 2022-04-28
+## 0.1.38 - 2022-04-28
 ### Fix
 - Updated to core emhass module v0.2.11.
 - Improved automated docker image publish. Now building each architecture separately.
 
-## [0.1.37] - 2022-04-26
+## 0.1.37 - 2022-04-26
 ### Fix
 - Solving six module not found issue.
 
-## [0.1.36] - 2022-04-26
+## 0.1.36 - 2022-04-26
 ### Fix
 - Added gfortran to try solve netcdf4 builds on armv7 arch.
 - Updated version of core emhass to solve faulty forecast from list problem.
 
-## [0.1.35] - 2022-04-25
+## 0.1.35 - 2022-04-25
 ### Fix
 - Added pkg-config and python3-h5py to try solve netcdf4 builds on armv7 arch.
 
-## [0.1.34] - 2022-04-25
+## 0.1.34 - 2022-04-25
 ### Fix
 - Added missing libhdf5-dev, libhdf5-serial-dev, netcdf-bin and libnetcdf-dev to try solve netcdf4 builds on armv7 arch.
 
-## [0.1.33] - 2022-04-25
+## 0.1.33 - 2022-04-25
 ### Fix
 - Fixed error on if condition for correct list lengths.
 - Added hdf5-helpers and hdf5-tools to try solve netcdf4 builds on armv7 arch.
 
-## [0.1.32] - 2022-04-25
+## 0.1.32 - 2022-04-25
 ### Fix
 - Fixed wrong logs when passing forecasts lists.
 - Updated netcdf4 version to 1.5.4 probably fixing builds on armv7 arch.
 
-## [0.1.31] - 2022-04-24
+## 0.1.31 - 2022-04-24
 ### Fix
 - Reinstated build.yaml for automatic image builder.
 
-## [0.1.30] - 2022-04-24
+## 0.1.30 - 2022-04-24
 ### Fix
 - Fixing presumed problems with falsk caching module. Now using just simple pickle object save/load.
 - Added fixed image name for automated docker images pubishing.
 
-## [0.1.29] - 2022-04-23
+## 0.1.29 - 2022-04-23
 ### Improvement
 - Added automated publish of add-on images using github actions.
 
-## [0.1.28] - 2022-04-23
+## 0.1.28 - 2022-04-23
 ### Improvement
 - Prepared for using a production WSGI server.
 - Rearranged app_server functions for better code visibility.
 ### Fix
 - Fixed return problems, dropped using jinja2, now using directly Flask render_template method.
 
-## [0.1.27] - 2022-04-21
+## 0.1.27 - 2022-04-21
 ### Fix
 - Fixing flask redirects and correct response returns.
 - Updated to new emhass version using now pandas get_indexer method.
 
-## [0.1.26] - 2022-04-21
+## 0.1.26 - 2022-04-21
 ### Fix
 - Fixed missing imports in flask app.
 
-## [0.1.25] - 2022-04-21
+## 0.1.25 - 2022-04-21
 ### Fix
 - Fixed error using flask returns. It was not using redirect and url_for methods.
 
-## [0.1.24] - 2022-04-20
+## 0.1.24 - 2022-04-20
 ### Fix
 - Fixed 'index' did not return a valid response errors. Added appropiate returns to flask app.
 
-## [0.1.23] - 2022-04-18
+## 0.1.23 - 2022-04-18
 ### Fix
 - Updating to a new release to build with latest emhass version as a fatal errors on pubish_data were fixed.
 
-## [0.1.22] - 2022-04-16
+## 0.1.22 - 2022-04-16
 ### Fix
 - Fixed problem of solver not found on arm64 architectures by installing the glpk solver. The install is added to the add-on Dockerfile.
 
-## [0.1.21] - 2022-04-16
+## 0.1.21 - 2022-04-16
 ### Fix
 - Fix following the improved handling of errors in EMHASS concerning solver issues with Pulp. Added support for glpk solver. For now just using a try/catch strategy but should update to solver passed as a parameter to EMHASS.
 
-## [0.1.20] - 2022-04-13
+## 0.1.20 - 2022-04-13
 ### Fix
 - Added possibility to pass web ui url as a parameter AGAIN. This functionnality was removed by error.
 - Merged pull request, now using relative url in index.html
 
-## [0.1.19] - 2022-04-12
+## 0.1.19 - 2022-04-12
 ### Fix
 - Removed possibility to pass web ui url as a parameter.
 - Added the possibility to pass HA instance url and token as parameters.
 - Fixed errors in manual buttons on index.html
 
-## [0.1.18] - 2022-04-05
+## 0.1.18 - 2022-04-05
 ### Added
 - Added support to post list of values for forecast methods.
 ### Fix
@@ -539,102 +547,10 @@ The new machine learning forecast module is here! Check the updated documentatio
 ### Fix
 - Changed Dockerfile, adding C++ compilers to solve numpy install on arm archs
 
-## [0.1.0] - 2022-03-26
+## 0.1.0 - 2022-03-26
 ### Added
 - Added the first version of the EMHASS add-on
 
-[0.1.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.0
-[0.1.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.18
-[0.1.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.19
-[0.1.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.20
-[0.1.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.21
-[0.1.22]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.22
-[0.1.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.23
-[0.1.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.24
-[0.1.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.25
-[0.1.26]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.26
-[0.1.27]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.27
-[0.1.28]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.28
-[0.1.29]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.29
-[0.1.30]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.30
-[0.1.31]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.31
-[0.1.32]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.32
-[0.1.33]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.33
-[0.1.34]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.34
-[0.1.35]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.35
-[0.1.36]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.36
-[0.1.37]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.37
-[0.1.38]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.38
-[0.1.39]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.39
-[0.1.40]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.40
-[0.1.41]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.41
-[0.1.42]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.1.42
-[0.2.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.0
-[0.2.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.1
-[0.2.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.2
-[0.2.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.3
-[0.2.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.4
-[0.2.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.5
-[0.2.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.6
-[0.2.7]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.7
-[0.2.8]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.8
-[0.2.9]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.9
-[0.2.10]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.10
-[0.2.11]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.11
-[0.2.12]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.12
-[0.2.13]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.13
-[0.2.14]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.14
-[0.2.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.15
-[0.2.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.16
-[0.2.17]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.17
-[0.2.18]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.18
-[0.2.19]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.19
-[0.2.20]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.20
-[0.2.21]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.21
-[0.2.22]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.22
-[0.2.23]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.23
-[0.2.24]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.24
-[0.2.25]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.25
-[0.2.26]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.26
-[0.2.27]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.27
-[0.2.28]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.28
-[0.2.29]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.2.29
-[0.3.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.0
-[0.3.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.1
-[0.3.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.2
-[0.3.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.3
-[0.3.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.4
-[0.3.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.5
-[0.3.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.6
-[0.3.7]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.7
-[0.3.8]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.8
-[0.3.9]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.9
-[0.3.10]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.10
-[0.3.11]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.11
-[0.3.12]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.12
-[0.3.13]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.13
-[0.3.14]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.14
-[0.3.15]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.15
-[0.3.16]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.3.16
-[0.4.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.0
-[0.4.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.1
-[0.4.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.4.2
-[0.5.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.0
-[0.5.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.1
-[0.5.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.2
-[0.5.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.3
-[0.5.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.5.4
-[0.6.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.0
-[0.6.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.1
-[0.6.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.2
-[0.6.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.3
-[0.6.4]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.4
-[0.6.5]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.5
-[0.6.6]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.6.6
-[0.8.0]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.0
-[0.8.1]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.1
-[0.8.2]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.2
-[0.8.3]: https://github.com/davidusb-geek/emhass-add-on/releases/tag/v0.8.3
 
 # Notes
 All notable changes to this project will be documented in this file.
