@@ -95,7 +95,7 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
         branch=masaddasdasdter
 
         sed -i.bak "s%build_repo:\s.*%build_repo: $repo%g"  ~/addons/emhass-add-on/emhass/build.yaml
-        sed -i.bak "s/build_branch:\s.*/build_repo: $branch/g"  ~/addons/emhass-add-on/emhass/build.yaml
+        sed -i.bak "s/build_branch:\s.*/build_branch: $branch/g"  ~/addons/emhass-add-on/emhass/build.yaml
         ```
 - Finally:
   - head to Home Assistant: `Add-ons` > `ADD-ON STORE`
