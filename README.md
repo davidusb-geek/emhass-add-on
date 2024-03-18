@@ -10,7 +10,7 @@ The complete documentation for this module can be found here: https://emhass.rea
 
 To install add the EMHASS Add-on repository in the Home Assistant store, follow these steps: https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons
 
-This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository and then press "Add".
+This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
 
 Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
 
