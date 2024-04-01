@@ -10,7 +10,6 @@ FROM ${BUILD_FROM} AS base
 ARG BUILD_ARCH
 ENV BUILD_ARCH=${BUILD_ARCH}
 
-
 WORKDIR /app
 COPY requirements.txt /app/
 
@@ -65,7 +64,6 @@ RUN apt-get purge -y --auto-remove \
     netcdf-bin \
     libnetcdf-dev \
     && rm -rf /var/lib/apt/lists/*
-
 
 #copy config file (on all builds)
 COPY config_emhass.yaml /app/

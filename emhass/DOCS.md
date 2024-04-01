@@ -77,7 +77,8 @@ In the default configuration example the first peak hour will start at 02:54 and
 
 The following parameters are associated with the technical specifications of the PV power plant and the batteries.
 
-- maximum_power_from_grid: The maximum power that can be supplied by the utility grid in Watts. Defaults to 9000.
+- maximum_power_from_grid: The maximum power that can be supplied by the utility grid in Watts (consumption). Defaults to 9000.
+- maximum_power_to_grid: The maximum power that can be supplied to the utility grid in Watts (injection). Defaults to 9000.
 
 We will define the technical parameters of the PV installation. For the modeling task we rely on the PVLib Python package. For more information see: [https://pvlib-python.readthedocs.io/en/stable/](https://pvlib-python.readthedocs.io/en/stable/)
 The complete list of supported modules can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv) 

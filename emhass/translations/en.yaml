@@ -139,7 +139,10 @@ configuration:
     description: (Default 0.065). The paid price for energy injected to the grid from excedent PV production in €/kWh.
   maximum_power_from_grid:
     name: maximum_power_from_grid, The maximum power from the grid
-    description: (Default 9000). The maximum power that can be supplied by the utility grid in Watts.
+    description: (Default 9000). The maximum power that can be supplied by the utility grid in Watts (consumption).
+  maximum_power_to_grid:
+    name: maximum_power_to_grid, The maximum power to the grid
+    description: (Default 9000). The maximum power that can be supplied to the utility grid in Watts (injection).
   list_pv_module_model:
     name: list_pv_module_model, (method=scrapper/solar.forecast) A list of the PV module model
     description: For example 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.

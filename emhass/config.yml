@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.8.4
+version: 0.8.5
 slug: emhass
 arch:
   - aarch64
@@ -39,6 +39,7 @@ options:
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
   maximum_power_from_grid: 9000
+  maximum_power_to_grid: 9000
   number_of_deferrable_loads: 2
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: 3000
@@ -89,7 +90,7 @@ schema:
   costfun: "list(profit|cost|self-consumption)?"
   sensor_power_photovoltaics: "str?"
   sensor_power_load_no_var_loads: "str?"
-  optimization_time_step: "int(10,1440)?" #optional
+  optimization_time_step: "int(5,1440)?" #optional
   historic_days_to_retrieve: "int(2,365)?" #optional
   method_ts_round: "list(nearest|first|last)?" #optional
   set_total_pv_sell: "bool?"
@@ -112,6 +113,7 @@ schema:
   optional_solcast_rooftop_id: "str?" #optional
   optional_solar_forecast_kwp: "float?" #optional
   maximum_power_from_grid: "int(0,)?"
+  maximum_power_to_grid: "int(0,)?"
   number_of_deferrable_loads: "int(1,10)?"
   list_nominal_power_of_deferrable_loads:
     - nominal_power_of_deferrable_loads: "int(0,)?"
