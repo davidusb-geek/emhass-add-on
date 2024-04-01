@@ -92,9 +92,10 @@ RUN git clone $build_repo
 WORKDIR /tmp/emhass
 #Branch
 RUN git checkout $build_branch
-RUN mkdir -p /app/src/emhass/
+RUN mkdir -p /app/src/emhass/data/
 #RUN mkdir -p /app/data/ #if config.yaml DATA_PATH=/app/data/
 RUN cp -r /tmp/emhass/src/emhass/. /app/src/emhass/
+RUN cp /tmp/emhass/src/emhass/data/*  /app/src/emhass/data/
 #RUN cp /tmp/emhass/data/opt_res_latest.csv  /app/data/ #if config.yaml DATA_PATH=/app/data/
 RUN cp /tmp/emhass/setup.py /app/
 RUN cp /tmp/emhass/README.md /app/
