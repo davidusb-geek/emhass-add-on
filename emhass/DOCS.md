@@ -100,16 +100,19 @@ The complete list of supported modules can be found here: [https://github.com/da
 
 And the list of inverter models can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv)
 
+This webapp can help you find your correct module/inverter key: [https://emhass-pvlib-database.streamlit.app/](https://emhass-pvlib-database.streamlit.app/)
+
 If your specific model is not found in these lists then solution (1) is to pick another model as close as possible as yours in terms of the nominal power.
 
 Solution (2) would be to use SolCast and pass that data directly to emhass as a list of values from a template. Take a look at this example here: [https://emhass.readthedocs.io/en/latest/forecasts.html#example-using-solcast-forecast-amber-prices](https://emhass.readthedocs.io/en/latest/forecasts.html#example-using-solcast-forecast-amber-prices)
 
-- pv*module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '*'.
-- pv*inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH**Fronius_Primo_5_0_1_208_240**240V*'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '\_'.
+- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
+- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
 - surface_tilt: The tilt angle of your solar panels. This is a value between 0 and 90. Defaults to 30. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - surface_azimuth: The azimuth of your PV installation. This is a value between 0 and 360. Defaults to 205. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - strings_per_inverter: The number of used strings per inverter. Defaults to 1. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
+- inverter_is_hybrid: Set to True to consider that the installation inverter is hybrid for PV and batteries. (Default False).
 - set_use_battery: Set to True if we should consider an energy storage device such as a Li-Ion battery. Defaults to False.
 
 If the `set_use_battery` is set to `true`, then the following parameters need to be defined properly. If you don't have a battery then just leave the default values, they will not be used.

@@ -147,7 +147,7 @@ configuration:
     name: list_pv_module_model, (method=scrapper/solar.forecast) A list of the PV module model
     description: For example 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
   list_pv_inverter_model:
-    name: list_pv_inverter_model, (method=scrapper) A list of the PV inverter model
+    name: list_pv_inverter_model, (method=all methods, used in the optimization to set the PV peak power) A list of the PV inverter model
     description: For example 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
   list_surface_tilt:
     name: list_surface_tilt, (method=scrapper/solar.forecast) The tilt angle of your solar panels
@@ -161,6 +161,9 @@ configuration:
   list_strings_per_inverter:
     name: list_strings_per_inverter, (method=scrapper) The number of used strings per inverter
     description: (Default 1). This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
+  inverter_is_hybrid:
+    name: inverter_is_hybrid, Set to True if it is a hybrid inverter (PV+batteries) or not
+    description: Set to True to consider that the installation inverter is hybrid for PV and batteries. (Default False).
   set_use_battery:
     name: set_use_battery, Set if a battery is present
     description: Set to True if we should consider an energy storage device such as a Li-Ion battery. (Default False).
