@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.1 - 2024-06-03
+### Fix
+- Fixed PV curtailment maximum possible value constraint
+- Added PV curtailement to variable to publish to HA
+
 ## 0.10.0 - 2024-06-02
 ### BREAKING CHANGE
 - In this new version we have added support for PV curtailment computation. While doing this the nominal PV peak power is needed. The easiest way find this information is by directly using the `inverter_model` defined in the configuration. As this is needed in the optimization to correctly compute PV curtailment, this parameter need to be properly defined for your installation. Before this chage this parameter was only needed if using the PV forecast method `scrapper`, but now it is not optional as it is directly used in the optimization. 
