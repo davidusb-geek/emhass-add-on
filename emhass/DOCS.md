@@ -96,10 +96,6 @@ The following parameters are associated with the technical specifications of the
 
 We will define the technical parameters of the PV installation. For the modeling task we rely on the PVLib Python package. For more information see: [https://pvlib-python.readthedocs.io/en/stable/](https://pvlib-python.readthedocs.io/en/stable/)
 
-The complete list of supported modules can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv)
-
-And the list of inverter models can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv)
-
 This webapp can help you find your correct module/inverter key: [https://emhass-pvlib-database.streamlit.app/](https://emhass-pvlib-database.streamlit.app/)
 
 If your specific model is not found in these lists then solution (1) is to pick another model as close as possible as yours in terms of the nominal power.
