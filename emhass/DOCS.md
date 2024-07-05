@@ -96,10 +96,6 @@ The following parameters are associated with the technical specifications of the
 
 We will define the technical parameters of the PV installation. For the modeling task we rely on the PVLib Python package. For more information see: [https://pvlib-python.readthedocs.io/en/stable/](https://pvlib-python.readthedocs.io/en/stable/)
 
-The complete list of supported modules can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9234460/sam-library-cec-modules-2019-03-05.csv)
-
-And the list of inverter models can be found here: [https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv](https://github.com/davidusb-geek/emhass-add-on/files/9532724/sam-library-cec-inverters-2019-03-05.csv)
-
 This webapp can help you find your correct module/inverter key: [https://emhass-pvlib-database.streamlit.app/](https://emhass-pvlib-database.streamlit.app/)
 
 If your specific model is not found in these lists then solution (1) is to pick another model as close as possible as yours in terms of the nominal power.
@@ -113,6 +109,7 @@ Solution (2) would be to use SolCast and pass that data directly to emhass as a 
 - modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - strings_per_inverter: The number of used strings per inverter. Defaults to 1. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - inverter_is_hybrid: Set to True to consider that the installation inverter is hybrid for PV and batteries. (Default False).
+- compute_curtailment: Set to True to compute a PV curtailment variable. (Default False).
 - set_use_battery: Set to True if we should consider an energy storage device such as a Li-Ion battery. Defaults to False.
 
 If the `set_use_battery` is set to `true`, then the following parameters need to be defined properly. If you don't have a battery then just leave the default values, they will not be used.
