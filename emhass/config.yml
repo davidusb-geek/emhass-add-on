@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.10.1
+version: 0.10.2
 slug: emhass
 arch:
   - aarch64
@@ -84,6 +84,7 @@ options:
   list_strings_per_inverter:
     - strings_per_inverter: 1
   inverter_is_hybrid: false
+  compute_curtailment: false
   set_use_battery: false
   battery_nominal_energy_capacity: 5000
 schema:
@@ -155,6 +156,7 @@ schema:
   list_strings_per_inverter:
     - strings_per_inverter: "int(0,)?"
   inverter_is_hybrid: "bool?"
+  compute_curtailment: "bool?"
   set_use_battery: "bool?"
   set_battery_dynamic: "bool?" #optional
   battery_dynamic_max: "float(0.0,1.0)?" #optional

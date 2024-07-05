@@ -163,7 +163,10 @@ configuration:
     description: (Default 1). This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
   inverter_is_hybrid:
     name: inverter_is_hybrid, Set to True if it is a hybrid inverter (PV+batteries) or not
-    description: Set to True to consider that the installation inverter is hybrid for PV and batteries. (Default False).
+    description: A special parameter to consider that the installation inverter is hybrid for PV and batteries. (Default False).
+  compute_curtailment:
+    name: compute_curtailment, Set to True to compute a PV curtailment variable.
+    description: A special parameter to define if we will compute a PV curtailment variable. (Default False).
   set_use_battery:
     name: set_use_battery, Set if a battery is present
     description: Set to True if we should consider an energy storage device such as a Li-Ion battery. (Default False).
