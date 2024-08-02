@@ -92,8 +92,14 @@ configuration:
   sensor_power_load_no_var_loads:
     name: sensor_power_load_no_var_loads, The Home Assistant sensor for the load power without the deferrable loads
     description: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example sensor.power_load_no_var_loads.
+  list_sensor_replace_zero:
+    name: list_sensor_replace_zero, A list of retrieved variables that we would want  to replace nans with zeros
+    description: A list of sensors
+  list_sensor_linear_interp:
+    name: list_sensor_linear_interp, A list of retrieved variables that we would want to interpolate nan values using linear interpolation
+    description: A list of sensors
   load_negative:
-    name: load_negative, If the retrived load variable is negative by convention
+    name: load_negative, If the retrieved load variable is negative by convention
     description: (Default False). Options are True or False
   set_zero_min:
     name: set_zero_min, To give a special treatment for a minimum value saturation to zero for power consumption data. Values below zero are replaced by nans.
@@ -103,7 +109,7 @@ configuration:
     description: (Default 2). Define the number of deferrable loads to consider.
   list_nominal_power_of_deferrable_loads:
     name: list_nominal_power_of_deferrable_loads, The nominal power for each deferrable load in Watts
-    description: This is a list of elements, the number of elements. (number of items = number_of_deferrable_loads)
+    description: A list of elements, the number of elements. (number of items = number_of_deferrable_loads)
   list_operating_hours_of_each_deferrable_load:
     name: list_operating_hours_of_each_deferrable_load, The total number of hours that each deferrable load should operate
     description: A list of elements. (number of items = number_of_deferrable_loads)
