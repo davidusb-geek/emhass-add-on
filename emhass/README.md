@@ -59,7 +59,7 @@ When the installation has finished go to the `Configuration` tab to set the add-
 - EMHASS
     - For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). *(EMHASS docs)*
 - EMHASS-Add-on
-    - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./Test.md).
+    - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./emhass/Test.md).
 
 ## License
 

@@ -1,14 +1,14 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.10.6
+version: 0.2.0
 slug: emhass
 arch:
   - aarch64
   - amd64
   - armhf
   - armv7
-image: "davidusb/image-{arch}-emhass" #set if use image from DockerHub
+image: "ghcr.io/davidusb-geek/emhass-{arch}" #set if use image from DockerHub
 ports:
   5000/tcp: 5000
 ports_description:
@@ -35,6 +35,12 @@ options:
   costfun: profit
   sensor_power_photovoltaics: sensor.power_photovoltaics
   sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
+  list_sensor_replace_zero:
+    - sensor_replace_zero: "sensor.power_photovoltaics"
+    - sensor_replace_zero: "sensor.power_load_no_var_loads"
+  list_sensor_linear_interp:
+    - sensor_linear_interp: "sensor.power_photovoltaics"
+    - sensor_linear_interp: "sensor.power_load_no_var_loads"
   set_total_pv_sell: false
   set_nocharge_from_grid: false
   set_nodischarge_to_grid: false
@@ -95,6 +101,10 @@ schema:
   costfun: "list(profit|cost|self-consumption)?"
   sensor_power_photovoltaics: "str?"
   sensor_power_load_no_var_loads: "str?"
+  list_sensor_replace_zero:
+    - sensor_replace_zero: "str?"
+  list_sensor_linear_interp:
+    - sensor_linear_interp: "str?"
   optimization_time_step: "int(5,1440)?" #optional
   historic_days_to_retrieve: "int(2,365)?" #optional
   method_ts_round: "list(nearest|first|last)?" #optional
