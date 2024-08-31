@@ -1,7 +1,7 @@
 # build_from: #choose between debian or raspbian images
-#   amd64: ghcr.io/geoderp/emhass
-#   armhf: ghcr.io/geoderp/emhass
-#   armv7: ghcr.io/geoderp/emhass
-#   aarch64: ghcr.io/geoderp/emhass
+#   amd64: ghcr.io/davidusb-geek/emhass
+#   armhf: ghcr.io/davidusb-geek/emhass
+#   armv7: ghcr.io/davidusb-geek/emhass
+#   aarch64: ghcr.io/davidusb-geek/emhass
 # args:
 #   build_version: v0.2.0 #In Dockerfile, which version of emhass to pull from

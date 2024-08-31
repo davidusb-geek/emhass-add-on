@@ -8,7 +8,7 @@ arch:
   - amd64
   - armhf
   - armv7
-image: "ghcr.io/geoderp/emhass" #set if use image container repository
+image: "ghcr.io/davidusb-geek/emhass" #set if use image container repository
 ports:
   5000/tcp: 5000
 ports_description:
@@ -35,7 +35,7 @@ schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
   logging_level: "list(DEBUG|INFO|WARNING|ERROR)?" #optional
-  data_path: "list(default|/data/|/share/)?" #optional
+  data_path: "list(default|/data/|/share/emhass/)?" #optional
   time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
   Latitude: "float?" #optional
   Longitude: "float?" #optional
