@@ -1,3 +1,5 @@
+<!-- markdown file presented on the main addon info tab -->
+
 # EMHASS Add-on
 
 ### A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
@@ -42,7 +44,6 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 </a>
 </div>
 
-
 ## Installation
 
 To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
@@ -56,10 +57,11 @@ Be patient, the installation may take some time depending on your hardware.
 When the installation has finished go to the `Configuration` tab to set the add-on parameters.
 
 ## Developing EMHASS/EMHASS-Add-on
+
 - EMHASS
-    - For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). *(EMHASS docs)*
+  - For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). _(EMHASS docs)_
 - EMHASS-Add-on
-    - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./emhass/Test.md).
+  - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./emhass/Test.md).
 
 ## License
 

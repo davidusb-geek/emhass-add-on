@@ -1,14 +1,14 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: 0.2.0
+version: v0.20.0
 slug: emhass
 arch:
   - aarch64
   - amd64
   - armhf
   - armv7
-image: "ghcr.io/davidusb-geek/emhass-{arch}" #set if use image from DockerHub
+image: "ghcr.io/geoderp/emhass" #set if use image container repository
 ports:
   5000/tcp: 5000
 ports_description:
@@ -30,179 +30,16 @@ environment:
   CONFIG_PATH: "/app/config_emhass.yaml"
   DATA_PATH: "/data/"
 options:
-  logging_level: INFO
   data_path: default
-  costfun: profit
-  sensor_power_photovoltaics: sensor.power_photovoltaics
-  sensor_power_load_no_var_loads: sensor.power_load_no_var_loads
-  list_sensor_replace_zero:
-    - sensor_replace_zero: "sensor.power_photovoltaics"
-    - sensor_replace_zero: "sensor.power_load_no_var_loads"
-  list_sensor_linear_interp:
-    - sensor_linear_interp: "sensor.power_photovoltaics"
-    - sensor_linear_interp: "sensor.power_load_no_var_loads"
-  set_total_pv_sell: false
-  set_nocharge_from_grid: false
-  set_nodischarge_to_grid: false
-  maximum_power_from_grid: 9000
-  maximum_power_to_grid: 9000
-  number_of_deferrable_loads: 2
-  list_nominal_power_of_deferrable_loads:
-    - nominal_power_of_deferrable_loads: 3000
-    - nominal_power_of_deferrable_loads: 750
-  list_operating_hours_of_each_deferrable_load:
-    - operating_hours_of_each_deferrable_load: 5
-    - operating_hours_of_each_deferrable_load: 8
-  list_start_timesteps_of_each_deferrable_load:
-    - start_timesteps_of_each_deferrable_load: 0
-    - start_timesteps_of_each_deferrable_load: 0
-  list_end_timesteps_of_each_deferrable_load:
-    - end_timesteps_of_each_deferrable_load: 0
-    - end_timesteps_of_each_deferrable_load: 0
-  list_peak_hours_periods_start_hours:
-    - peak_hours_periods_start_hours: "05:54"
-    - peak_hours_periods_start_hours: "10:24"
-  list_peak_hours_periods_end_hours:
-    - peak_hours_periods_end_hours: "09:24"
-    - peak_hours_periods_end_hours: "11:54"
-  list_treat_deferrable_load_as_semi_cont:
-    - treat_deferrable_load_as_semi_cont: true
-    - treat_deferrable_load_as_semi_cont: true
-  list_set_deferrable_load_single_constant:
-    - set_deferrable_load_single_constant: false
-    - set_deferrable_load_single_constant: false
-  list_set_deferrable_startup_penalty:
-    - set_deferrable_startup_penalty: 0.0
-    - set_deferrable_startup_penalty: 0.0
-  load_peak_hours_cost: 0.1907
-  load_offpeak_hours_cost: 0.1419
-  photovoltaic_production_sell_price: 0.065
-  list_pv_module_model:
-    - pv_module_model: CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M
-  list_pv_inverter_model:
-    - pv_inverter_model: Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_
-  list_surface_tilt:
-    - surface_tilt: 30
-  list_surface_azimuth:
-    - surface_azimuth: 205
-  list_modules_per_string:
-    - modules_per_string: 16
-  list_strings_per_inverter:
-    - strings_per_inverter: 1
-  inverter_is_hybrid: false
-  compute_curtailment: false
-  set_use_battery: false
-  battery_nominal_energy_capacity: 5000
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
-  logging_level: "list(DEBUG|INFO|WARNING|ERROR)?"
-  data_path: "list(default|/data/|/share/)?"
-  costfun: "list(profit|cost|self-consumption)?"
-  sensor_power_photovoltaics: "str?"
-  sensor_power_load_no_var_loads: "str?"
-  list_sensor_replace_zero:
-    - sensor_replace_zero: "str?"
-  list_sensor_linear_interp:
-    - sensor_linear_interp: "str?"
-  optimization_time_step: "int(5,1440)?" #optional
-  historic_days_to_retrieve: "int(2,365)?" #optional
-  method_ts_round: "list(nearest|first|last)?" #optional
-  set_total_pv_sell: "bool?"
-  lp_solver: "list(PULP_CBC_CMD|GLPK_CMD|COIN_CMD)?" #optional
-  lp_solver_path: "str?" #optional
-  load_negative: "bool?" #optional
-  set_zero_min: "bool?" #optional
-  set_nocharge_from_grid: "bool?"
-  set_nodischarge_to_grid: "bool?"
-  load_forecast_method: "list(naive|csv|list|mlforecaster)?" #optional
-  delta_forecast_daily: "int?" #optional
-  weather_forecast_method: "list(scrapper|solcast|csv|solar.forecast)?" #optional
-  #passed by the HA
-  # time_zone: "match((\\w+)?(\\/)(\\w+))?"
-  # Latitude: "float?"
-  # Longitude: "float?"
-  #not used
-  # Altitude: "float?"
-  optional_solcast_api_key: "password?" #optional
-  optional_solcast_rooftop_id: "str?" #optional
-  optional_solar_forecast_kwp: "float?" #optional
-  maximum_power_from_grid: "int(0,)?"
-  maximum_power_to_grid: "int(0,)?"
-  number_of_deferrable_loads: "int(1,10)?"
-  list_nominal_power_of_deferrable_loads:
-    - nominal_power_of_deferrable_loads: "int(0,)?"
-  list_operating_hours_of_each_deferrable_load:
-    - operating_hours_of_each_deferrable_load: "int(0,)?"
-  list_start_timesteps_of_each_deferrable_load:
-    - start_timesteps_of_each_deferrable_load: "int(0,)?"
-  list_end_timesteps_of_each_deferrable_load:
-    - end_timesteps_of_each_deferrable_load: "int(0,)?"
-  list_peak_hours_periods_start_hours:
-    - peak_hours_periods_start_hours: "str?"
-  list_peak_hours_periods_end_hours:
-    - peak_hours_periods_end_hours: "str?"
-  list_treat_deferrable_load_as_semi_cont:
-    - treat_deferrable_load_as_semi_cont: "bool?"
-  list_set_deferrable_load_single_constant:
-    - set_deferrable_load_single_constant: "bool?"
-  list_set_deferrable_startup_penalty:
-    - set_deferrable_startup_penalty: "float?"
-  load_cost_forecast_method: "list(hp_hc_periods|csv)?"
-  production_price_forecast_method: "list(constant|csv)?" #optional
-  load_peak_hours_cost: "float(0,)?"
-  load_offpeak_hours_cost: "float(0,)?"
-  photovoltaic_production_sell_price: "float(0,)?"
-  list_pv_module_model:
-    - pv_module_model: "str?"
-  list_pv_inverter_model:
-    - pv_inverter_model: "str?"
-  list_surface_tilt:
-    - surface_tilt: "int(0,90)?"
-  list_surface_azimuth:
-    - surface_azimuth: "int(0,360)?"
-  list_modules_per_string:
-    - modules_per_string: "int(0,)?"
-  list_strings_per_inverter:
-    - strings_per_inverter: "int(0,)?"
-  inverter_is_hybrid: "bool?"
-  compute_curtailment: "bool?"
-  set_use_battery: "bool?"
-  set_battery_dynamic: "bool?" #optional
-  battery_dynamic_max: "float(0.0,1.0)?" #optional
-  battery_dynamic_min: "float?" #optional
-  weight_battery_discharge: "float?" #optional
-  weight_battery_charge: "float?" #optional
-  battery_discharge_power_max: "int(0,)?" #optional
-  battery_charge_power_max: "int(0,)?" #optional
-  battery_discharge_efficiency: "float(0.0,1.0)?" #optional
-  battery_charge_efficiency: "float(0.0,1.0)?" #optional
-  battery_nominal_energy_capacity: "int(0,)?"
-  battery_minimum_state_of_charge: "float(0.0,1.0)?" #optional
-  battery_maximum_state_of_charge: "float(0.0,1.0)?" #optional
-  battery_target_state_of_charge: "float(0.0,1.0)?" #optional
-  # not implmented
-  # custom_deferrable_forecast_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
-  # custom_batt_forecast_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
-  # custom_grid_forecast_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
-  # custom_cost_fun_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
-  # custom_unit_load_cost_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
-  # custom_unit_prod_price_id:
-  #   - entity_id: "str?"
-  #   - unit_of_measurement: "str?"
-  #   - friendly_name: "str?"
+  logging_level: "list(DEBUG|INFO|WARNING|ERROR)?" #optional
+  data_path: "list(default|/data/|/share/)?" #optional
+  time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
+  Latitude: "float?" #optional
+  Longitude: "float?" #optional
+  Altitude: "float?" #optional
+  solcast_api_key: "password?" #optional
+  solcast_rooftop_id: "str?" #optional
+  solar_forecast_kwp: "float?" #optional

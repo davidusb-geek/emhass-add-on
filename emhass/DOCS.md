@@ -1,4 +1,7 @@
+<!-- markdown file presented on the documentation tab -->
+
 # EMHASS Add-on Documentation
+
 <div>
  <a style="text-decoration:none" href="https://emhass.readthedocs.io/en/latest/">
       <img src="https://raw.githubusercontent.com/davidusb-geek/emhass/master/docs/images/Documentation_button.svg" alt="EMHASS Documentation">
@@ -18,7 +21,6 @@
 </div>
 
 ## This is the documentation for the Add-on of **EMHASS: Energy Management for Home Assistant**
-
 
 EMHASS is a Python module proposing an **optimized energy management** approach using the Linear Programming (LP) optimization technique.
 
@@ -102,8 +104,8 @@ If your specific model is not found in these lists then solution (1) is to pick 
 
 Solution (2) would be to use SolCast and pass that data directly to emhass as a list of values from a template. Take a look at this example here: [https://emhass.readthedocs.io/en/latest/forecasts.html#example-using-solcast-forecast-amber-prices](https://emhass.readthedocs.io/en/latest/forecasts.html#example-using-solcast-forecast-amber-prices)
 
-- pv_module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
-- pv_inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
+- pv*module_model: The PV module model. For example: 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '*'.
+- pv*inverter_model: The PV inverter model. For example: 'Fronius_International_GmbH**Fronius_Primo_5_0_1_208_240**240V*'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '\_'.
 - surface_tilt: The tilt angle of your solar panels. This is a value between 0 and 90. Defaults to 30. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - surface_azimuth: The azimuth of your PV installation. This is a value between 0 and 360. Defaults to 205. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
 - modules_per_string: The number of modules per string. Defaults to 16. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
@@ -324,11 +326,10 @@ If you find any problems with the code, you can open new issues in the EMHASS or
 <img src="https://raw.githubusercontent.com/davidusb-geek/emhass/master/docs/images/EMHASS_Add_on_button.svg" alt="EMHASS-Add-on Issues">
 </a>
 </br>
-*For any add-on specific issues. E.g. configuration page, add-on installation or add-on updating.*
+_For any add-on specific issues. E.g. configuration page, add-on installation or add-on updating._
 </br></br>
 <a style="text-decoration:none" href="https://github.com/davidusb-geek/emhass/issues">
 <img src="https://raw.githubusercontent.com/davidusb-geek/emhass/master/docs/images/EMHASS_button.svg" alt="EMHASS Issues">
 </a>
 </br>
-*For for any other EMHASS issues issues.*
-
+_For for any other EMHASS issues issues._
