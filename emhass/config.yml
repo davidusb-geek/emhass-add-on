@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: v0.20.0
+version: v0.20.0 #set if use image container version
 slug: emhass
 arch:
   - aarch64
@@ -25,17 +25,13 @@ ingress_port: 5000
 ingress_stream: true
 panel_icon: mdi:home-lightning-bolt-outline
 panel_title: EMHASS
-environment:
-  OPTIONS_PATH: "/data/options.json"
-  CONFIG_PATH: "/app/config_emhass.yaml"
-  DATA_PATH: "/data/"
 options:
   data_path: default
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
   logging_level: "list(DEBUG|INFO|WARNING|ERROR)?" #optional
-  data_path: "list(default|/data/|/share/emhass/)?" #optional
+  data_path: "list(default|/data/|/share/emhass)?" #optional
   time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
   Latitude: "float?" #optional
   Longitude: "float?" #optional
