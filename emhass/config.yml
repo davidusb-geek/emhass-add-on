@@ -31,7 +31,7 @@ schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
   logging_level: "list(DEBUG|INFO|WARNING|ERROR)?" #optional
-  data_path: "list(default|/data/|/share/emhass)?" #optional
+  data_path: "list(default|/data/|/share)?" #optional
   time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
   Latitude: "float?" #optional
   Longitude: "float?" #optional
