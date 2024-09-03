@@ -4,4 +4,4 @@
 #   armv7: ghcr.io/davidusb-geek/emhass
 #   aarch64: ghcr.io/davidusb-geek/emhass
 # args:
-#   build_version: v0.2.0 #In Dockerfile, which version of emhass to pull from
+#   build_version: v0.20.0 #In Dockerfile, which version of emhass to pull from
