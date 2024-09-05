@@ -1,4 +1,7 @@
 configuration:
+  server_ip:
+   name: server_ip, binds the webserver server to an ip address/range
+   description: default 0.0.0.0, which sallows the server to listen to all network interfaces accessible inside the docker container
   hass_url:
     name: URL, the Home Assistant instance
     description: hass_url (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value. Otherwise enter the URL (Ex. http://localhost:8123/) of your external Home Assistant instance.

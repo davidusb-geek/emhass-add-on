@@ -15,7 +15,6 @@ ports_description:
   5000/tcp: Web interface and API
 webui: http://[HOST]:[PORT:5000]
 map:
-  - config:rw
   - share:rw
 init: false
 hassio_role: default
@@ -25,8 +24,6 @@ ingress_port: 5000
 ingress_stream: true
 panel_icon: mdi:home-lightning-bolt-outline
 panel_title: EMHASS
-options:
-  data_path: default
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
@@ -39,3 +36,4 @@ schema:
   solcast_api_key: "password?" #optional
   solcast_rooftop_id: "str?" #optional
   solar_forecast_kwp: "float?" #optional
+  server_ip: "list(0.0.0.0|127.0.0.1)?" #optional
