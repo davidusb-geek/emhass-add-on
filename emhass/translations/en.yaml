@@ -8,9 +8,6 @@ configuration:
   long_lived_token:
     name: Long-Lived Access Token of the Home Assistant instance
     description: long_lived_token (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value.  Otherwise enter the Long-Lived Access Token for your Home Assistant instance, this can be created from the Lovelace profile page.
-  logging_level:
-    name: Set the logger level
-    description: logging_level (Default INFO) This sets the logger level. Change to WARNING or ERROR to reduce logging if needed.
   data_path:
     name: Set folder path where EMHASS data will be stored
     description: data_path (Default default), selecting /data/ will store data in an enclosed folder, only assessable by the addon itself. Select /share/emhass to store data in the mounted share folder, accessible outside of the addon.
