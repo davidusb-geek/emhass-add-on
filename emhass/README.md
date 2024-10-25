@@ -102,11 +102,11 @@ _Warning: This method will override the Docker image tag, and therefore will req
 
 ## Developing EMHASS/EMHASS-Add-on
 
-**EMHASS**
-- For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). _(EMHASS docs)_ 
+#### **EMHASS**
+For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). _(EMHASS docs)_ 
 
-**EMHASS-Add-on**
-- For those who want to test the EMHASS addon _(EMHASS inside of a virtual Home Assistant Environment)_. Have a look at [Test.md](./emhass/Test.md).
+#### **EMHASS-Add-on**
+For those who want to test the EMHASS addon _(EMHASS inside of a virtual Home Assistant Environment)_. Have a look at [Test Markdown](./emhass/Test.md).
 
 ## License
 

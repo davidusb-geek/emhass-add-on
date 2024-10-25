@@ -119,18 +119,22 @@ If you would like to test your own forked version of EMHASS, the container repos
       ```
 
  ### Build a custom image of EMHASS locally
- The last option requires merging the EMHASS-Add-on and EMHASS repository together so the user can build the Docker container locally for rapid testing. This is the most complicated approach and the example bellow is not guaranteed to work.
+ The last option requires merging the EMHASS-Add-on and EMHASS repository together, allowing the user to build EMHASS, and the Docker container locally. The best use case for this method if for rapid testing. Since you can adjust the emhass source files and rebuild the addon. This is the most complicated approach and the example bellow is not guaranteed to work.
 
 ```bash
 cd ~/addons/emhass-add-on/
 # git clone EMHASS repo (or forked emhass repo)
 git clone https://github.com/davidusb-geek/emhass.git ./emhass-git
 # copy required EMHASS files to the emhass-add-on root
-cp ./emhass-git/Dockerfile .
-cp ./emhass-git/requirements.txt .
-cp ./emhass-git/src .
-cp ./emhass-git/setup.py .
-cp ./emhass-git/data .
+cp ./emhass-git/Dockerfile ./emhass/
+cp ./emhass-git/requirements.txt ./emhass/
+cp ./emhass-git/README.md ./emhass/README.md
+cp -R ./emhass-git/src ./emhass/
+cp -R ./emhass-git/setup.py ./emhass/
+cp -R ./emhass-git/data ./emhass/
 # comment out the `image:` line of the emhass-add-on config.yml file. To tell Home Assistant to build the Dockerfile locally
 sed -i.bak '/image:/ s/./#&/' ~/addons/emhass-add-on/emhass/config.yml
+# Replace TARGETARCH with BUILD_ARCH (Home Assistant Build ARG) in Dockerfile 
+sed -i.bak "s/TARGETARCH/BUILD_ARCH/g"  ~/addons/emhass-add-on/emhass/Dockerfile
 ```
+*Note: It is recommended to regularly adjust the `version:` tag_(in `config.yml`)_ after a change and before a test. This helps the user to check if Home Assistant has received the update.*
