@@ -46,22 +46,67 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 
 ## Installation
 
-To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
+The steps to install EMHASS as an Home Assistant addon:
 
-This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
+1) Add the EMHASS-Add-on repository to the HAOS add-on store
 
-Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
+    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
 
-Be patient, the installation may take some time depending on your hardware.
+    - This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
 
-When the installation has finished go to the `Configuration` tab to set the add-on parameters.
+2) Install the EMHASS Add-on 
+    - Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
+      - The installation may take some time depending on your hardware.
+
+3) Start the EMHASS addon
+    - Once installed, head into the EMHASS addon
+    - click `start` to start the EMHASS web server
+      -  For consistent use, it is recommended that you enable: `Show in sidebar`,`Watchdog` and `Start on boot `
+
+4) Open the EMHASS web interface, and configure parameters
+    - Click `OPEN WEB UI` to enter the EMHASS web server
+    - Click the cog icon ⚙️  to to enter the emhass configuration page
+    - Insert your user specific parameters
+      - For users who wish to use `Solcast` or `Forecast.Solar` insert your secrets in the Home Assistant EMHASS configuration page, under `Show unused optional configuration options`. (E.g: `localhost:8123/hassio/addon/emhass/config`)
+
+## Installation Method 2 - Manually changing EMHASS version
+This method allows the user to select which EMHASS version to run _(via adjusting the Docker version tag)_. This second method of installation may be more preferable for users who wish to test EMHASS or rollback to a older stable version.   
+_Warning: This method will override the Docker image tag, and therefore will require the user to manually adjust the tag to update. The user will also need to regularly check to see if the EMHASS-Add-on repository is up to date with the Github `main` branch_
+
+1) Have a method of inserting commands
+    - Two Addon options are [Terminal & SSH](https://github.com/home-assistant/addons/tree/master/ssh) and Community Add-on: [Studio Code Server](https://github.com/hassio-addons/addon-vscode)
+
+2) Clone the `EMHASS-Add-on` repository into your `/addons` directory 
+    ```bash
+    cd ~/addons/
+    git clone https://github.com/davidusb-geek/emhass-add-on.git
+    ```
+
+3) Specify what EMHASS version image to use
+    - in the `emhass-add-on/emhass/config.yml` adjust the `version:` line to match the version of choice:
+      ```bash
+      # set version here 
+      emhassVersion=v0.20.0
+      # sed command to replace version line in config.yml 
+      sed -i.bak "s/version:.*/version: $emhassVersion/g"  ~/addons/emhass-add-on/emhass/config.yml
+      ```
+4) Head to the Home Assistant add-on store and refresh addon cache
+    - Settings > Add-ons > Add-on Store
+    - Refresh Addon cache with: hamburger icon ☰ > Check for updates
+    - Wait half a minute and refresh the page 
+
+5) Install local version of EMHASS 
+    - From here a new Addon Source under the name `Local add-ons` should appear _(if not repeat step 4)_
+    - Install the EMHASS addon, Note: after clicking the EMHASS addon, the `Current version: ` Tag on the top left of the EMHASS card.
+
 
 ## Developing EMHASS/EMHASS-Add-on
 
-- EMHASS
-  - For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). _(EMHASS docs)_
-- EMHASS-Add-on
-  - For those who want to test the Home Assistant integration of EMHASS. Have a look at [Test.md](./emhass/Test.md).
+**EMHASS**
+- For those who want to develop the EMHASS package itself. Have a look at the [Develop page](https://emhass.readthedocs.io/en/latest/develop.html). _(EMHASS docs)_ 
+
+**EMHASS-Add-on**
+- For those who want to test the EMHASS addon _(EMHASS inside of a virtual Home Assistant Environment)_. Have a look at [Test.md](./emhass/Test.md).
 
 ## License
 

@@ -1,139 +1,121 @@
 # Testing EMHASS-Add-on
 
-To test EMHASS-Add-on integration, you will need a Home Assistant (with Supervisor) environment.
+To fully test EMHASS and its EMHASS-Add-on integration, you will likely want to test the EMHASS addon in a Home Assistant Operating System environment (HAOS/Supervisor).
 
 The common Home Assistant options are:
 
 - Adding EMHASS-Add-on into a pre-existing Home Assistant environment.
-- Testing EMHASS-Add-on on a Home Assistant inside a vertual test environment _(Using VS-Code)_.
+- Testing EMHASS-Add-on on a Home Assistant with virtual test environment with VS-Code Dev Containers.
 
 See the following steps for both options.
 
-_The following examples are for testing the EMHASS-Add-on integration _(Docker wrapper of EMHASS for Home Assistant)_. To develop/test the EMHASS Packadge itself, check EMHASS [Develop page](https://emhass.readthedocs.io/en/latest/develop.html)_.
+_Note: The following examples are for testing the EMHASS-Add-on integration with Home Assistant. To develop/test the EMHASS Package and its Docker container itself, check the EMHASS [Develop page](https://emhass.readthedocs.io/en/latest/develop.html)_.
 
-_See [Test EMHASS-Add-On build](#Test-EMHASS-Add-On-build) for an example of testing Home Assistants Docker image build._
+## Develop on VS-Code Dev Container with Home Assistant test environment
 
-## Develop on VS-Code DevContainer with Home Assistant test environment
+Using VS-Code Dev Containers, you can generate a Home Assistant test environment for the EMHASS Add-on before release. The steps to achieve this are as follows:  
+</br>
+_Note: These following steps require VS-Code and the Dev Container Extension to be installed and operational. See ['Developing inside a Container'](https://code.visualstudio.com/docs/DevContainers/containers) for more information._
 
-Using VS-Code DevContainers, you can generate a Home Assistant test environment for the Add-on before release. We can pull a version of the EMHASS package (required with EMHASS-Add-on) from a Git repo/branch, or via pip. Alternately, we can specify different pre-built EMHASS-Add-On versions _(EMHASS-Add-On Docker images)_ from DockerHub.
 
-See the following steps:
+1) Git clone `EMHASS-Add-on` repository and open VS-code 
+    ```bash
+    git clone https://github.com/davidusb-geek/emhass-add-on.git
+    cd emhass-add-on
+    code .
+    ```
 
-- DockerHub:
-  - Edit the `version` line from from [`config.yml`](./emhass/config.yml) to pull different versions of EMHASS-Add-On via DockerHub
-- Git/pip:
-  - Comment out `image: "davidusb/image-{arch}-emhass"` line from [`config.yml`](./emhass/config.yml). This will tell the addon to build from the local Dockerfile and not pull Image from DockerHub
-  - Git
-    - Change `build_version: addon` in [_build.yaml_](./emhass/build.yaml) to `build_version: addon-git`. _(This overrides the pip version of EMHASS specified via [requirements.txt](./emhass/requirements.txt))_
-    - To specify the Git repo and branch, change lines accordingly in [*build.yaml*](/emhass/build.yaml).
-      - repo: `#build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode`
-      - branch: `#build_branch: master #addon-git mode`
+2) Adjust the EMHASS image to the version you would like to test. To adjust the image, you may select one of three options:
+    - Change the EMHASS Docker image version tag
+    - Change the EMHASS Docker image repository
+    - Build a custom version of EMHASS locally  
 
-  - pip
-    - Change `emhass` version in [requirements.txt](/emhass/requirements.txt) to pull EMHASS via pip version.
-      - You may need to modify the other python packages to different versions to match
-- Finally
-  - Run _(if not already)_  the VS-Code DevContainer _(Shortcut: `F1` > `Dev Containers: Rebuild and Reopen in Container`)_ - This requires DevContainers to be operational. See [visualstudio.com - Developing inside a Container](https://code.visualstudio.com/docs/devcontainers/containers) for more info
-  - Start VS-Code Task to start Home Assistant (`ctrl+shift+p`>`Tasks: Run Task`> `Start Home Assistant`)
-    - Login to the generated HA Portal: `localhost:7123`
-    - Navigate to Home Assistant: `Add-ons` > `ADD-ON STORE`
-    - Install/Run and Test Add-on
-      - For more infomation see Home Assistant's [local addon testing](https://developers.home-assistant.io/docs/add-ons/testing).
+    See [Customizing EMHASS](##Customizing-EMHASS) for more information.
 
-_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, `check for updates` on Add-on Store page, and re-installing._  
-  _If you have chosen Git, also try removing the `emhass` python package from requirements.txt ._
+3) Run Home Assistant Environment
+    - Run _(if not already)_  the VS-Code Dev Container
+      - Shortcut: `F1` > `Dev Containers: Rebuild and Reopen in Container`
+    - Start VS-Code Task to start Home Assistant 
+      - `ctrl+shift+p`>`Tasks: Run Task`> `Start Home Assistant`
+      - Login to the generated HA Portal: `localhost:7123`
+      - Navigate to Home Assistant: 
+        - `Add-ons` > `ADD-ON STORE`
+      - Install/Run and Test Add-on
+        - For more information see Home Assistant's [Local add-on testing](https://developers.home-assistant.io/docs/add-ons/testing).
+
+_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, `check for updates` on Add-on Store page, and re-installing._
 
 ## Adding EMHASS-Add-on into pre-existing Home Assistant environment
 
 If you would like to test a version of EMHASS-Add-on inside a pre-existing Home Assistant (with Supervisor) environment, see the following steps:
 
-- With your preferred method of choice, clone the emhass-add-on repository to the addons folder
-  - One method is to use the [`Home Assistant Add-on: SSH server`](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md) addon to add:
-    - Install addon and click `OPEN WEB UI`
-      - See [SSH Addon README](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md#installation) for install steps
-    - Type commands:
-      ```bash
-      cd ~/addons/
-      git clone https://github.com/davidusb-geek/emhass-add-on
-      ```
-- With your preferred method of choice, indicate which EMHASS package to build with (`image`), or specify what built DockerHub version of EMHASS-Add-on (`version`) to use,  in section of [`config.yml`](./emhass/config.yml) file:
-  - Comment out the **image** line `image: "davidusb/image-{arch}-emhass"` if you wish to pull a EMHASS version from pip or Git repo/branch
-    - ssh example:
-      ```bash
-      sed -i.bak '/image:/ s/./#&/' ~/addons/emhass-add-on/emhass/config.yml
-      ```
-  - Change **version** if you would like to pull in an older version of EMHASS-Add-on _(pre built Docker image)_ from DockerHub (Default state)
-    - ssh example:
-      ```bash
-      emhassVersion=0.6.5
-      sed -i.bak "s/version:.*/version: $emhassVersion/g"  ~/addons/emhass-add-on/emhass/config.yml
-      ```
-- If you want EMHASS from **pip**:
-  - To specify the EMHASS pip version, modify the `emhass` version number in [requirements.txt](/emhass/requirements.txt)
-    - ssh example:
+1) With your preferred method of choice, clone the emhass-add-on repository to the addons folder
+    - One method is to use the [`Home Assistant Add-on: SSH server`](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md) addon to add:
+      - Install addon and click `OPEN WEB UI`
+        - See [SSH Addon README](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md#installation) for install steps
+      - Type commands to clone repository:
         ```bash
-        emhassVersion=0.7.7
-        sed -i.bak "s/emhass==.*/emhass==$emhassVersion/g"  ~/addons/emhass-add-on/emhass/requirements.txt
+        cd ~/addons
+        git clone https://github.com/davidusb-geek/emhass-add-on
+        cd ./emhass-add-on
         ```
+2) Adjust the EMHASS image to the version you would like to test. To adjust the image, you may select one of three options:
+    - Change the EMHASS Docker image version tag
+    - Change the EMHASS Docker image repository
+    - Build a custom version of EMHASS locally  
 
-- If you want EMHASS from **Git**:
-  - Tell the Add-on to use Git, and specify what EMHASS repo and branch you would like to pull.
+    See [Customizing EMHASS](##Customizing-EMHASS) for more information.
 
-    - To tell Docker to pull from Git, change the build argument from `addon` to `addon-git` in the [_build.yaml_](./emhass/build.yaml).
-      - ssh example:
-        ```bash
-        sed -i.bak "s/build_version:.*/build_version: addon-git/g"  ~/addons/emhass-add-on/emhass/build.yaml
-        ```
-    - To specify the EMHASS Git repository and branch values, _(optional)_ change lines in [*build.yaml*](/emhass/build.yaml):
-      - `#build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode`
-      - `#build_branch: master #addon-git mode`  _
-
-      - ssh example:
-
-        ```bash
-        repo=https://github.com/daviasdasdsasddusb-geek/emhass.git
-        branch=masaddasdasdter
-
-        sed -i.bak "s%build_repo:\s.*%build_repo: $repo%g"  ~/addons/emhass-add-on/emhass/build.yaml
-        sed -i.bak "s/build_branch:\s.*/build_branch: $branch/g"  ~/addons/emhass-add-on/emhass/build.yaml
-        ```
-- Finally:
-  - head to Home Assistant: `Add-ons` > `ADD-ON STORE`
-    - you should see an `EMHASS` Add-on under `Local add-ons`
-      - If you don't, try hamburger button _(3 dots)_ on top right > check updates > refresh page
-  - Install and test Add-on
-  - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the Add-on.
+3) Run EMHASS addon:
+    - head to Home Assistant: `Add-ons` > `ADD-ON STORE`
+      - you should see an `EMHASS` Add-on under `Local add-ons`
+        - If you don't, try hamburger icon ☰ on top right > check updates > refresh page
+    - Install and test Add-on
+    - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the Add-on.
 
 </br>
 
-_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, check for updates on Add-on Store page, and re-installing._  
-  _If you have chosen Git, also try removing the emhass python package from requirements.txt ._
+_Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, check for updates on the Add-on Store page, and re-install._
 
-## Test EMHASS-Add-On build
+## Customizing EMHASS 
+If you are testing EMHASS-Add-on, it is likely that you would like with a particular version of EMHASS.
+There are different methods of achieving this, depending on where the source of the EMHASS package resigns. See examples bellow: 
 
-You can test the EMHASS-Add-On docker image build using the Home Assistant builder.
+### Change the EMHASS Docker image version tag
+If you would like to solely change the EMHASS version _(i.e. Image tag)_ of the EMHASS package. (keeping the Docker repository to [ghcr.io/davidusb-geek/emhass](https://github.com/davidusb-geek/emhass/pkgs/container/emhass)). Follow the steps bellow:
 
-**emhass-add-on local repo**
+1) Change the `version:` line in the emhass-add-on config.yml:
+    ```bash
+    emhassVersion=v0.20.0
+    sed -i.bak "s/version:.*/version: $emhassVersion/g"  ~/addons/emhass-add-on/emhass/config.yml
+    ```
+*Make sure the version you select matches one of the tagged images in https://github.com/davidusb-geek/emhass/pkgs/container/emhass*
 
-Linux example:
+### Change the EMHASS Docker image repository
+If you would like to test your own forked version of EMHASS, the container repository can be changed to match your forked repository. The steps to accomplish this include:
 
-```bash
-architecture=amd64 #your host machine architecture
+1) If not already, enable the Github Actions in your EMHASS fork 
+    - Head to the actions tag on your github fork (E.g. https://github.com/YOURUSERNAME/emhass/actions)
+    - Read the warnings and observe the workflow files on the repo (https://github.com/YOURUSERNAME/emhass/tree/master/.github/workflows)
+    - If you understand the workflows and accept the warnings, press `I understand my workflows, go ahead and enable them`
 
-docker run --rm --privileged -v ~/.docker:/root/.docker -v ${PWD}:/data ghcr.io/home-assistant/${architecture}-builder:latest --test --${architecture} --target /data/emhass
-```
+2) Create a github release of your EMHASS fork
+    - In your EMHASS fork, draft a new release to trigger the github action to build the docker image 
+      - Head the releases page of your fork and draft a new release (https://github.com/YOURUSERNAME/emhass/releases/new)
+    - In `choose a new tag` create a new suitable tag name (E.g. `v2.0.0`)
+    - Change `Target` if you are working on a branch that is not the default `master`
+    - When happy, click `publish release`
+    - Head to the Actions page of your fork again to observe the `publish_docker` workflow running. Once its finished, if successful, a new Docker image should be available in the packages page of your Github repo (https://github.com/YOURUSERNAME/emhass/pkgs/container/emhass) 
 
-_confirm terminal directory is in root `emhass-add-on` folder_
+3) In your home assistant environment change the `version:` and `image:` lines in the addons config.yml
+    - In the package page on Github copy the repository url and tag name provided (E.g. Repo:`ghcr.io/YOURUSERNAME/emhass` Tag:`v2.0.0`)
+    - Edit the version/tag and image/repo sections of the config.yaml
+      ```bash
+      emhassVersion=v2.0.0
+      emhassRepo="ghcr.io/YOURUSERNAME/emhass"
+      sed -i.bak "s%version:.*%version: $emhassVersion%g"  ~/addons/emhass-add-on/emhass/config.yml
+      sed -i.bak "s%image:.*%image: $emhassRepo%g"  ~/addons/emhass-add-on/emhass/config.yml
+      ```
 
-**emhass-add-on Git repo**
-
-Linux example:
-
-```bash
-architecture=amd64 #your host machine architecture
-
-repo=https://github.com/davidusb-geek/emhass-add-on.git #repo example
-branch=main #branch example
-
-docker run --rm --privileged -v ~/.docker:/root/.docker ghcr.io/home-assistant/${architecture}-builder:latest --test --${architecture} --target emhass -r ${repo} -b ${branch}
-```
+ ### Build a custom version of EMHASS locally
+ The last option requires merging the EMHASS-Add-on and EMHASS repository together so the user can build the Docker container locally for rapid testing.
