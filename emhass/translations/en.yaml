@@ -1,199 +1,34 @@
 configuration:
+  server_ip:
+   name: server_ip, binds the webserver server to an ip address/range
+   description: default 0.0.0.0, which sallows the server to listen to all network interfaces accessible inside the docker container
   hass_url:
-    name: hass_url, The Home Assistant instance URL
-    description: (Default "empty"). Enter the URL (Ex. http://localhost:8123/) of your Home Assistant instance. If using the supervisor you can leave this to the default "empty" value.
+    name: URL, the Home Assistant instance
+    description: hass_url (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value. Otherwise enter the URL (Ex. http://localhost:8123/) of your external Home Assistant instance.
   long_lived_token:
-    name: long_lived_token, A Long-Lived Access Token
-    description: (Default "empty"). This can be created from the Lovelace profile page. If using the supervisor you can leave this to the default "empty" value.
-  costfun:
-    name: costfun, Define the type of cost function
-    description: (Default profit). This is optional and the options are profit, cost and self-consumption
-  logging_level:
-    name: logging_level, Set the logger level
-    description: (Default INFO) This sets the logger level. Change to WARNING or ERROR to reduce logging if needed.
+    name: Long-Lived Access Token of the Home Assistant instance
+    description: long_lived_token (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value.  Otherwise enter the Long-Lived Access Token for your Home Assistant instance, this can be created from the Lovelace profile page.
   data_path:
-    name: data_path, Set folder path where EMHASS data will be stored
-    description: (Default default) Selecting /data/ will store data in an enclosed folder, only assessable by the addon itself. Select /share/ to store data in the mounted share folder, accessible outside of the Addon.
-  optimization_time_step:
-    name: optimization_time_step, The time step to resample retrieved data from hass
-    description: (Default 30). This parameter is given in minutes. It should not be defined too low or you will run into memory problems when defining the Linear Programming optimization.
-  historic_days_to_retrieve:
-    name: historic_days_to_retrieve, The number of history days to retrieve for perfect-optim
-    description: (Default 2). We will retrieve data from now and up to historic_days_to_retrieve days. This will be used for the perfect-optim task.
-  method_ts_round:
-    name: method_ts_round, Set the method for timestamp rounding
-    description: (Default nearest). options are first, last and nearest.
-  set_total_pv_sell:
-    name: set_total_pv_sell, Set the total PV production to sell
-    description: (Default false). Set this parameter to true to consider that all the PV power produced is injected to the grid. No direct self-consumption, or false, for as system with direct self-consumption.
-  lp_solver:
-    name: lp_solver, Linear programming solver
-    description: (Default COIN_CMD). Set the name of the linear programming solver that will be used. The options are PULP_CBC_CMD, GLPK_CMD and COIN_CMD.
-  lp_solver_path:
-    name: lp_solver_path, The path to the linear programming solver
-    description: (Default /usr/bin/cbc). Set the path to the LP solver.
-  set_nocharge_from_grid:
-    name: set_nocharge_from_grid, Set no charge from grid condition
-    description: (Default False). Set this to true if you want to forbidden to charge the battery from the grid. The battery will only be charged from excess PV.
-  set_nodischarge_to_grid:
-    name: set_nodischarge_to_grid, Set no discharge to grid condition
-    description: (Default False). Set this to true if you want to forbidden to discharge the battery power to the grid.
-  set_battery_dynamic:
-    name: set_battery_dynamic, Set a power dynamic limiting condition to the battery power
-    description: (Default False). This is an additional constraint on the power dynamic in power per unit of time.
-  battery_dynamic_max:
-    name: battery_dynamic_max, The maximum positive battery power dynamic
-    description: (Default 0.9). This is the power variation in percentage of battery maximum power.
-  battery_dynamic_min:
-    name: battery_dynamic_min, The minimum negative battery power dynamic
-    description: (Default -0.9). This is the power variation in percentage of battery maximum power.
-  weight_battery_discharge:
-    name: weight_battery_discharge, A weight to the cost function for battery discharge
-    description: (Default 0.0). This is an additional weight (currency/ kWh) applied in cost function to battery usage for discharge.
-  weight_battery_charge:
-    name: weight_battery_charge, A weight to the cost function for battery charge
-    description: (Default 0.0). This is an additional weight (currency/ kWh) applied in cost function to battery usage for charge.
-  load_forecast_method:
-    name: load_forecast_method, The load forecast method
-    description: (Default naive). The available options are 'csv', 'list' or 'mlforecaster' to use the machine learning forecaster.
-  delta_forecast_daily:
-    name: delta_forecast_daily, The number of days for forecasted data
-    description: (Default 1) int number of days (1 day = 1)
-  weather_forecast_method:
-    name: weather_forecast_method, Define the weather forecast method that will be used. (PV power production forecast)
-    description: (Default scrapper). The options are 'scrapper' (ClearOutside), 'Solcast', 'solar.forecast' and 'csv'.
+    name: Set folder path where EMHASS data will be stored
+    description: data_path (Default default), selecting /data/ will store data in an enclosed folder, only assessable by the addon itself. Select /share/emhass to store data in the mounted share folder, accessible outside of the addon.
   time_zone:
     name: The time zone of your system.
-    description: (Default Europe/Paris).
+    description: time_zone, (Default Europe/Paris) this is automatically set if your are using the supervisor.
   Latitude:
-    name: Your systems latitude. Used for solar.forecast & scrapper for location & for estimating cloud cover if Solcast is selected
-    description: (Default 45.0).
+    name: Your systems latitude.
+    description: Latitude, (Default 45.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
   Longitude:
-    name: Your systems longitude. Used for solar.forecast & scrapper for location & for estimating cloud cover if Solcast is selected
-    description: (Default 6.0).
+    name: Your systems longitude.
+    description: Longitude, (Default 6.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
   Altitude:
     name: Your systems altitude
-    description: (Default 100.0).
-  optional_solcast_api_key:
-    name: optional_solcast_api_key, solcast api key (method=solcast)
-    description: string value
-  optional_solcast_rooftop_id:
-    name: optional_solcast_rooftop_id, solcast rooftop id (method=solcast)
-    description: string value
-  optional_solar_forecast_kwp:
-    name: optional_solar_forecast_kwp, The PV peak installed power in kW used for the 'solar.forecast' API call. (method=solar.forecast)
-    description: (Default 0). int value for PV peak installed power in KW
-  load_cost_forecast_method:
-    name: load_cost_forecast_method, Define the method that will be used for load cost forecast.
-    description: (Default hp_hc_periods). The options are 'hp_hc_periods' for peak and non-peak hours contracts and 'csv' to load custom cost from CSV file.
-  sensor_power_photovoltaics:
-    name: sensor_power_photovoltaics, The Home Assistant sensor for PV power production
-    description: This is the name of the photovoltaic produced power sensor in Watts from Home Assistant. For example sensor.power_photovoltaics.
-  sensor_power_load_no_var_loads:
-    name: sensor_power_load_no_var_loads, The Home Assistant sensor for the load power without the deferrable loads
-    description: The name of the household power consumption sensor in Watts from Home Assistant. The deferrable loads that we will want to include in the optimization problem should be substracted from this sensor in HASS. For example sensor.power_load_no_var_loads.
-  load_negative:
-    name: load_negative, If the retrived load variable is negative by convention
-    description: (Default False). Options are True or False
-  set_zero_min:
-    name: set_zero_min, To give a special treatment for a minimum value saturation to zero for power consumption data. Values below zero are replaced by nans.
-    description: (Default True). Options are True or False (to enable or disable)
-  number_of_deferrable_loads:
-    name: number_of_deferrable_loads, The number of deferrable loads
-    description: (Default 2). Define the number of deferrable loads to consider.
-  list_nominal_power_of_deferrable_loads:
-    name: list_nominal_power_of_deferrable_loads, The nominal power for each deferrable load in Watts
-    description: This is a list of elements, the number of elements. (number of items = number_of_deferrable_loads)
-  list_operating_hours_of_each_deferrable_load:
-    name: list_operating_hours_of_each_deferrable_load, The total number of hours that each deferrable load should operate
-    description: A list of elements. (number of items = number_of_deferrable_loads)
-  list_peak_hours_periods_start_hours:
-    name: list_peak_hours_periods_start_hours, The total number of hours that each deferrable load should operate
-    description: A list of hours in 24h HH:MM format (number of items = number_of_deferrable_loads)
-  list_peak_hours_periods_end_hours:
-    name: list_peak_hours_periods_end_hours, This is a list of end hours of peak hours periods
-    description: A list of hours in 24h HH:MM format. (number of items = number_of_deferrable_loads)
-  list_start_timesteps_of_each_deferrable_load:
-    name: list_start_timesteps_of_each_deferrable_load, The timestep as from which each deferrable load is allowed to operate. Operation before this timestep is not allowed.
-    description: "(Default start_timesteps_of_each_deferrable_load: 0). A list of elements. If value 0 is given, the deferrable load will be optimized as from the beginning of the complete prediction horizon window. (number of items = number_of_deferrable_loads)"
-  list_end_timesteps_of_each_deferrable_load:
-    name: list_end_timesteps_of_each_deferrable_load,The timestep before which each deferrable load should operate. Operation after this timestep is not allowed.
-    description: "(Default end_timesteps_of_each_deferrable_load: 0). A list of elements. If value 0 is given, the deferrable load optimization window will extend up to the end of the prediction horizon window. (number of items = number_of_deferrable_loads)"
-  list_treat_deferrable_load_as_semi_cont:
-    name: list_treat_deferrable_load_as_semi_cont, Treat each deferrable load as a semi-continuous variable
-    description: "(Default treat_deferrable_load_as_semi_cont: true). Semi-continuous variables are variables that can take either their nominal value or zero. (number of items = number_of_deferrable_loads)"
-  list_set_deferrable_load_single_constant:
-    name: list_set_deferrable_load_single_constant, Set each deferrable load as a constant fixed value variable with just one startup for each optimization task (ex. each 24h) 
-    description: "(Default treat_deferrable_load_as_semi_cont: false). Options are True or False (to enable or disable) (number of items = number_of_deferrable_loads)"
-  list_set_deferrable_startup_penalty:
-    name: list_set_deferrable_startup_penalty, for each deferrable load, add a penalty P (Power) each time the deferrable load turns on. 
-    description: "(Default set_deferrable_startup_penalty: 0). The deferrable load turns on will incur an additional cost of P * list_nominal_power_of_deferrable_loads * cost_of_electricity at that time (number of items = number_of_deferrable_loads)"
-  load_peak_hours_cost:
-    name: load_peak_hours_cost, The cost of the electrical energy during peak hours
-    description: (Default 0.1907). The cost of the electrical energy from the grid during peak hours in €/kWh.
-  load_offpeak_hours_cost:
-    name: load_offpeak_hours_cost, The cost of the electrical energy during non-peak hours
-    description: (Default 0.1419). The cost of the electrical energy from the grid during non-peak hours in €/kWh.
-  production_price_forecast_method:
-    name: production_price_forecast_method, Define the method that will be used for PV power production price forecast. This is the price that is payed by the utility for energy injected to the grid.
-    description: (Default constant). options are 'constant' for constant fixed value or 'csv' to load custom price forecast from a CSV file
-  photovoltaic_production_sell_price:
-    name: photovoltaic_production_sell_price, The paid price for energy injected to the grid
-    description: (Default 0.065). The paid price for energy injected to the grid from excedent PV production in €/kWh.
-  maximum_power_from_grid:
-    name: maximum_power_from_grid, The maximum power from the grid
-    description: (Default 9000). The maximum power that can be supplied by the utility grid in Watts (consumption).
-  maximum_power_to_grid:
-    name: maximum_power_to_grid, The maximum power to the grid
-    description: (Default 9000). The maximum power that can be supplied to the utility grid in Watts (injection).
-  list_pv_module_model:
-    name: list_pv_module_model, (method=scrapper/solar.forecast) A list of the PV module model
-    description: For example 'CSUN_Eurasia_Energy_Systems_Industry_and_Trade_CSUN295_60M'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
-  list_pv_inverter_model:
-    name: list_pv_inverter_model, (method=all methods, used in the optimization to set the PV peak power) A list of the PV inverter model
-    description: For example 'Fronius_International_GmbH__Fronius_Primo_5_0_1_208_240__240V_'. This parameter can be a list of strings to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270). When finding the correct model for your installation remember to replace all the special characters in the model name by '_'.
-  list_surface_tilt:
-    name: list_surface_tilt, (method=scrapper/solar.forecast) The tilt angle of your solar panels
-    description: (Default 30) This is a value between 0 and 90. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-  list_surface_azimuth:
-    name: list_surface_azimuth, (method=scrapper/solar.forecast) The azimuth of your PV installation
-    description: (Default 205). This is a value between 0 and 360. This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array (azimuth=90) and one west-facing array (azimuth=270).
-  list_modules_per_string:
-    name: list_modules_per_string, (method=scrapper) The number of modules per string
-    description: (Default 16). This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
-  list_strings_per_inverter:
-    name: list_strings_per_inverter, (method=scrapper) The number of used strings per inverter
-    description: (Default 1). This parameter can be a list of integers to enable the simulation of mixed orientation systems, for example one east-facing array and one west-facing array.
-  inverter_is_hybrid:
-    name: inverter_is_hybrid, Set to True if it is a hybrid inverter (PV+batteries) or not
-    description: A special parameter to consider that the installation inverter is hybrid for PV and batteries. (Default False).
-  compute_curtailment:
-    name: compute_curtailment, Set to True to compute a PV curtailment variable.
-    description: A special parameter to define if we will compute a PV curtailment variable. (Default False).
-  set_use_battery:
-    name: set_use_battery, Set if a battery is present
-    description: Set to True if we should consider an energy storage device such as a Li-Ion battery. (Default False).
-  battery_discharge_power_max:
-    name: battery_discharge_power_max, The maximum discharge power in Watts
-    description: (Default 1000).
-  battery_charge_power_max:
-    name: battery_charge_power_max, The maximum charge power in Watts
-    description: (Default 1000).
-  battery_discharge_efficiency:
-    name: battery_discharge_efficiency, The discharge efficiency
-    description: (Default 0.95).
-  battery_charge_efficiency:
-    name: battery_charge_efficiency, The charge efficiency
-    description: (Default 0.95).
-  battery_nominal_energy_capacity:
-    name: battery_nominal_energy_capacity, The total capacity of the battery stack in Wh
-    description: (Default 5000).
-  battery_minimum_state_of_charge:
-    name: battery_minimum_state_of_charge, The minimun allowable battery state of charge
-    description: (Default 0.3).
-  battery_maximum_state_of_charge:
-    name: battery_maximum_state_of_charge, The maximum allowable battery state of charge
-    description: (Default 0.9).
-  battery_target_state_of_charge:
-    name: battery_target_state_of_charge, The desired battery state of charge at the end of each optimization cycle
-    description: (Default 0.6).
+    description: Altitude, (Default 100.0) this is automatically set if your are using the supervisor.
+  solcast_api_key:
+    name: optional_solcast_api_key, solcast api key
+    description: optional_solcast_api_key, solcast api key (weather_forecast_method=solcast)
+  solcast_rooftop_id:
+    name: optional_solcast_rooftop_id, solcast rooftop id
+    description: optional_solcast_rooftop_id, solcast rooftop id (weather_forecast_method=solcast)
+  solar_forecast_kwp:
+    name: optional_solar_forecast_kwp,int value for PV peak installed power in KW. (weather_forecast_method=solar.forecast)
+    description: optional_solar_forecast_kwp (Default 0). The PV peak installed power in kW used for the 'solar.forecast' API call

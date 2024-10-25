@@ -1,12 +1,7 @@
-build_from: #choose between debian or raspbian images
-  amd64: ghcr.io/home-assistant/amd64-base-debian:bookworm
-  armhf: ghcr.io/home-assistant/armhf-base-raspbian:bookworm
-  armv7: ghcr.io/home-assistant/armv7-base-debian:bookworm
-  aarch64: ghcr.io/home-assistant/aarch64-base-debian:bookworm
-args:
-  build_version: addon
-  build_repo: https://github.com/davidusb-geek/emhass.git #addon-git mode
-  build_branch: master #addon-git mode
-codenotary:
-  signer: notary@home-assistant.io
-  base_image: notary@home-assistant.io
+# build_from: #choose between debian or raspbian images
+#   amd64: ghcr.io/davidusb-geek/emhass
+#   armhf: ghcr.io/davidusb-geek/emhass
+#   armv7: ghcr.io/davidusb-geek/emhass
+#   aarch64: ghcr.io/davidusb-geek/emhass
+# args:
+#   build_version: v0.20.0 #In Dockerfile, which version of emhass to pull from
