@@ -28,7 +28,7 @@ _Note: These following steps require VS-Code and the Dev Container Extension to 
 2) Adjust the EMHASS image to the version you would like to test. To adjust the image, you may select one of three options:
     - Change the EMHASS Docker image version tag
     - Change the EMHASS Docker image repository
-    - Build a custom version of EMHASS locally  
+    - Build a custom image of EMHASS locally  
 
     See [Customizing EMHASS](##Customizing-EMHASS) for more information.
 
@@ -62,14 +62,14 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
 2) Adjust the EMHASS image to the version you would like to test. To adjust the image, you may select one of three options:
     - Change the EMHASS Docker image version tag
     - Change the EMHASS Docker image repository
-    - Build a custom version of EMHASS locally  
+    - Build a custom image of EMHASS locally  
 
     See [Customizing EMHASS](##Customizing-EMHASS) for more information.
 
 3) Run EMHASS addon:
     - head to Home Assistant: `Add-ons` > `ADD-ON STORE`
       - you should see an `EMHASS` Add-on under `Local add-ons`
-        - If you don't, try hamburger icon ☰ on top right > check updates > refresh page
+        - If you do not, try hamburger icon ☰ on top right > `check updates` > refresh page
     - Install and test Add-on
     - Use the Supervisor logs _(on the config/logs page)_ to see any logs with the Add-on.
 
@@ -78,13 +78,13 @@ If you would like to test a version of EMHASS-Add-on inside a pre-existing Home 
 _Note: If, on run, the emhass version looks off. Try: uninstalling Add-on, check for updates on the Add-on Store page, and re-install._
 
 ## Customizing EMHASS 
-If you are testing EMHASS-Add-on, it is likely that you would like with a particular version of EMHASS.
-There are different methods of achieving this, depending on where the source of the EMHASS package resigns. See examples bellow: 
+If you are testing EMHASS-Add-on, it is likely that you would want to select a particular version of EMHASS to run and test.
+There are different methods of achieving this, depending on where the source of the desired EMHASS package resigns. See examples bellow: 
 
 ### Change the EMHASS Docker image version tag
 If you would like to solely change the EMHASS version _(i.e. Image tag)_ of the EMHASS package. (keeping the Docker repository to [ghcr.io/davidusb-geek/emhass](https://github.com/davidusb-geek/emhass/pkgs/container/emhass)). Follow the steps bellow:
 
-1) Change the `version:` line in the emhass-add-on config.yml:
+1) Change the `version:` line in the emhass-add-on `config.yml`:
     ```bash
     emhassVersion=v0.20.0
     sed -i.bak "s/version:.*/version: $emhassVersion/g"  ~/addons/emhass-add-on/emhass/config.yml
@@ -92,7 +92,8 @@ If you would like to solely change the EMHASS version _(i.e. Image tag)_ of the 
 *Make sure the version you select matches one of the tagged images in https://github.com/davidusb-geek/emhass/pkgs/container/emhass*
 
 ### Change the EMHASS Docker image repository
-If you would like to test your own forked version of EMHASS, the container repository can be changed to match your forked repository. The steps to accomplish this include:
+If you would like to test your own forked version of EMHASS, the container repository can be changed to match your forked repository. The steps to accomplish this include:  
+ _(building your own EMHASS image)_
 
 1) If not already, enable the Github Actions in your EMHASS fork 
     - Head to the actions tag on your github fork (E.g. https://github.com/YOURUSERNAME/emhass/actions)
@@ -103,7 +104,7 @@ If you would like to test your own forked version of EMHASS, the container repos
     - In your EMHASS fork, draft a new release to trigger the github action to build the docker image 
       - Head the releases page of your fork and draft a new release (https://github.com/YOURUSERNAME/emhass/releases/new)
     - In `choose a new tag` create a new suitable tag name (E.g. `v2.0.0`)
-    - Change `Target` if you are working on a branch that is not the default `master`
+    - Change `Target` if you wish to select a branch that is not the default `master`
     - When happy, click `publish release`
     - Head to the Actions page of your fork again to observe the `publish_docker` workflow running. Once its finished, if successful, a new Docker image should be available in the packages page of your Github repo (https://github.com/YOURUSERNAME/emhass/pkgs/container/emhass) 
 
@@ -117,5 +118,19 @@ If you would like to test your own forked version of EMHASS, the container repos
       sed -i.bak "s%image:.*%image: $emhassRepo%g"  ~/addons/emhass-add-on/emhass/config.yml
       ```
 
- ### Build a custom version of EMHASS locally
- The last option requires merging the EMHASS-Add-on and EMHASS repository together so the user can build the Docker container locally for rapid testing.
+ ### Build a custom image of EMHASS locally
+ The last option requires merging the EMHASS-Add-on and EMHASS repository together so the user can build the Docker container locally for rapid testing. This is the most complicated approach and the example bellow is not guaranteed to work.
+
+```bash
+cd ~/addons/emhass-add-on/
+# git clone EMHASS repo (or forked emhass repo)
+git clone https://github.com/davidusb-geek/emhass.git ./emhass-git
+# copy required EMHASS files to the emhass-add-on root
+cp ./emhass-git/Dockerfile .
+cp ./emhass-git/requirements.txt .
+cp ./emhass-git/src .
+cp ./emhass-git/setup.py .
+cp ./emhass-git/data .
+# comment out the `image:` line of the emhass-add-on config.yml file. To tell Home Assistant to build the Dockerfile locally
+sed -i.bak '/image:/ s/./#&/' ~/addons/emhass-add-on/emhass/config.yml
+```
