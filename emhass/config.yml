@@ -14,6 +14,7 @@ ports:
 ports_description:
   5000/tcp: Web interface and API
 webui: http://[HOST]:[PORT:5000]
+watchdog: http://[HOST]:[PORT:5000]
 map:
   - share:rw
 init: false
