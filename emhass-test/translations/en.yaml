@@ -1,0 +1,34 @@
+configuration:
+  server_ip:
+   name: server_ip, binds the webserver server to an ip address/range
+   description: default 0.0.0.0, which sallows the server to listen to all network interfaces accessible inside the docker container
+  hass_url:
+    name: URL, the Home Assistant instance
+    description: hass_url (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value. Otherwise enter the URL (Ex. http://localhost:8123/) of your external Home Assistant instance.
+  long_lived_token:
+    name: Long-Lived Access Token of the Home Assistant instance
+    description: long_lived_token (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value.  Otherwise enter the Long-Lived Access Token for your Home Assistant instance, this can be created from the Lovelace profile page.
+  data_path:
+    name: Set folder path where EMHASS data will be stored
+    description: data_path (Default default), selecting /data/ will store data in an enclosed folder, only assessable by the addon itself. Select /share/emhass to store data in the mounted share folder, accessible outside of the addon.
+  time_zone:
+    name: The time zone of your system.
+    description: time_zone, (Default Europe/Paris) this is automatically set if your are using the supervisor.
+  Latitude:
+    name: Your systems latitude.
+    description: Latitude, (Default 45.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
+  Longitude:
+    name: Your systems longitude.
+    description: Longitude, (Default 6.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
+  Altitude:
+    name: Your systems altitude
+    description: Altitude, (Default 100.0) this is automatically set if your are using the supervisor.
+  solcast_api_key:
+    name: optional_solcast_api_key, solcast api key
+    description: optional_solcast_api_key, solcast api key (weather_forecast_method=solcast)
+  solcast_rooftop_id:
+    name: optional_solcast_rooftop_id, solcast rooftop id
+    description: optional_solcast_rooftop_id, solcast rooftop id (weather_forecast_method=solcast)
+  solar_forecast_kwp:
+    name: optional_solar_forecast_kwp,int value for PV peak installed power in KW. (weather_forecast_method=solar.forecast)
+    description: optional_solar_forecast_kwp (Default 0). The PV peak installed power in kW used for the 'solar.forecast' API call
