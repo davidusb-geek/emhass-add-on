@@ -1,0 +1,38 @@
+name: EMHASS-test
+description: Energy Management for Home Assistant (testing version)
+url: https://github.com/davidusb-geek/emhass
+version: test # pull the latest test image
+slug: emhass
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+image: "ghcr.io/davidusb-geek/emhass" #set if use image container repository
+ports:
+  5000/tcp: 5000
+ports_description:
+  5000/tcp: Web interface and API
+webui: http://[HOST]:[PORT:5000]
+map:
+  - share:rw
+init: false
+hassio_role: default
+homeassistant_api: true
+ingress: true
+ingress_port: 5000
+ingress_stream: true
+panel_icon: mdi:home-lightning-bolt
+panel_title: EMHASS
+schema:
+  hass_url: "str?" #optional
+  long_lived_token: "password?" #optional
+  data_path: "list(default|/data/|/share)?" #optional
+  time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
+  Latitude: "float?" #optional
+  Longitude: "float?" #optional
+  Altitude: "float?" #optional
+  solcast_api_key: "password?" #optional
+  solcast_rooftop_id: "str?" #optional
+  solar_forecast_kwp: "float?" #optional
+  server_ip: "list(0.0.0.0|127.0.0.1)?" #optional
