@@ -2,7 +2,7 @@ name: EMHASS-test
 description: Energy Management for Home Assistant (testing version)
 url: https://github.com/davidusb-geek/emhass
 version: test # pull the latest test image
-slug: emhass
+slug: emhass-test
 arch:
   - aarch64
   - amd64
@@ -23,7 +23,7 @@ ingress: true
 ingress_port: 5000
 ingress_stream: true
 panel_icon: mdi:home-lightning-bolt
-panel_title: EMHASS
+panel_title: EMHASS-test
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
