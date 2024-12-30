@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1 - 2024-12-30
+### Patch fix
+- Fixed error with retrieve config from HA
+
 ## 0.12.0 - 2024-12-29
 ### BREAKING CHANGE
 - The solar PV system is now optional. If you have a PV system then use the switch on the webui or set the `set_use_pv` parameter to `True`.
