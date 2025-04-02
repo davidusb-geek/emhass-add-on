@@ -1,13 +1,13 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: v0.12.8 #set if use image container version
+version: v0.13.0 #set if use image container version
 slug: emhass
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
+  # - armhf
+  # - armv7
 image: "ghcr.io/davidusb-geek/emhass" #set if use image container repository
 ports:
   5000/tcp: 5000
