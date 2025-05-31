@@ -56,6 +56,12 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 
 The steps to install EMHASS as an Home Assistant addon:
 
+<a href="https://my.home-assistant.io/redirect/supervisor_store/" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_store.svg" alt="Open your Home Assistant instance and show the add-on store." /></a>
+
+<details>
+<summary><b> Manual install steps</b></summary>
+    
+## Installation Method 1
 1) Add the EMHASS-Add-on repository to the HAOS add-on store
 
     - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
@@ -107,6 +113,7 @@ _Warning: This method will override the Docker image tag, and therefore will req
     - From here a new Addon Source under the name `Local add-ons` should appear _(if not repeat step 4)_
     - Install the EMHASS addon, Note: after clicking the EMHASS addon, the `Current version: ` Tag on the top left of the EMHASS card.
 
+</details>
 
 ## Developing EMHASS/EMHASS-Add-on
 
