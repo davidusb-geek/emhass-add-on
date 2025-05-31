@@ -1,5 +1,7 @@
 <!-- markdown file presented on the main addon info tab -->
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Emhass_logo.svg" alt="EMHASS" width="300px">
+
 # EMHASS Add-on
 
 ### A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
