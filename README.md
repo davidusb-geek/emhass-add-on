@@ -56,8 +56,24 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 
 The steps to install EMHASS as an Home Assistant addon:
 
-<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdavidusb-geek%2Femhass-add-on" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg" alt="Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled." /></a>  
-<a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5b918bf2_emhass" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the dashboard of an add-on." /></a>
+1) Add the EMHASS-Add-on repository to the HAOS add-on store  
+<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdavidusb-geek%2Femhass-add-on" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg" alt="Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled." /></a>
+
+2) Install the EMHASS Add-on  
+<a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5b918bf2_emhass" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the dashboard of an add-on." /></a>  
+Click on `install`, the installation may take some time depending on your hardware.
+
+4) Start the EMHASS addon
+    - Once installed, head into the EMHASS addon
+    - click `start` to start the EMHASS web server
+      -  For consistent use, it is recommended that you enable: `Show in sidebar`,`Watchdog` and `Start on boot `
+
+5) Open the EMHASS web interface, and configure parameters
+    - Click `OPEN WEB UI` to enter the EMHASS web server
+    - Click the cog icon ⚙️  to to enter the emhass configuration page
+    - Insert your user specific parameters
+      - For users who wish to use `Solcast` or `Forecast.Solar` insert your secrets in the Home Assistant EMHASS configuration page, under `Show unused optional configuration options`. (E.g: `localhost:8123/hassio/addon/emhass/config`)
+
 
 <details>
 <summary><b> Manual install steps</b></summary>
