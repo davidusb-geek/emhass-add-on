@@ -5,6 +5,12 @@
 # EMHASS Add-on
 
 ### A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
+<a style="text-decoration:none" href="https://github.com/davidusb-geek/emhass/releases">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/davidusb-geek/emhass">
+  </a>
+<a style="text-decoration:none" href="https://github.com/davidusb-geek/emhass/blob/master/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/davidusb-geek/emhass">
+  </a>
 
 </br>
 
