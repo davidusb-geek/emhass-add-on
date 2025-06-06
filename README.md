@@ -50,7 +50,7 @@ The steps to install EMHASS as an Home Assistant addon:
 
 1) Add the EMHASS-Add-on repository to the HAOS add-on store
 
-    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
+    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-a-third-party-add-on-repository)
 
     - This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
 
