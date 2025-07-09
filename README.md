@@ -70,7 +70,7 @@ Click on `install`, the installation may take some time depending on your hardwa
 
 5) Open the EMHASS web interface, and configure parameters
     - Click `OPEN WEB UI` to enter the EMHASS web server
-    - Click the cog icon ⚙️  to to enter the emhass configuration page
+    - Click the cog icon ⚙️  to enter the emhass configuration page
     - Insert your user specific parameters
       - For users who wish to use `Solcast` or `Forecast.Solar` insert your secrets in the Home Assistant EMHASS configuration page, under `Show unused optional configuration options`. (E.g: `localhost:8123/hassio/addon/emhass/config`)
 
