@@ -82,7 +82,7 @@ Click on `install`, the installation may take some time depending on your hardwa
 ## Installation Method 1
 1) Add the EMHASS-Add-on repository to the HAOS add-on store
 
-    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
+    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-a-third-party-add-on-repository)
 
     - This will be: Open the add-on store with the button below, or go to settings in HA, select add-on and the add-on store.
       <a href="https://my.home-assistant.io/redirect/supervisor_store/" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_store.svg" alt="Open your Home Assistant instance and show the add-on store." /></a>
