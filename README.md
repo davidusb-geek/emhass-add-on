@@ -57,7 +57,7 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 The steps to install EMHASS as an Home Assistant addon:
 
 1) Add the EMHASS-Add-on repository to the HAOS add-on store  
-<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdavidusb-geek%2Femhass-add-on" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg" alt="Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled." /></a>
+<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdavidusb-geek%2Femhass-add-on" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg" alt="Open your Home Assistant instance and show the add-on repository dialog with a specific repository URL pre-filled." /></a>
 
 2) Install the EMHASS Add-on  
 <a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5b918bf2_emhass" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the dashboard of an add-on." /></a>  
