@@ -6,8 +6,8 @@ slug: emhass-test
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
+  # - armhf
+  # - armv7
 image: "ghcr.io/davidusb-geek/emhass" #set if use image container repository
 ports:
   5000/tcp: 5000
