@@ -1,8 +1,16 @@
 <!-- markdown file presented on the main addon info tab -->
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Emhass_logo.svg" alt="EMHASS" width="300px">
+
 # EMHASS Add-on
 
 ### A Home Assistant Add-on for the EMHASS module: Energy Management for Home Assistant
+<a style="text-decoration:none" href="https://github.com/davidusb-geek/emhass/releases">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/davidusb-geek/emhass">
+  </a>
+<a style="text-decoration:none" href="https://github.com/davidusb-geek/emhass/blob/master/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/davidusb-geek/emhass">
+  </a>
 
 </br>
 
@@ -46,13 +54,40 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 
 ## Installation
 
-The steps to install EMHASS as an Home Assistant addon:
+The steps to install EMHASS as a Home Assistant add-on:
 
+1) Add the EMHASS-Add-on repository to the HAOS add-on store  
+<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdavidusb-geek%2Femhass-add-on" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg" alt="Open your Home Assistant instance and show the add-on repository dialog with a specific repository URL pre-filled." /></a>
+
+2) Install the EMHASS Add-on  
+<a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=5b918bf2_emhass" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the dashboard of an add-on." /></a>  
+Click on `install`, the installation may take some time depending on your hardware.
+
+4) Start the EMHASS addon
+    - Once installed, head into the EMHASS addon
+    - click `start` to start the EMHASS web server
+      -  For consistent use, it is recommended that you enable: `Show in sidebar`,`Watchdog` and `Start on boot `
+
+5) Open the EMHASS web interface, and configure parameters
+    - Click `OPEN WEB UI` to enter the EMHASS web server
+    - Click the cog icon ⚙️  to enter the emhass configuration page
+    - Insert your user-specific parameters
+    - Insert your user specific parameters
+      - For users who wish to use `Solcast` or `Forecast.Solar` insert your secrets in the Home Assistant EMHASS configuration page, under `Show unused optional configuration options` (e.g., `localhost:8123/hassio/addon/emhass/config`).
+
+
+<details>
+<summary><b> Manual install steps</b></summary>
+    
+## Installation Method 1
 1) Add the EMHASS-Add-on repository to the HAOS add-on store
 
-    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-third-party-add-ons)
+    - To install add the EMHASS Add-on repository in the Home Assistant store, follow [these steps](https://www.home-assistant.io/common-tasks/os/#installing-a-third-party-add-on-repository)
 
-    - This will be: Configuration > Add-ons & Backups open the add-on store > Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
+    - This will be: Open the add-on store with the button below, or go to settings in HA, select add-on and the add-on store.
+      <a href="https://my.home-assistant.io/redirect/supervisor_store/" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/supervisor_store.svg" alt="Open your Home Assistant instance and show the add-on store." /></a>
+       - Press the 3 dots and choose repository.
+       - Add the URL of the repository (e.g https://github.com/davidusb-geek/emhass-add-on) and then press "Add".
 
 2) Install the EMHASS Add-on 
     - Look for the EMHASS Add-on tab and when inside the Add-on click on `install`.
@@ -99,6 +134,7 @@ _Warning: This method will override the Docker image tag, and therefore will req
     - From here a new Addon Source under the name `Local add-ons` should appear _(if not repeat step 4)_
     - Install the EMHASS addon, Note: after clicking the EMHASS addon, the `Current version: ` Tag on the top left of the EMHASS card.
 
+</details>
 
 ## Developing EMHASS/EMHASS-Add-on
 
