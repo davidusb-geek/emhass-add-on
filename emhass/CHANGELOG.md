@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.15.6 - 2026-01-18
+### Improvement
+- New feature that allows users to disable SSL communication with Home Assistant
+### Fix
+- Fix issues with missing `long_train_data.pkl` file and load power sensor name updated by the user
+- Fix broken MLRegressor by removing unnecessary loading of a CSV file
+- Fix missing outdoor temperature data for thermal model
+
 ## 0.15.5 - 2026-01-16
 ### Fix
 - Fix the thermal load parsing to use it on any type of optimization
