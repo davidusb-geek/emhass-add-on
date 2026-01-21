@@ -36,3 +36,5 @@ schema:
   solcast_rooftop_id: "str?" #optional
   solar_forecast_kwp: "float?" #optional
   server_ip: "list(0.0.0.0|127.0.0.1)?" #optional
+  influxdb_username: "str?" #optional
+  influxdb_password: "password?" #optional
