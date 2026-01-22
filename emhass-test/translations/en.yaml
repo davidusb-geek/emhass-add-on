@@ -16,13 +16,13 @@ configuration:
     description: time_zone, (Default Europe/Paris) this is automatically set if your are using the supervisor.
   Latitude:
     name: Your systems latitude.
-    description: Latitude, (Default 45.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
+    description: Latitude, (Default 45.0) this is automatically set if you are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
   Longitude:
     name: Your systems longitude.
-    description: Longitude, (Default 6.0) this is automatically set if your are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
+    description: Longitude, (Default 6.0) this is automatically set if you are using the supervisor. Used for solar.forecast & scrapper for location, & for estimating cloud cover if Solcast is selected.
   Altitude:
     name: Your systems altitude
-    description: Altitude, (Default 100.0) this is automatically set if your are using the supervisor.
+    description: Altitude, (Default 100.0) this is automatically set if you are using the supervisor.
   solcast_api_key:
     name: Solcast API key
     description: The Solcast API key (weather_forecast_method=solcast)
