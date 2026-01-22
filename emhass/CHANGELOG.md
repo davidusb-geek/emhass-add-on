@@ -19,7 +19,7 @@ This release marks a significant milestone in the evolution of EMHASS. We have c
 - Added internal gains factor to heating demand calculation (@sokorn)
 - Add vector support for maximum power to or from grid (@mk2lehe)
 ### Fix
-- Fix Bug: Influxdb login failure (Issue #689)
+- Fix Bug: InfluxDB login failure (Issue #689)
 
 ### ⚠️ BREAKING CHANGE: Solver Configuration
 
