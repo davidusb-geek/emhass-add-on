@@ -1,7 +1,7 @@
 name: EMHASS
 description: Energy Management for Home Assistant
 url: https://github.com/davidusb-geek/emhass
-version: v0.15.6 #set if use image container version
+version: v0.16.0 #set if use image container version
 slug: emhass
 arch:
   - aarch64
@@ -36,3 +36,6 @@ schema:
   solcast_rooftop_id: "str?" #optional
   solar_forecast_kwp: "float?" #optional
   server_ip: "list(0.0.0.0|127.0.0.1)?" #optional
+  influxdb_username: "str?" #optional
+  influxdb_password: "password?" #optional
+  

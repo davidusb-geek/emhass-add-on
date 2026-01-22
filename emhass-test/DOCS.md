@@ -76,7 +76,7 @@ For those who want to test the EMHASS addon _(EMHASS inside of a virtual Home As
 
 MIT License
 
-Copyright (c) 2021-2023 David HERNANDEZ
+Copyright (c) 2021-2026 David HERNANDEZ TORRES
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
