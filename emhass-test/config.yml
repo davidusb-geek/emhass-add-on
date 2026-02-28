@@ -16,6 +16,9 @@ ports_description:
 webui: http://[HOST]:[PORT:5000]
 map:
   - share:rw
+  - type: addon_config
+    path: /config
+    read_only: False
 init: false
 hassio_role: default
 homeassistant_api: true
@@ -27,7 +30,8 @@ panel_title: EMHASS-test
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
-  data_path: "list(default|/data/|/share)?" #optional
+  data_path: "list(default|/config|/data|/share|/share/emhass)?" #optional
+  config_path: "list(default|/config/config.json|/share/config.json|/share/emhass/config.json)?" #optional
   time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
   Latitude: "float?" #optional
   Longitude: "float?" #optional

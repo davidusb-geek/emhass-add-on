@@ -10,7 +10,10 @@ configuration:
     description: long_lived_token (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value.  Otherwise enter the Long-Lived Access Token for your Home Assistant instance, this can be created from the Lovelace profile page.
   data_path:
     name: Set folder path where EMHASS data will be stored
-    description: data_path (Default default), selecting /data/ will store data in an enclosed folder, only assessable by the addon itself. Select /share/emhass to store data in the mounted share folder, accessible outside of the addon.
+    description: data_path (Default default), selecting /data/ will store data in an enclosed folder, only accessible by the addon itself. Select /share, /share/emhass or /config to store data in a mounted folder, accessible outside of the addon.
+  config_path:
+    name: Set the path for the EMHASS configuration file
+    description: config_path (Default default), selecting default or /config/config.json will store the config file in the Home Assistant addons_configs/ folder
   time_zone:
     name: The time zone of your system.
     description: time_zone, (Default Europe/Paris) this is automatically set if your are using the supervisor.
