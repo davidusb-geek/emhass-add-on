@@ -41,3 +41,9 @@ configuration:
   influxdb_password:
     name: InfluxDB password
     description: Password for authenticating with InfluxDB. Leave empty if no authentication is required.
+  victoriametrics_username:
+    name: VictoriaMetrics username
+    description: Username for HTTP Basic authentication with VictoriaMetrics (use_victoriametrics). Leave empty if no authentication is required.
+  victoriametrics_password:
+    name: VictoriaMetrics password
+    description: Password for HTTP Basic authentication with VictoriaMetrics (use_victoriametrics). Leave empty if no authentication is required.
