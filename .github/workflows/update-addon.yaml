@@ -57,7 +57,7 @@ jobs:
       - name: Checkout emhass-add-on
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: main
           path: emhass-add-on
 
       - name: Checkout main emhass at tag ${{ steps.vars.outputs.tag }}
@@ -145,7 +145,7 @@ jobs:
             echo "Files already up to date for ${TAG}."
           else
             git commit -m "Bump EMHASS add-on to ${TAG}"
-            git push origin master
+            git push origin main
           fi
 
           git tag -f "${TAG}"
