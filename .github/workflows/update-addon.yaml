@@ -1,0 +1,156 @@
+name: Auto-Update Add-on on New EMHASS Release
+
+on:
+  # Triggered automatically by the main emhass repository
+  repository_dispatch:
+    types: [new-emhass-image]
+
+  # Allows manual testing from the Actions tab in emhass-add-on
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Version tag (e.g., v0.18.9 or v0.19.0)"
+        required: true
+        type: string
+      dry_run:
+        description: "Dry run only (prints git diff without committing or releasing)"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  bump-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Tag and Mode
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag_name }}"
+            DRY_RUN="${{ inputs.dry_run }}"
+          else
+            TAG="${{ github.event.client_payload.tag }}"
+            DRY_RUN="false"
+          fi
+          [[ "$TAG" != v* ]] && TAG="v$TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "dry_run=$DRY_RUN" >> $GITHUB_OUTPUT
+
+      - name: Wait and Verify Docker Image Exists on GHCR
+        run: |
+          TAG="${{ steps.vars.outputs.tag }}"
+          echo "Checking ghcr.io/davidusb-geek/emhass:${TAG}..."
+          for i in {1..10}; do
+            if docker manifest inspect "ghcr.io/davidusb-geek/emhass:${TAG}" > /dev/null 2>&1; then
+              echo "Verified ghcr.io/davidusb-geek/emhass:${TAG} is live on GHCR!"
+              exit 0
+            fi
+            echo "Image not available yet, waiting 30s (attempt $i/10)..."
+            sleep 30
+          done
+          echo "Error: Docker image ghcr.io/davidusb-geek/emhass:${TAG} was not found on GHCR."
+          exit 1
+
+      - name: Checkout emhass-add-on
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          path: emhass-add-on
+
+      - name: Checkout main emhass at tag ${{ steps.vars.outputs.tag }}
+        uses: actions/checkout@v4
+        with:
+          repository: davidusb-geek/emhass
+          ref: ${{ steps.vars.outputs.tag }}
+          path: emhass
+
+      - name: Update emhass/config.yml and emhass/CHANGELOG.md
+        env:
+          TAG: ${{ steps.vars.outputs.tag }}
+        run: |
+          python3 - << 'EOF'
+          import os, re, pathlib
+
+          tag = os.environ["TAG"]
+          ver_no_v = tag.lstrip("v")
+
+          # 1. Update emhass/config.yml version
+          config_path = pathlib.Path("emhass-add-on/emhass/config.yml")
+          config_text = config_path.read_text(encoding="utf-8")
+          new_config_text, count = re.subn(
+              r"^(version:\s*)([^\s#]+)(.*)$",
+              rf"\g<1>{tag}\g<3>",
+              config_text,
+              count=1,
+              flags=re.MULTILINE,
+          )
+          if count != 1 or f"version: {tag}" not in new_config_text:
+              raise RuntimeError("Failed to update version in emhass/config.yml")
+          config_path.write_text(new_config_text, encoding="utf-8")
+
+          # 2. Extract the latest version entry from main emhass CHANGELOG.md
+          for candidate in ["emhass/CHANGELOG.md", "emhass/HISTORY.md", "emhass/docs/CHANGELOG.md"]:
+              src = pathlib.Path(candidate)
+              if src.exists():
+                  break
+          else:
+              raise FileNotFoundError("Could not find CHANGELOG.md in main emhass repo")
+
+          main_changelog = src.read_text(encoding="utf-8")
+          match = re.search(r"(^##\s+.*?)(?=^##\s+|\Z)", main_changelog, flags=re.MULTILINE | re.DOTALL)
+          if not match:
+              raise RuntimeError("Could not parse latest ## section from main CHANGELOG.md")
+
+          latest_entry = match.group(1).strip()
+          pathlib.Path("release_notes.md").write_text(latest_entry + "\n", encoding="utf-8")
+
+          # 3. Prepend latest_entry to emhass-add-on/emhass/CHANGELOG.md if not already present
+          addon_cl_path = pathlib.Path("emhass-add-on/emhass/CHANGELOG.md")
+          addon_cl = addon_cl_path.read_text(encoding="utf-8") if addon_cl_path.exists() else "# Changelog\n\n"
+
+          if ver_no_v not in "\n".join(addon_cl.splitlines()[:10]):
+              if re.search(r"^##\s+", addon_cl, flags=re.MULTILINE):
+                  updated_cl = re.sub(
+                      r"(^##\s+)",
+                      f"{latest_entry}\n\n\\g<1>",
+                      addon_cl,
+                      count=1,
+                      flags=re.MULTILINE,
+                  )
+              else:
+                  updated_cl = addon_cl.rstrip() + "\n\n" + latest_entry + "\n"
+              addon_cl_path.write_text(updated_cl, encoding="utf-8")
+          EOF
+
+      - name: Show git diff in logs
+        working-directory: emhass-add-on
+        run: |
+          git diff emhass/config.yml emhass/CHANGELOG.md
+
+      - name: Commit, Tag, Push, and Publish Release
+        if: ${{ steps.vars.outputs.dry_run == 'false' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.vars.outputs.tag }}
+        working-directory: emhass-add-on
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add emhass/config.yml emhass/CHANGELOG.md
+          if git diff --cached --quiet; then
+            echo "Files already up to date for ${TAG}."
+          else
+            git commit -m "Bump EMHASS add-on to ${TAG}"
+            git push origin master
+          fi
+
+          git tag -f "${TAG}"
+          git push origin "${TAG}" --force
+
+          gh release create "${TAG}" \
+            --title "${TAG}" \
+            --notes-file ../release_notes.md
