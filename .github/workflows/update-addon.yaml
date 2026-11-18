@@ -152,5 +152,5 @@ jobs:
           git push origin "${TAG}" --force
 
           gh release create "${TAG}" \
-            --title "${TAG}" \
+            --title "EMHASS add-on ${TAG}" \
             --notes-file ../release_notes.md
