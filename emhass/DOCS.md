@@ -64,6 +64,15 @@ For any Issues/Feature Requests for the EMHASS core module, create a new issue h
 </a>
 </div>
 
+## Planning with another EMHASS
+
+EMHASS's coordinated backend can plan this home together with another EMHASS, for example one running a garage. The settings are on the add-on's Configuration page:
+
+- **This EMHASS serves a coordinator:** set `participant_token` (at least 16 characters) and, in the EMHASS configuration, `participant_api`. The coordinator reaches this EMHASS at `http://<home-assistant-host>:5000/participant`, not through ingress.
+- **This EMHASS coordinates another one:** add an entry to `remote_solver_tokens` for each remote solver in your `site` configuration. `name` is the remote's `token_secret`, and `token` is that EMHASS's `participant_token`. A remote reached over plain `http://` on another machine also needs `"trusted_network": true` on its `solver`, or this EMHASS won't send it the token; use `https://` where you can.
+
+See the [coordinated backend documentation](https://github.com/davidusb-geek/emhass/blob/master/docs/coordinated_backend.md) for the `site` configuration.
+
 ## Developing EMHASS/EMHASS-Add-on
 
 #### **EMHASS**

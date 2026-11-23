@@ -28,10 +28,16 @@ ingress_stream: true
 panel_icon: mdi:home-lightning-bolt-outline
 panel_title: EMHASS
 panel_admin: true
+options:
+  remote_solver_tokens: [] # a list must have its default: none
 schema:
   hass_url: "str?" #optional
   long_lived_token: "password?" #optional
   emhass_api_token: "password?" #optional
+  participant_token: "password?" #optional, the token a coordinator presents to this EMHASS
+  remote_solver_tokens: # the tokens of the remote solvers the site names, each under its token_secret
+    - name: "match(^[a-z][a-z0-9_]{0,31}$)"
+      token: "password"
   data_path: "list(default|/config|/data|/share|/share/emhass)?" #optional
   config_path: "list(default|/config/config.json|/share/config.json|/share/emhass/config.json)?" #optional
   time_zone: "match((\\w+)?(\\/)(\\w+))?" #optional
