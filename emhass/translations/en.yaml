@@ -2,6 +2,12 @@ configuration:
   server_ip:
    name: server_ip, binds the webserver server to an ip address/range
    description: default 0.0.0.0, which sallows the server to listen to all network interfaces accessible inside the docker container
+  participant_token:
+    name: Participant token (serving this EMHASS to a coordinator)
+    description: The token another EMHASS (a coordinator) must present to plan with this one, at least 16 characters. Set it together with participant_api in the EMHASS configuration. Coordinators reach this EMHASS on port 5000 at /participant, not through the Home Assistant sidebar.
+  remote_solver_tokens:
+    name: Remote solver tokens (coordinating another EMHASS)
+    description: One entry per remote EMHASS your site configuration names. name is the remote's token_secret (a lower case letter, then up to 31 lower case letters, digits or _), token is that EMHASS's participant token. Reserved EMHASS secret names (such as hass_url, long_lived_token, emhass_api_token, or participant_token) are not allowed.
   hass_url:
     name: URL, the Home Assistant instance
     description: hass_url (Default "empty").If using the supervisor (this Home Assistant) you can leave this to the default "empty" value. Otherwise enter the URL (Ex. http://localhost:8123/) of your external Home Assistant instance.

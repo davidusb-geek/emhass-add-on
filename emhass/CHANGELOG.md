@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+### Feature
+- Configuration options for planning with another EMHASS (EMHASS's participant API): `participant_token`, the token a coordinator presents to this EMHASS, and `remote_solver_tokens`, the tokens of the remote solvers the site names. Needs the EMHASS release that reads them from `options.json`.
+
 ## 0.18.11 - 2026-11-18
 ### Fix
 - Fix Home Assistant add-on ingress port (8099) and expose `emhass_api_token` configuration option
